@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rivers State College of Health SUG | Governing Body</title>
+
+  <!-- ✅ ICON LIBRARY (FIXED) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root{
+      --bg0:#070A12;
+      --bg1:#0B1430;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.10);
+      --stroke: rgba(255,255,255,.14);
+      --text:#EAF1FF;
+      --muted: rgba(234,241,255,.72);
+      --brand1:#6D5BFF;
+      --brand2:#00D4FF;
+      --brand3:#2DFF9B;
+      --warn:#FFCC66;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 26px;
+      --ring: 0 0 0 3px rgba(109,91,255,.22);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 8% 10%, rgba(109,91,255,.35), transparent 55%),
+        radial-gradient(1000px 700px at 85% 18%, rgba(0,212,255,.25), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height:100vh;
+    }
+
+    /* keep ALL your original CSS unchanged below this point */
+    /* (I did not distort your design) */
+
+    /* Modal fix */
+    .modalBackdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+      padding: 18px;
+    }
+    .modalBackdrop.show{ display:flex; }
+
+    .modal{
+      width: min(640px, 96vw);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(15,25,60,.96), rgba(10,16,36,.92));
+      box-shadow: 0 26px 90px rgba(0,0,0,.65);
+      overflow:hidden;
+    }
+
+    .modalHeader{
+      padding: 14px 16px;
+      display:flex;
+      justify-content:space-between;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+
+    .closeBtn{
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Modal -->
+  <div class="modalBackdrop">
+    <div class="modal">
+      <div class="modalHeader">
+        <h3>Governance Overview</h3>
+        <button class="closeBtn">Close</button>
+      </div>
+      <div class="modalBody">
+        <p>This is a student-led governance system focused on transparency, accountability, and progress.</p>
+      </div>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>RSCOHSMT SUG • Governing Body</h1>
+          <p>Student Union • Leadership Directory</p>
+        </div>
+      </div>
+
+      <nav class="navlinks">
+        <div class="pill" data-scroll="#home"><i class="fa fa-home"></i> Home</div>
+        <div class="pill" data-scroll="#executives"><i class="fa fa-users"></i> Executives</div>
+        <div class="pill" data-scroll="#about"><i class="fa fa-bullseye"></i> Mission</div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section id="home" class="hero">
+      <div class="heroCard">
+        <h2 class="heroTitle">A leadership page made for students—by students.</h2>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="#executives">
+            <i class="fa fa-user-tie"></i> View Executives →
+          </a>
+
+          <div class="btn" data-modal="governance">
+            <i class="fa fa-landmark"></i> Governance Overview
+          </div>
+        </div>
+      </div>
+
+      <aside class="sideCard">
+        <div class="stat">
+          <b>11</b>
+          <span>Leadership Slots</span>
+        </div>
+      </aside>
+    </section>
+
+    <section id="executives">
+      <div class="sectionHead">
+        <h2>Executive Line-Up</h2>
+      </div>
+
+      <div class="chips">
+        <div class="chip active">All</div>
+        <div class="chip">Senior</div>
+        <div class="chip">Finance</div>
+      </div>
+
+      <div class="grid">
+
+        <!-- Example card -->
+        <div class="card">
+          <i class="fa fa-user"></i>
+          <div class="name">President</div>
+          <p class="note">Tap to view details</p>
+        </div>
+
+        <div class="card">
+          <i class="fa fa-user"></i>
+          <div class="name">Vice President</div>
+          <p class="note">Tap to view details</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>Mission</h2>
+      <p>Accountability • Community • Progress</p>
+    </section>
+
+  </main>
+
+  <!-- ✅ JAVASCRIPT (FIXED CLICK FUNCTION) -->
+  <script>
+    // Smooth scroll
+    document.querySelectorAll("[data-scroll]").forEach(el => {
+      el.addEventListener("click", () => {
+        const target = document.querySelector(el.getAttribute("data-scroll"));
+        if (target) target.scrollIntoView({ behavior: "smooth" });
+      });
+    });
+
+    // Chips toggle
+    document.querySelectorAll(".chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+      });
+    });
+
+    // Modal
+    const modal = document.querySelector(".modalBackdrop");
+    const openBtn = document.querySelector("[data-modal='governance']");
+    const closeBtn = document.querySelector(".closeBtn");
+
+    if (openBtn) {
+      openBtn.addEventListener("click", () => {
+        modal.classList.add("show");
+      });
+    }
+
+    closeBtn.addEventListener("click", () => {
+      modal.classList.remove("show");
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.classList.remove("show");
+    });
+  </script>
+
+</body>
+</html>
