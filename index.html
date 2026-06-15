@@ -1,40 +1,194 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SUG Governing Body</title><style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f9;
+<title>SUG Portal System</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
 }
 
-/* HEADER */
-header {
-  background: #002147;
-  color: white;
-  text-align: center;
-  padding: 20px;
+body{
+  background:#f4f6f9;
 }
 
-header h1 {
-  margin: 0;
+/* LOGIN SECTION */
+.login-container{
+  width:100%;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(120deg,#1e3c72,#2a5298);
 }
 
-/* GRID */
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
+.login-box{
+  background:white;
+  padding:25px;
+  width:320px;
+  border-radius:10px;
+  box-shadow:0 0 15px rgba(0,0,0,0.2);
 }
 
-/* CARD */
-.card {
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  text-align: center;
+.login-box h2{
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.login-box input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:1px solid #ccc;
+  border-radius:5px;
+}
+
+.login-box button{
+  width:100%;
+  padding:10px;
+  background:#2a5298;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+/* DASHBOARD */
+.dashboard{
+  display:none;
+  padding:20px;
+}
+
+.navbar{
+  background:#2a5298;
+  color:white;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.card:hover{
+  transform:scale(1.05);
+}
+
+.loading{
+  display:none;
+  text-align:center;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN PAGE -->
+<div class="login-container" id="loginPage">
+
+  <div class="login-box">
+    <h2>Student Login</h2>
+    <input type="text" id="studentMatric" placeholder="Matric Number">
+    <input type="password" id="studentPass" placeholder="Password">
+    <button onclick="loginStudent()">Login</button>
+  </div>
+
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+
+  <div class="navbar">
+    <h3>SUG Portal Dashboard</h3>
+    <button onclick="logout()" style="padding:5px 10px;">Logout</button>
+  </div>
+
+  <div class="loading" id="loading">Loading module...</div>
+
+  <div class="grid">
+
+    <div class="card" onclick="openModule('Profile')">👤 Profile</div>
+    <div class="card" onclick="openModule('Results')">📊 Results</div>
+    <div class="card" onclick="openModule('Fees')">💰 Fees</div>
+    <div class="card" onclick="openModule('Courses')">📚 Courses</div>
+
+  </div>
+
+</div>
+
+<script>
+// SIMPLE LOCAL DATABASE
+let users = [
+  {matric:"SUG001", pass:"1234"}
+];
+
+// LOGIN FUNCTION
+function loginStudent(){
+  let m = document.getElementById("studentMatric").value;
+  let p = document.getElementById("studentPass").value;
+
+  let found = users.find(u => u.matric === m && u.pass === p);
+
+  if(found){
+    localStorage.setItem("student", JSON.stringify(found));
+    document.getElementById("loginPage").style.display="none";
+    document.getElementById("dashboard").style.display="block";
+  }else{
+    alert("Invalid login details");
+  }
+}
+
+// AUTO LOGIN CHECK
+window.onload = function(){
+  let user = localStorage.getItem("student");
+  if(user){
+    document.getElementById("loginPage").style.display="none";
+    document.getElementById("dashboard").style.display="block";
+  }
+}
+
+// MODULE LOADING EFFECT
+function openModule(name){
+  let load = document.getElementById("loading");
+  load.style.display="block";
+  load.innerText = "Loading " + name + "...";
+
+  setTimeout(()=>{
+    load.style.display="none";
+    alert(name + " opened successfully");
+  }, 1200);
+}
+
+// LOGOUT
+function logout(){
+  localStorage.removeItem("student");
+  location.reload();
+}
+</script>
+
+</body>
+                                                                 </html>  text-align: center;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
