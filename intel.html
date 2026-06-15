@@ -1,0 +1,338 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUG Governing Body</title><style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+}
+
+/* HEADER */
+header {
+  background: #002147;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+/* GRID */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 10px 0 5px;
+}
+
+.card p {
+  color: gray;
+  margin-bottom: 15px;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  background: white;
+  margin: auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 10px;
+  text-align: center;
+  animation: fadeIn 0.5s;
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.close {
+  float: right;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+/* LOADING */
+.loader {
+  display: none;
+  position: fixed;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  background: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 6px solid #ccc;
+  border-top: 6px solid #002147;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+</style></head><body><header>
+  <h1>SUG Governing Body</h1>
+  <p>Meet the Executives</p>
+</header><div class="container">  <!-- EXEC 1 -->  <div class="card" onclick="openProfile('provost.jpg','Ngerebo Lamech Dimkpa','Provost')">
+    <img src="provost.jpg">
+    <h3>Ngerebo Lamech Dimkpa</h3>
+    <p>Provost</p>
+  </div>  <!-- EXEC 2 -->  <div class="card" onclick="openProfile('speaker.jpg','Godspower Awajimowa Ebirien','Speaker, SRC SUG')">
+    <img src="speaker.jpg">
+    <h3>Godspower Awajimowa Ebirien</h3>
+    <p>Speaker, SRC SUG</p>
+  </div>  <!-- EXEC 3 -->  <div class="card" onclick="openProfile('auditor.jpg','Victor Uche Dakubor','Internal Auditor')">
+    <img src="auditor.jpg">
+    <h3>Victor Uche Dakubor</h3>
+    <p>Internal Auditor</p>
+  </div></div><!-- LOADER --><div class="loader" id="loader">
+  <div class="spinner"></div>
+</div><!-- MODAL --><div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImg">
+    <h2 id="modalName"></h2>
+    <p id="modalRole"></p>
+  </div>
+</div><script>
+function openProfile(img, name, role) {
+  let loader = document.getElementById("loader");
+  loader.style.display = "flex";
+
+  setTimeout(() => {
+    loader.style.display = "none";
+
+    document.getElementById("modalImg").src = img;
+    document.getElementById("modalName").innerText = name;
+    document.getElementById("modalRole").innerText = role;
+
+    document.getElementById("myModal").style.display = "block";
+  }, 1000);
+}
+
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+}
+
+window.onclick = function(event) {
+  let modal = document.getElementById("myModal");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script></body>
+  </html>
+<body>
+
+<header>
+<h3>RIVERS STATE COLLEGE OF HEALTH SCIENCE</h3>
+<h2>STUDENT UNION GOVERNMENT (SUG)</h2>
+<p>2025/2026 Administration</p>
+</header>
+
+<div class="nav">
+<div onclick="show('home')">Home</div>
+<div onclick="show('exec')">Executives</div>
+<div onclick="show('reg')">Register</div>
+<div onclick="show('profiles')">Profiles</div>
+</div>
+
+<!-- HOME -->
+<section id="home" class="active">
+<p>
+The Student Union Government (SUG) is the highest student body that represents,
+protects and promotes student interests within the institution.
+</p>
+</section>
+
+<!-- EXECUTIVES -->
+<section id="exec">
+<h3>Executives</h3>
+
+<div class="card" onclick="openExec('President','images/president.jpg')">President</div>
+<div class="card" onclick="openExec('Vice President','images/vice.jpg')">Vice President</div>
+<div class="card" onclick="openExec('Speaker','images/speaker.jpg')">Speaker</div>
+
+</section>
+
+<!-- REGISTER -->
+<section id="reg">
+<h3>Register</h3>
+
+<input id="name" placeholder="Full Name">
+<input id="matric" placeholder="Matric Number">
+<input id="dept" placeholder="Department">
+
+<button onclick="register()">Submit</button>
+<p id="msg"></p>
+</section>
+
+<!-- PROFILES -->
+<section id="profiles">
+<h3>Students</h3>
+<div id="list"></div>
+</section>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+<img id="img">
+</div>
+
+<!-- FIREBASE SCRIPT -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs }
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+/* 🔥 PUT YOUR FIREBASE CONFIG HERE */
+const firebaseConfig = {
+apiKey: "YOUR_API_KEY",
+authDomain: "YOUR_PROJECT.firebaseapp.com",
+projectId: "YOUR_PROJECT_ID",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+/* NAV */
+window.show = function(id){
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+/* EXEC IMAGE */
+window.openExec = function(name,img){
+document.getElementById("img").src = img;
+document.getElementById("popup").style.display="flex";
+
+setTimeout(()=>{
+document.getElementById("popup").style.display="none";
+},3000);
+}
+
+/* REGISTER */
+window.register = async function(){
+
+if(!name.value || !matric.value || !dept.value){
+msg.innerText="Fill all fields";
+return;
+}
+
+await addDoc(collection(db,"students"),{
+name:name.value,
+matric:matric.value,
+dept:dept.value
+});
+
+msg.innerText="Registered Successfully";
+
+loadStudents();
+show('profiles');
+}
+
+/* LOAD */
+async function loadStudents(){
+
+let snap = await getDocs(collection(db,"students"));
+let html="";
+
+snap.forEach(doc=>{
+let d=doc.data();
+
+html+=`
+<div class="profileCard">
+<b>${d.name}</b><br>
+${d.matric}<br>
+${d.dept}
+</div>`;
+});
+
+document.getElementById("list").innerHTML=html;
+}
+
+loadStudents();
+
+</script>
+
+<!-- ============================= -->
+<!-- 🔐 FIRESTORE SECURITY RULES -->
+<!-- DO NOT PUT THIS INSIDE HTML -->
+<!-- GO TO FIREBASE → FIRESTORE → RULES AND PASTE -->
+
+<!--
+rules_version = '2';
+service cloud.firestore {
+match /databases/{database}/documents {
+
+match /students/{id} {
+
+allow read: if true;
+
+allow create: if request.resource.data.name != null
+&& request.resource.data.matric != null
+&& request.resource.data.dept != null;
+
+allow update: if false;
+allow delete: if false;
+
+}
+}
+}
+-->
+
+</body>
+</html>
