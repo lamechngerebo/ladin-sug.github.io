@@ -5,39 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Official SUG Portal | RIVCOHSMAT</title>
     <style>
-        /* Matured Royal Blue & Crisp White Theme */
-        :root {
-            --primary-blue: #0A369D;
-            --accent-blue: #4A90E2;
-            --dark-blue: #051C52;
-            --pure-white: #FFFFFF;
-            --bg-light: #F4F7FC;
-            --text-main: #2C3E50;
-            --text-muted: #7F8C8D;
-            --success-green: #2ECC71;
-        }
-
+        /* Modernized Global Style Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        :root {
+            --primary-blue: #003366;     /* Deep Matured Corporate Blue */
+            --accent-blue: #0066cc;      /* Vibrant Sky/Aluta Accent Blue */
+            --bg-light: #f5f8fa;         /* Crisp soft white gray */
+            --text-dark: #1a2530;
+            --white: #ffffff;
         }
 
         body {
             background-color: var(--bg-light);
-            color: var(--text-main);
+            color: var(--text-dark);
             line-height: 1.6;
         }
 
-        /* Top Navigation Bar */
-        nav {
-            background-color: var(--primary-blue);
-            padding: 15px 20px;
+        /* Fixed Premium Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .nav-container {
@@ -46,97 +42,63 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 15px 20px;
         }
 
-        .nav-logo-text {
-            color: var(--pure-white);
-            font-weight: 800;
-            font-size: 1.4rem;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
+        .brand {
             display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-text h1 {
+            font-size: 1.4rem;
+            color: var(--primary-blue);
+            font-weight: 800;
+        }
+
+        .brand-text p {
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
             gap: 20px;
         }
 
-        .nav-links button {
-            background: none;
-            border: none;
-            color: rgba(255,255,255,0.8);
-            font-size: 1rem;
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
             font-weight: 600;
-            cursor: pointer;
             padding: 8px 16px;
-            border-radius: 4px;
+            border-radius: 6px;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .nav-links button:hover, .nav-links button.active {
-            color: var(--pure-white);
-            background-color: var(--accent-blue);
+        nav ul li a.active, nav ul li a:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
         }
 
-        /* Header / Banner Area */
-        header {
-            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
-            color: var(--pure-white);
-            text-align: center;
-            padding: 50px 20px;
-            border-bottom: 4px solid var(--accent-blue);
-        }
-
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 20px;
-        }
-
-        .logo-box {
-            background: var(--pure-white);
-            padding: 10px;
-            border-radius: 50%;
-            width: 80px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .logo-box svg {
-            width: 50px;
-            height: 50px;
-        }
-
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 5px;
-        }
-
-        header h2 {
-            font-size: 1.5rem;
-            color: var(--accent-blue);
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* Dynamic Page Section Styling */
-        .page {
-            display: none;
-            max-width: 1200px;
+        /* Layout Container */
+        .container {
+            max-width: 1100px;
             margin: 40px auto;
             padding: 0 20px;
-            animation: fadeIn 0.5s ease;
         }
 
-        .page.active {
+        /* Dynamic Page Switching Control */
+        .page {
+            display: none;
+        }
+
+        .page.active-page {
             display: block;
+            animation: fadeIn 0.4s ease;
         }
 
         @keyframes fadeIn {
@@ -144,233 +106,260 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* HOME PAGE: Matured Long Content Layout */
-        .content-card {
-            background: var(--pure-white);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        /* ==================== HOME PAGE STYLING ==================== */
+        .logo-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
             margin-bottom: 30px;
-        }
-
-        .content-card h3 {
-            color: var(--primary-blue);
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--bg-light);
-            padding-bottom: 10px;
-        }
-
-        .content-card p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            text-align: justify;
-        }
-
-        /* EXECUTIVES PAGE: Interactive Grid Layout */
-        .exec-split {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .exec-split { grid-template-columns: 1fr; }
-        }
-
-        .exec-list-panel {
-            background: var(--pure-white);
+            background: var(--white);
             padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            max-height: 650px;
-            overflow-y: auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
 
-        .exec-item {
-            padding: 12px 15px;
-            border-bottom: 1px solid var(--bg-light);
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            font-weight: 600;
-        }
-
-        .exec-item:hover, .exec-item.selected {
-            background-color: var(--primary-blue);
-            color: var(--pure-white);
-        }
-
-        .exec-item span {
-            display: block;
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-
-        .exec-viewer-panel {
-            background: var(--pure-white);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
+        .logo-box {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 450px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            gap: 8px;
         }
 
-        .photo-frame {
-            width: 260px;
-            height: 260px;
-            border-radius: 12px;
-            background-color: var(--bg-light);
+        /* Clean vector logo representations */
+        .logo-placeholder {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+        .college-logo { background: var(--primary-blue); }
+        .aluta-logo { background: #cc0000; } /* Aluta traditional red accent */
+
+        .welcome-hero {
+            background: linear-gradient(135deg, var(--primary-blue), #001f40);
+            color: var(--white);
+            padding: 50px 30px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 20px rgba(0,51,102,0.15);
+        }
+
+        .welcome-hero h2 { font-size: 2.2rem; margin-bottom: 10px; }
+        .welcome-hero p { color: #b3d1ff; font-size: 1.2rem; font-weight: 500; }
+
+        .essay-section {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            text-align: justify;
+        }
+
+        .essay-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            border-left: 5px solid var(--accent-blue);
+            padding-left: 15px;
+        }
+
+        .essay-section p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        /* ==================== EXEC PAGE STYLING ==================== */
+        .exec-instruction {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #616e7c;
+            font-style: italic;
+        }
+
+        .exec-list-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .list-item-btn {
+            background: var(--white);
+            border: 1px solid #e4e7eb;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            width: 100%;
+        }
+
+        .list-item-btn:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,102,204,0.08);
+        }
+
+        .btn-meta .role-tag {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .btn-meta .name-tag {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .arrow-indicator {
+            color: #a0aec0;
+            font-size: 1.2rem;
+        }
+
+        /* Modal / Profile Overlay View */
+        .profile-view-box {
+            display: none;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto 40px auto;
+            border: 2px solid var(--primary-blue);
+            animation: scaleUp 0.3s ease;
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .avatar-frame {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: #e4e7eb;
+            margin: 0 auto 20px auto;
             border: 4px solid var(--primary-blue);
-            margin-bottom: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
         }
 
-        .photo-frame img {
+        .avatar-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .viewer-name {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--dark-blue);
+        .profile-view-box h4 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
             margin-bottom: 5px;
         }
 
-        .viewer-role {
-            font-size: 1.1rem;
+        .profile-view-box .role {
+            font-weight: bold;
             color: var(--accent-blue);
-            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 15px;
         }
 
-        .viewer-admin-tag {
-            background: var(--bg-light);
-            padding: 6px 15px;
-            border-radius: 20px;
+        .profile-view-box .admin-stamp {
             font-size: 0.9rem;
             font-weight: bold;
-            color: var(--text-main);
-            border: 1px solid rgba(0,0,0,0.05);
+            background: #e6f0fa;
+            color: var(--primary-blue);
+            padding: 6px 16px;
+            border-radius: 20px;
+            display: inline-block;
         }
 
-        /* REGISTRATION & PROFILE PAGE Layout */
-        .form-box {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--pure-white);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        .close-profile-btn {
+            margin-top: 20px;
+            background: #cbd5e1;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* ==================== REGISTRATION STYLING ==================== */
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .split-layout { grid-template-columns: 1fr; }
+            .logo-row { gap: 20px; }
+        }
+
+        .reg-card {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        .reg-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            font-size: 1.4rem;
         }
 
         .form-group {
             margin-bottom: 20px;
-            position: relative;
         }
 
         .form-group label {
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
-            color: var(--dark-blue);
+            color: #4a5568;
         }
 
         .form-group input, .form-group select {
             width: 100%;
             padding: 12px;
-            border: 2px solid #E1E8E4;
-            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
             font-size: 1rem;
             outline: none;
-            transition: border-color 0.3s ease;
+            transition: border 0.2s;
         }
 
         .form-group input:focus, .form-group select:focus {
             border-color: var(--accent-blue);
         }
 
-        .btn-submit {
+        .submit-btn {
             width: 100%;
-            background-color: var(--primary-blue);
-            color: var(--pure-white);
+            background: var(--primary-blue);
+            color: var(--white);
             border: none;
-            padding: 14px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--dark-blue);
-        }
-
-        /* Split Directory Dashboard Layout */
-        .dashboard-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .dashboard-layout { grid-template-columns: 1fr; }
-        }
-
-        .profile-container {
-            background: var(--pure-white);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-
-        .user-avatar-upload {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: var(--bg-light);
-            margin: 0 auto 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border: 3px dashed var(--accent-blue);
-            position: relative;
-            cursor: pointer;
-        }
-
-        .user-avatar-upload img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .upload-overlay {
-            position: absolute;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            font-size: 0.75rem;
-            bottom: 0;
-            width: 100%;
-            padding: 4px 0;
-        }
-
-        .member-list-panel {
-            background: var(--pure-white);
-            padding: 30px;
-            border-radius: 12px;
-        
+    
