@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUG Platform | RIVCOHSMAT</title>
     <style>
         :root { --primary: #00468c; --primary-dark: #002d5c; --secondary: #0073e6; --light: #f5f8fc; --white: #ffffff; --dark: #2c3e50; }
@@ -87,7 +86,7 @@
             <p>The strategic importance of a highly active and unified Student Union Government cannot be overstated. By serving as an organized framework for collective bargaining, the union prevents administrative isolation, ensuring that issues regarding tuition adjustments, examination processing guidelines, campus transit networks, health clinic support protocols, and infrastructural development directly reflect student demands. It translates isolated student concerns into precise policy negotiations with higher college executives.</p>
             <p>Furthermore, the dominance of the SUG over the entire student body operates as a standard system of democratic stewardship and total legislative responsibility. As a recognized student governing authority, its decisions hold operational dominance over all faculty clubs, departmental groups, and student unions within the campus environment. Through this structure, the union coordinates wide-reaching academic adjustments, maintains general discipline, and protects civic balance, making it an essential leadership power that guides the campus community toward absolute success.</p>
         </div>
-                </main>
+    </main>
         <main id="page-exec" class="page">
         <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary);">2025/2026 Executive Council</h2>
         <div class="grid-layout" id="executives-container"></div>
@@ -163,7 +162,7 @@
                 <button class="submit-btn" style="background-color:#7f8c8d;" onclick="handleLogout()">Log Out of Session</button>
             </div>
 
-            <!-- Bulletproof Direct Action Formspree Box -->
+            <!-- Forced Direct-Submission Method Formspree Box -->
             <div class="dashboard-box" style="margin-top: 25px;">
                 <h3 style="color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e1e8f0; padding-bottom: 8px;">Secured SUG Suggestion & Complaint Box</h3>
                 <form action="https://formspree.io" method="POST">
@@ -189,7 +188,7 @@
     </main>
 
     <footer><p>&copy; 2026 <strong>RIVCOHSMAT SUG Council</strong>. All Rights Reserved.</p></footer>
-        <script>
+            <script>
         const data = [
             { r: "SUG President", n: "Sen. Comr. Justina Gentle Welli", img: "1781503643336.jpg" }, 
             { r: "SUG Vice President", n: "Comr. Nwibu Roselyn", img: "" },
@@ -250,7 +249,7 @@
             localStorage.setItem(`SUG_U_${m}`, JSON.stringify(prof)); localStorage.setItem('SUG_SESS', m);
             ld(prof, "✓ Registration Successful! Welcome to your active dashboard workspace.");
         }
-            function handleLoginSubmit(e) {
+                        function handleLoginSubmit(e) {
             e.preventDefault(); 
             const m = document.getElementById('login-matric').value.trim().toUpperCase();
             const inputPass = document.getElementById('login-pass').value;
@@ -288,9 +287,8 @@
             document.getElementById('student-dashboard-section').style.display = 'block';
             renderSocialFeed();
             const adminBox = document.getElementById('admin-broadcaster-panel'); if(adminBox) adminBox.remove();
-        }
-
-        function loadAdminDashboard() {
+                }
+                        function loadAdminDashboard() {
             document.getElementById('registration-form-section').style.display = 'none'; 
             document.getElementById('student-dashboard-section').style.display = 'block';
             document.getElementById('dashboard-banner-text').innerText = "⚡ SUG ADMINISTRATOR SESSION ACTIVE";
@@ -316,64 +314,12 @@
                 const r = new FileReader(); r.onload = function(e) {
                     const img = new Image(); img.onload = function() {
                         const canvas = document.createElement('canvas'), ctx = canvas.getContext('2d');
-                        const max_w = 150, max_h = 150; let w = img.width, h = img.height;
-                        if (w > h) { if (w > max_w) { h *= max_w / w; w = max_w; } } else { if (h > max_h) { w *= max_h / h; h = max_h; } }
-                        canvas.width = w; canvas.height = h; ctx.drawImage(img, 0, 0, w, h);
-                        const compactB64 = canvas.toDataURL('image/jpeg', 0.7);
+                        canvas.width = 120; canvas.height = 120; ctx.drawImage(img, 0, 0, 120, 120);
+                        const compactB64 = canvas.toDataURL('image/jpeg', 0.6);
                         document.getElementById('user-profile-pic').src = compactB64;
                         const lD = localStorage.getItem(`SUG_U_${s}`); if (lD) { const prof = JSON.parse(lD); prof.profilePic = compactB64; localStorage.setItem(`SUG_U_${s}`, JSON.stringify(prof)); }
                     }; img.src = e.target.result;
                 }; r.readAsDataURL(f);
             }
-        }
-
-        function handleAdminMediaPublish(e) {
-            e.preventDefault(); 
-            const fileInput = document.getElementById('broadcast-file-input').files;
-            const captionText = document.getElementById('broadcast-caption').value; 
-            if(!fileInput) return;
-            const r = new FileReader(); r.onload = function(evt) {
-                const mediaData = evt.target.result, isVideo = fileInput.type.startsWith('video'), posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]');
-                posts.unshift({ id: 'P_' + Date.now(), src: mediaData, videoFlag: isVideo, caption: captionText, likes: 0, likedUsers: [], comments: [], timestamp: new Date().toLocaleDateString() });
-                localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); document.getElementById('admin-broadcast-form').reset(); renderSocialFeed();
-            }; r.readAsDataURL(fileInput);
-            }
-                    function renderSocialFeed() {
-            const streamContainer = document.getElementById('media-posts-stream'); if(!streamContainer) return; streamContainer.innerHTML = "";
-            const s = localStorage.getItem('SUG_SESS'), posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]');
-            if(posts.length === 0) { streamContainer.innerHTML = `<p style="text-align:center; color:#7f8c8d; font-style:italic; padding:20px;">No announcements or media updates yet.</p>`; return; }
-            posts.forEach(post => {
-                let mediaTag = post.videoFlag ? `<video src="${post.src}" class="feed-media" controls></video>` : `<img src="${post.src}" class="feed-media" alt="Campus Post">`;
-                let commentItems = ""; post.comments.forEach((c, index) => { 
-                    let deleteButton = (c.authorId === s || s === 'ADMIN') ? `<span class="del-comment-link" onclick="deleteFeedComment('${post.id}', ${index})">[Delete]</span>` : '';
-                    commentItems += `<div class="comment-bubble"><div><strong>${c.author}:</strong> ${c.msg}</div>${deleteButton}</div>`; 
-                });
-                streamContainer.innerHTML += `<div class="feed-card">${mediaTag}<div class="feed-content"><p style="font-size:0.75rem; color:#7f8c8d; font-weight:bold; margin-bottom:5px;">📢 Posted: ${post.timestamp}</p><p style="font-size:1.05rem; margin-bottom:15px; color:var(--dark); font-weight:600;">${post.caption}</p><div class="feed-actions"><button class="like-btn" onclick="togglePostLike('${post.id}')">❤️ <span id="like-count-${post.id}">${post.likes}</span> Likes</button></div><div class="comment-display-box" id="comments-box-${post.id}">${commentItems}</div><div style="display:flex; gap:10px;"><input type="text" id="comment-input-${post.id}" placeholder="Write a comment..." style="flex-grow:1; padding:8px; border:1px solid #ced8e3; border-radius:6px; font-size:0.9rem;"><button onclick="submitPostComment('${post.id}')" style="background:var(--primary); color:var(--white); border:none; padding:8px 15px; border-radius:6px; font-weight:bold; font-size:0.85rem; cursor:pointer;">Post</button></div></div></div>`;
-            });
-        }
-
-        function togglePostLike(postId) {
-            const s = localStorage.getItem('SUG_SESS'); if(!s) return;
-            const posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]'); const post = posts.find(p => p.id === postId); if(!post) return;
-            const userIdx = post.likedUsers.indexOf(s);
-            if(userIdx === -1) { post.likes++; post.likedUsers.push(s); } else { post.likes--; post.likedUsers.splice(userIdx, 1); }
-            localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); document.getElementById(`like-count-${postId}`).innerText = post.likes;
-        }
-
-        function submitPostComment(postId) {
-            const s = localStorage.getItem('SUG_SESS'); if(!s) return;
-            const inputField = document.getElementById(`comment-input-${postId}`), commentText = inputField.value.trim(); if(!commentText) return;
-            let authorName = "SUG Admin"; if(s !== 'ADMIN') { const p = JSON.parse(localStorage.getItem(`SUG_U_${s}`)); authorName = p.name; }
-            const posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]'); const post = posts.find(p => p.id === postId); if(!post) return;
-            post.comments.push({ authorId: s, author: authorName, msg: commentText }); 
-            localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); inputField.value = ""; renderSocialFeed();
-        }
-
-        function deleteFeedComment(postId, commentIndex) {
-            const posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]'); const post = posts.find(p => p.id === postId); if(!post) return;
-            post.comments.splice(commentIndex, 1); localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); renderSocialFeed();
-        }
-        window.onload = renderExecutiveGrid;
-    </script>
-</body>
-</html>
+                }
+                
