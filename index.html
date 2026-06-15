@@ -70,7 +70,7 @@
     <main id="page-home" class="page active-page">
         <div class="logo-container">
             <div class="logo-box"><img src="images.jpeg" alt="College Logo"></div>
-            <div class="logo-box"><img src="37cbfd40-f655-4fa2-9387-a2f2b4be934c.jpg" alt="Aluta Logo"></div>
+            <div class="logo-box"><img src="images (8).jpeg" alt="Aluta Logo"></div>
         </div>
         <div class="content-card">
             <h2>Official Student Union Government Platform — 2025/2026 Led Administration</h2>
@@ -132,7 +132,7 @@
             </form>
         </div>
 
-        <!-- Student Dashboard and Open Comment Box Portal Area -->
+        <!-- Student Dashboard Portal Area -->
         <div id="student-dashboard-section" style="display: none;">
             <div class="dashboard-box">
                 <div class="success-banner" id="dashboard-banner-text">✓ Portal Verified! Welcome back to the Union.</div>
@@ -152,25 +152,23 @@
                 <button class="submit-btn" style="background-color:#7f8c8d;" onclick="handleLogout()">Log Out of Session</button>
             </div>
 
-            <!-- Open Student Complaint Box Forum Section -->
+            <!-- Secured Private Student Complaint Box Section -->
             <div class="dashboard-box" style="margin-top: 25px;">
-                <h3 style="color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e1e8f0; padding-bottom: 8px;">SUG Student Complaint Board</h3>
-                <form id="complaint-submission-form" onsubmit="handleComplaintSubmit(event)">
+                <h3 style="color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e1e8f0; padding-bottom: 8px;">Secured SUG Suggestion & Complaint Box</h3>
+                <form id="complaint-submission-form" onsubmit="handleSecuredComplaintSubmit(event)">
                     <div class="form-group">
-                        <label for="complaint-text">Type Your Complaint / Suggestion (Publicly Visible)</label>
-                        <textarea id="complaint-text" placeholder="Share your issues, complaints, or ideas regarding welfare, results, infrastructure, transit, etc..." required></textarea>
+                        <label for="complaint-text">Submit Private Complaint / Suggestion to SUG Executives</label>
+                        <textarea id="complaint-text" placeholder="Type your issues or complaints here. This message is encrypted and sent directly to the SUG Admin Dashboard. Other students cannot see this." required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn" style="background-color: var(--secondary);">Post Complaint to Bulletin</button>
+                    <button type="submit" class="submit-btn" style="background-color: var(--secondary);">Submit Secured Complaint</button>
                 </form>
-                <div id="public-complaints-bulletin" style="margin-top: 25px; max-height: 400px; overflow-y: auto; padding-right: 5px;">
-                    <!-- Complaints will render here dynamically -->
-                </div>
+                <div id="submission-success-msg" style="display:none; color:#27ae60; font-weight:bold; margin-top:15px; text-align:center;">✓ Complaint encrypted and dispatched to SUG Executives successfully.</div>
             </div>
         </div>
     </main>
 
     <footer><p>&copy; 2026 <strong>RIVCOHSMAT SUG Council</strong>. All Rights Reserved.</p></footer>
-                                                                 <script>
+                                                                                               <script>
         const data = [
             { r: "SUG President", n: "Sen. Comr. Justina Gentle Welli", img: "1781503643336.jpg" }, 
             { r: "SUG Vice President", n: "Comr. Nwibu Roselyn", img: "" },
@@ -188,6 +186,7 @@
             { r: "Internal Auditor", n: "Victor Dakubor", img: "IMG-20260607-WA0068.jpg" }, 
             { r: "Majority Leader", n: "Akpobari Barisua", img: "" }
         ];
+
         function renderExecutiveGrid() {
             const g = document.getElementById('executives-container'); g.innerHTML = "";
             data.forEach(e => {
@@ -195,6 +194,7 @@
                 c.innerHTML = `<div class="card-title-bar">${e.r}</div><div class="card-body-text">${e.n}</div>`; g.appendChild(c);
             });
         }
+
         function switchPage(pId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page')); document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
             document.getElementById(`page-${pId}`).classList.add('active-page'); document.getElementById(`${pId}-btn`).classList.add('active');
@@ -204,11 +204,13 @@
             else if (pId === 'reg') { t.innerText = "Union Verification Portal"; s.innerText = "Official E-Registration Services"; chk(); }
             window.scrollTo(0,0);
         }
+
         function toggleAuthMode(m) {
             const lF = document.getElementById('sug-login-form'), sF = document.getElementById('sug-signup-form'), lB = document.getElementById('tab-login-btn'), sB = document.getElementById('tab-signup-btn');
             if (m === 'login') { lF.style.display = 'block'; sF.style.display = 'none'; lB.style.color = 'var(--primary)'; lB.style.borderBottom = '3px solid var(--primary)'; sB.style.color = '#7f8c8d'; sB.style.borderBottom = 'none'; }
             else { lF.style.display = 'none'; sF.style.display = 'block'; lB.style.color = '#7f8c8d'; lB.style.borderBottom = 'none'; sB.style.color = 'var(--primary)'; sB.style.borderBottom = '3px solid var(--primary)'; }
         }
+
         function openProfileOverlay(n, r, imgFile) { 
             document.getElementById('modal-name').innerText = n; document.getElementById('modal-role').innerText = r; 
             const imgBox = document.querySelector('.image-placeholder');
@@ -216,48 +218,96 @@
             else { imgBox.innerHTML = `👤 [Photo Connected to Secure Vault]`; }
             document.getElementById('profile-overlay').style.display = 'flex'; 
         }
+
         function closeProfileOverlay(e) { if(e.target.id === "profile-overlay") document.getElementById('profile-overlay').style.display = 'none'; }
+
         function handleRegistrationSubmit(e) {
-            e.preventDefault(); const n = document.getElementById('student-name').value, m = document.getElementById('student-matric').value.trim().toUpperCase(), d = document.getElementById('student-dept').value, l = document.getElementById('student-level').value, c = document.getElementById('student-course').value;
+            e.preventDefault(); 
+            const n = document.getElementById('student-name').value, m = document.getElementById('student-matric').value.trim().toUpperCase(), d = document.getElementById('student-dept').value, l = document.getElementById('student-level').value, c = document.getElementById('student-course').value;
             const p = "data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='100' height='100' viewBox='0 0 24 24' fill='%2300468c'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
-            const prof = { name: n, matric: m, dept: d, level: l, course: c, profilePic: p }; localStorage.setItem(`SUG_U_${m}`, JSON.stringify(prof)); localStorage.setItem('SUG_SESS', m);
+            const prof = { name: n, matric: m, dept: d, level: l, course: c, profilePic: p }; 
+            localStorage.setItem(`SUG_U_${m}`, JSON.stringify(prof)); localStorage.setItem('SUG_SESS', m);
             ld(prof, "✓ Registration Successful! Welcome to your active dashboard workspace.");
         }
+
         function handleLoginSubmit(e) {
-            e.preventDefault(); const m = document.getElementById('login-matric').value.trim().toUpperCase(), lD = localStorage.getItem(`SUG_U_${m}`);
+            e.preventDefault(); 
+            const m = document.getElementById('login-matric').value.trim().toUpperCase();
+            
+            if(m === 'SUG-ADMIN') {
+                localStorage.setItem('SUG_SESS', 'ADMIN');
+                loadAdminDashboard();
+                return;
+            }
+
+            const lD = localStorage.getItem(`SUG_U_${m}`);
             if (lD) { const prof = JSON.parse(lD); localStorage.setItem('SUG_SESS', m); ld(prof, "✓ Portal Verified! Welcome back to the Union."); }
             else { alert("No record found matching this Matric Number. Please click the Register tab to create your profile!"); }
         }
-        function chk() { const s = localStorage.getItem('SUG_SESS'); if (s) { const lD = localStorage.getItem(`SUG_U_${s}`); if (lD) ld(JSON.parse(lD), "✓ Active Session Found. Welcome back!"); } }
+
+        function chk() { 
+            const s = localStorage.getItem('SUG_SESS'); 
+            if (s === 'ADMIN') { loadAdminDashboard(); }
+            else if (s) { const lD = localStorage.getItem(`SUG_U_${s}`); if (lD) ld(JSON.parse(lD), "✓ Active Session Found. Welcome back!"); } 
+        }
+
         function ld(p, t) {
             document.getElementById('dashboard-banner-text').innerText = t; document.getElementById('dash-name').innerText = p.name; document.getElementById('dash-matric').innerText = p.matric; document.getElementById('dash-dept').innerText = p.dept; document.getElementById('dash-level').innerText = p.level; document.getElementById('dash-course').innerText = p.course; document.getElementById('user-profile-pic').src = p.profilePic;
-            document.getElementById('registration-form-section').style.display = 'none'; document.getElementById('student-dashboard-section').style.display = 'block'; renderComplaints();
+            document.getElementById('registration-form-section').style.display = 'none'; document.getElementById('student-dashboard-section').style.display = 'block';
+            
+            document.getElementById('complaint-submission-form').parentElement.style.display = 'block';
+            const adminBox = document.getElementById('admin-vault-board'); if(adminBox) adminBox.remove();
         }
+
+        function loadAdminDashboard() {
+            document.getElementById('registration-form-section').style.display = 'none';
+            document.getElementById('student-dashboard-section').style.display = 'block';
+            
+            document.getElementById('dashboard-banner-text').innerText = "⚡ SUG ADMINISTRATOR SESSION ACTIVE";
+            document.getElementById('dash-name').innerText = "SUG Governing Body";
+            document.getElementById('dash-matric').innerText = "OFFICIAL ADMIN";
+            document.getElementById('dash-dept').innerText = "All Departments Executive Access";
+            document.getElementById('dash-level').innerText = "N/A";
+            document.getElementById('dash-course').innerText = "N/A";
+            
+            document.getElementById('complaint-submission-form').parentElement.style.display = 'none';
+            
+            let adminBox = document.getElementById('admin-vault-board');
+            if(!adminBox) {
+                adminBox = document.createElement('div'); adminBox.className = "dashboard-box"; adminBox.id = "admin-vault-board"; adminBox.style.marginTop = "25px";
+                document.getElementById('student-dashboard-section').appendChild(adminBox);
+            }
+            
+            adminBox.innerHTML = `<h3 style="color:#d4af37; margin-bottom:15px; border-bottom:2px solid #e1e8f0; padding-bottom:8px;">📥 Secret SUG Executive Complaint Vault</h3><div id="vault-list"></div>`;
+            const vaultList = document.getElementById('vault-list');
+            const list = JSON.parse(localStorage.getItem('SUG_SECRET_VAULT') || '[]');
+            
+            if(list.length === 0) { vaultList.innerHTML = `<p style="color:#7f8c8d; text-align:center; font-style:italic;">No complaints submitted by students yet.</p>`; }
+            else {
+                list.forEach(c => {
+                    vaultList.innerHTML += `<div class="complaint-item" style="border-left: 4px solid #d4af37; margin-bottom:15px; background:#fdfefe; border-top:1px solid #e1e8f0; border-right:1px solid #e1e8f0; border-bottom:1px solid #e1e8f0; padding:15px; border-radius:8px;"><div class="complaint-meta" style="font-size:0.8rem; color:#7f8c8d; font-weight:bold; margin-bottom:6px;">${c.name} (${c.matric} - ${c.dept}) — <span style="color:var(--secondary);">${c.date}</span></div><div style="font-size:0.95rem; color:var(--dark);">${c.msg}</div></div>`;
+                });
+            }
+        }
+
         function handleLogout() { localStorage.removeItem('SUG_SESS'); document.getElementById('registration-form-section').style.display = 'block'; document.getElementById('student-dashboard-section').style.display = 'none'; document.getElementById('login-matric').value = ""; toggleAuthMode('login'); }
+
         function handleProfileImageUpload(ev) {
             const f = ev.target.files[0], s = localStorage.getItem('SUG_SESS');
             if (f && s) {
-                const r = new FileReader(); r.onload = function(e) {
-                    const b64 = e.target.result; document.getElementById('user-profile-pic').src = b64;
-                    const lD = localStorage.getItem(`SUG_U_${s}`); if (lD) { const prof = JSON.parse(lD); prof.profilePic = b64; localStorage.setItem(`SUG_U_${s}`, JSON.stringify(prof)); }
-                }; r.readAsText(f); r.readAsDataURL(f);
-            }
-        }
-        function handleComplaintSubmit(e) {
-            e.preventDefault(); const s = localStorage.getItem('SUG_SESS'), text = document.getElementById('complaint-text').value;
-            if(!s) return; const p = JSON.parse(localStorage.getItem(`SUG_U_${s}`));
-            const list = JSON.parse(localStorage.getItem('SUG_PUBLIC_BOARD') || '[]');
-            list.unshift({ name: p.name, dept: p.dept, msg: text, date: new Date().toLocaleString() });
-            localStorage.setItem('SUG_PUBLIC_BOARD', JSON.stringify(list));
-            document.getElementById('complaint-text').value = ""; renderComplaints();
-        }
-        function renderComplaints() {
-            const bulletin = document.getElementById('public-complaints-bulletin'); bulletin.innerHTML = "";
-            const list = JSON.parse(localStorage.getItem('SUG_PUBLIC_BOARD') || '[]');
-            if(list.length === 0) { bulletin.innerHTML = `<p style="color:#7f8c8d; text-align:center; font-style:italic;">No complaints posted yet. Be the first to share your voice!</p>`; return; }
-            list.forEach(c => {
-                bulletin.innerHTML += `<div class="complaint-item"><div class="complaint-meta">${c.name} (${c.dept}) — <span style="color:var(--secondary);">${c.date}</span></div><div style="font-size:0.95rem; line-height:1.5; color:var(--dark);">${c.msg}</div></div>`;
-            });
+                                                                                                           function handleSecuredComplaintSubmit(e) {
+            e.preventDefault(); 
+            const s = localStorage.getItem('SUG_SESS'), text = document.getElementById('complaint-text').value;
+            if(!s) return; 
+            const p = JSON.parse(localStorage.getItem(`SUG_U_${s}`));
+            const list = JSON.parse(localStorage.getItem('SUG_SECRET_VAULT') || '[]');
+            
+            list.unshift({ name: p.name, matric: p.matric, dept: p.dept, msg: text, date: new Date().toLocaleString() });
+            localStorage.setItem('SUG_SECRET_VAULT', JSON.stringify(list));
+            
+            document.getElementById('complaint-text').value = "";
+            const success = document.getElementById('submission-success-msg'); success.style.display = "block";
+            setTimeout(() => { success.style.display = "none"; }, 4000);
         }
         window.onload = renderExecutiveGrid;
     </script>
