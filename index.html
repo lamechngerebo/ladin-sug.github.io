@@ -3,281 +3,374 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUG Executive Council | RIVCOHSMAT</title>
+    <title>Official SUG Portal | RIVCOHSMAT</title>
     <style>
-        /* Modern, Clean Universal Reset */
+        /* Matured Royal Blue & Crisp White Theme */
+        :root {
+            --primary-blue: #0A369D;
+            --accent-blue: #4A90E2;
+            --dark-blue: #051C52;
+            --pure-white: #FFFFFF;
+            --bg-light: #F4F7FC;
+            --text-main: #2C3E50;
+            --text-muted: #7F8C8D;
+            --success-green: #2ECC71;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #f0f4f1; /* Soft clinical background */
-            color: #2c3e50;
-            padding: 0;
-            margin: 0;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
         }
 
-        /* Bold Top Banner */
-        .banner {
-            background: linear-gradient(135deg, #004d38, #007353); /* Deep Premium Emerald */
-            color: #ffffff;
-            text-align: center;
-            padding: 40px 20px;
-            border-bottom: 6px solid #d4af37; /* Leadership Gold */
+        /* Top Navigation Bar */
+        nav {
+            background-color: var(--primary-blue);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .banner h1 {
-            font-size: 2.2rem;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .banner p {
-            color: #d4af37;
-            font-size: 1.2rem;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-        }
-
-        /* Intro Statement Box */
-        .intro-box {
-            max-width: 900px;
-            background: #ffffff;
-            margin: 30px auto;
-            padding: 25px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-left: 5px solid #007353;
-        }
-
-        .intro-box h2 {
-            color: #004d38;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-        }
-
-        /* Central Container for Cards */
-        .main-content {
-            max-width: 1100px;
+        .nav-container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-        }
-
-        .section-heading {
-            text-align: center;
-            color: #004d38;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-        }
-
-        /* Fixed Grid Layout - Automatically scales and keeps cards neatly aligned */
-        .executive-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
-        }
-
-        /* Beautiful Clean Executive Cards */
-        .executive-card {
-            background: #ffffff;
-            border-radius: 12px;
-            border: 1px solid #e1e8e4;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-            overflow: hidden;
             display: flex;
-            flex-direction: column;
-            transition: transform 0.2s ease;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .executive-card:hover {
-            transform: translateY(-4px);
+        .nav-logo-text {
+            color: var(--pure-white);
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
         }
 
-        /* Top colored badge part of card */
-        .card-header {
-            background-color: #004d38;
-            color: #ffffff;
-            padding: 18px;
-            text-align: center;
-            font-weight: bold;
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.8);
             font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
 
-        /* Special Gold Badge for President & VP */
-        .executive-card.top-tier .card-header {
-            background: linear-gradient(135deg, #004d38, #002e21);
-            color: #d4af37;
-            border-bottom: 2px solid #d4af37;
+        .nav-links button:hover, .nav-links button.active {
+            color: var(--pure-white);
+            background-color: var(--accent-blue);
         }
 
-        /* Bottom white info part of card */
-        .card-body {
-            padding: 25px 20px;
+        /* Header / Banner Area */
+        header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: var(--pure-white);
             text-align: center;
-            flex-grow: 1;
+            padding: 50px 20px;
+            border-bottom: 4px solid var(--accent-blue);
+        }
+
+        .logo-container {
             display: flex;
-            flex-direction: column;
             justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
         }
 
-        .exec-name {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #1a2521;
-            margin-bottom: 8px;
-            line-height: 1.4;
+        .logo-box {
+            background: var(--pure-white);
+            padding: 10px;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        .exec-dept {
-            font-size: 0.85rem;
-            color: #6a7b73;
-            text-transform: uppercase;
+        .logo-box svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+
+        header h2 {
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Dynamic Page Section Styling */
+        .page {
+            display: none;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HOME PAGE: Matured Long Content Layout */
+        .content-card {
+            background: var(--pure-white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .content-card h3 {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 10px;
+        }
+
+        .content-card p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* EXECUTIVES PAGE: Interactive Grid Layout */
+        .exec-split {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .exec-split { grid-template-columns: 1fr; }
+        }
+
+        .exec-list-panel {
+            background: var(--pure-white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-height: 650px;
+            overflow-y: auto;
+        }
+
+        .exec-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--bg-light);
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
             font-weight: 600;
         }
 
-        /* Bottom Web Footer */
-        footer {
-            background-color: #1a2521;
-            color: #a3b8b0;
+        .exec-item:hover, .exec-item.selected {
+            background-color: var(--primary-blue);
+            color: var(--pure-white);
+        }
+
+        .exec-item span {
+            display: block;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .exec-viewer-panel {
+            background: var(--pure-white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             text-align: center;
-            padding: 30px 20px;
-            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 450px;
+        }
+
+        .photo-frame {
+            width: 260px;
+            height: 260px;
+            border-radius: 12px;
+            background-color: var(--bg-light);
+            border: 4px solid var(--primary-blue);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .viewer-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 5px;
+        }
+
+        .viewer-role {
+            font-size: 1.1rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .viewer-admin-tag {
+            background: var(--bg-light);
+            padding: 6px 15px;
+            border-radius: 20px;
             font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--text-main);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
-        footer strong {
-            color: #ffffff;
+        /* REGISTRATION & PROFILE PAGE Layout */
+        .form-box {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--pure-white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-    </style>
-</head>
-<body>
 
-    <!-- Top Banner Section -->
-    <header class="banner">
-        <h1>RIVCOHSMAT</h1>
-        <p>Student Union Government (SUG)</p>
-    </header>
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
 
-    <!-- Welcome Section -->
-    <section class="intro-box">
-        <h2>Unity, Progress & Student Welfare</h2>
-        <p>Official administrative dashboard showcasing the elected student leadership team of the Rivers State College of Health Science and Management Technology.</p>
-    </section>
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark-blue);
+        }
 
-    <!-- Main Governing Body Grid -->
-    <main class="main-content">
-        <h2 class="section-heading">The Executive Council</h2>
-        
-        <div class="executive-grid">
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E1E8E4;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
 
-            <!-- 1. President -->
-            <div class="executive-card top-tier">
-                <div class="card-header">★ SUG President</div>
-                <div class="card-body">
-                    <div class="exec-name">Sen. Comr. Justina Gentle Welli</div>
-                    <div class="exec-dept">Executive Head</div>
-                </div>
-            </div>
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--accent-blue);
+        }
 
-            <!-- 2. Vice President -->
-            <div class="executive-card top-tier">
-                <div class="card-header">★ SUG Vice President</div>
-                <div class="card-body">
-                    <div class="exec-name">Comr. Nwibu Roselyn</div>
-                    <div class="exec-dept">Executive Council</div>
-                </div>
-            </div>
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary-blue);
+            color: var(--pure-white);
+            border: none;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
 
-            <!-- 3. Speaker -->
-            <div class="executive-card">
-                <div class="card-header">SUG Speaker</div>
-                <div class="card-body">
-                    <div class="exec-name">Rt. Hon. Godspower Awajimowa Ebirien</div>
-                    <div class="exec-dept">Legislative Council</div>
-                </div>
-            </div>
+        .btn-submit:hover {
+            background-color: var(--dark-blue);
+        }
 
-            <!-- 4. Deputy Speaker -->
-            <div class="executive-card">
-                <div class="card-header">SUG Deputy Speaker</div>
-                <div class="card-body">
-                    <div class="exec-name">Hon. PraiseGod Barisi</div>
-                    <div class="exec-dept">Legislative Council</div>
-                </div>
-            </div>
+        /* Split Directory Dashboard Layout */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
 
-            <!-- 5. Secretary -->
-            <div class="executive-card">
-                <div class="card-header">SUG Secretary</div>
-                <div class="card-body">
-                    <div class="exec-name">Comr. Favour Mbete</div>
-                    <div class="exec-dept">Secretariat</div>
-                </div>
-            </div>
+        @media (max-width: 768px) {
+            .dashboard-layout { grid-template-columns: 1fr; }
+        }
 
-            <!-- 6. Provost -->
-            <div class="executive-card">
-                <div class="card-header">SUG Provost</div>
-                <div class="card-body">
-                    <div class="exec-name">Comr. Ngerebo Lamech Dimkpa</div>
-                    <div class="exec-dept">Directorate of Order</div>
-                </div>
-            </div>
+        .profile-container {
+            background: var(--pure-white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
 
-            <!-- 8. Treasurer -->
-            <div class="executive-card">
-                <div class="card-header">SUG Treasurer</div>
-                <div class="card-body">
-                    <div class="exec-name">Comr. Vera</div>
-                    <div class="exec-dept">Finance Directorate</div>
-                </div>
-            </div>
+        .user-avatar-upload {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--bg-light);
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 3px dashed var(--accent-blue);
+            position: relative;
+            cursor: pointer;
+        }
 
-            <!-- 9. P.R.O -->
-            <div class="executive-card">
-                <div class="card-header">SUG P.R.O</div>
-                <div class="card-body">
-                    <div class="exec-name">Comr. Bob Orji</div>
-                    <div class="exec-dept">Public Relations</div>
-                </div>
-            </div>
+        .user-avatar-upload img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-            <!-- 10. Fin Sec -->
-            <div class="executive-card">
-                <div class="card-header">SUG Fin. Sec</div>
-                <div class="card-body">
-                    <div class="exec-name">Comr. Chinemerem Silver</div>
-                    <div class="exec-dept">Finance Secretariat</div>
-                </div>
-            </div>
+        .upload-overlay {
+            position: absolute;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 0.75rem;
+            bottom: 0;
+            width: 100%;
+            padding: 4px 0;
+        }
 
-            <!-- 11. Welfare -->
-            <div class="executive-card">
-                <div class="card-header">SUG Welfare</div>
-                <div class="card-body">
-                    <div class="exec-name">Comr. Maureen</div>
-                    <div class="exec-dept">Student Welfare</div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2026 <strong>RIVCOHSMAT SUG</strong>. All Rights Reserved.</p>
-        <p style="font-size: 0.75rem; margin-top: 6px; opacity: 0.6;">Built for excellence in Health Science & Management Technology administration.</p>
-    </footer>
-
-</body>
-    </html>
-                    
+        .member-list-panel {
+            background: var(--pure-white);
+            padding: 30px;
+            border-radius: 12px;
+    
