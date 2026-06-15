@@ -1,331 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SUG Portal System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUG | Rivers State College of Health Science and Management Technology</title>
+    <style>
+        /* Unique Aesthetic: "Clinical Emerald & Gold" to match Health Science & Leadership */
+        :root {
+            --primary: #005a43;     /* Deep Clinical Emerald */
+            --secondary: #008060;   /* Vibrant Mint Accent */
+            --accent: #d4af37;      /* Leadership Gold */
+            --dark: #1e2522;        /* Dark Charcoal */
+            --light: #f4f7f5;       /* Soft Light Gray */
+            --white: #ffffff;
+        }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-body{
-  background:#f4f6f9;
-}
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
 
-/* LOGIN SECTION */
-.login-container{
-  width:100%;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:linear-gradient(120deg,#1e3c72,#2a5298);
-}
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary), #003628);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 5px solid var(--accent);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
 
-.login-box{
-  background:white;
-  padding:25px;
-  width:320px;
-  border-radius:10px;
-  box-shadow:0 0 15px rgba(0,0,0,0.2);
-}
+        .header-container h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
 
-.login-box h2{
-  text-align:center;
-  margin-bottom:15px;
-}
+        .header-container p {
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-.login-box input{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border:1px solid #ccc;
-  border-radius:5px;
-}
+        /* Hero Section */
+        .hero {
+            background: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 30px auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--secondary);
+        }
 
-.login-box button{
-  width:100%;
-  padding:10px;
-  background:#2a5298;
-  color:white;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-}
+        .hero h2 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
 
-/* DASHBOARD */
-.dashboard{
-  display:none;
-  padding:20px;
-}
+        /* Executive Grid Styling */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px 20px;
+        }
 
-.navbar{
-  background:#2a5298;
-  color:white;
-  padding:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            color: var(--primary);
+            font-size: 2rem;
+        }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-  gap:15px;
-  margin-top:20px;
-}
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            margin: 10px auto 0 auto;
+            border-radius: 2px;
+        }
 
-.card{
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  text-align:center;
-  cursor:pointer;
-  transition:0.3s;
-  box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
+        .exec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
 
-.card:hover{
-  transform:scale(1.05);
-}
+        /* Unique Diagonal Cut Card Design */
+        .exec-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
 
-.loading{
-  display:none;
-  text-align:center;
-  margin-top:20px;
-}
-</style>
+        .exec-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Top colored badge area of the card */
+        .card-badge {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Gold accent corner for high-ranking positions */
+        .exec-card.apex .card-badge::before {
+            content: '★';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .card-badge .role {
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .card-info {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .card-info .name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .card-info .status-tag {
+            font-size: 0.8rem;
+            color: #777;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 0.9rem;
+            border-top: 3px solid var(--secondary);
+        }
+
+        footer strong {
+            color: var(--white);
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 768px) {
+            .header-container h1 { font-size: 1.6rem; }
+            .header-container p { font-size: 0.9rem; }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- LOGIN PAGE -->
-<div class="login-container" id="loginPage">
+    <header>
+        <div class="header-container">
+            <h1>RIVCOHSMAT</h1>
+            <p>Student Union Government (SUG) Governing Body</p>
+        </div>
+    </header>
 
-  <div class="login-box">
-    <h2>Student Login</h2>
-    <input type="text" id="studentMatric" placeholder="Matric Number">
-    <input type="password" id="studentPass" placeholder="Password">
-    <button onclick="loginStudent()">Login</button>
-  </div>
+    <section class="hero">
+        <h2>Unity, Progress & Student Welfare</h2>
+        <p>Welcome to the official portal of the Rivers State College of Health Science and Management Technology SUG Executive Council. Committed to transparent leadership and academic excellence.</p>
+    </section>
 
-</div>
+    <main class="container">
+        <h3 class="section-title">The Executive Council</h3>
+        
+        <div class="exec-grid">
+            
+            <!-- 1. President (Apex class adds gold star) -->
+            <div class="exec-card apex">
+                <div class="card-badge">
+                    <span class="role">SUG President</span>
+                </div>
+                <div class="card-info">
+                    <div class="name">Sen. Comr. Justina Gentle Welli</div>
+                    <div class="status-tag">Executive Head</div>
+                </div>
+            </div>
 
-<!-- DASHBOARD -->
-<div class="dashboard" id="dashboard">
+            <!-- 2. Vice President -->
+            <div class="exec-card apex">
+                <div class="card-badge">
+                    <span class="role">SUG Vice President</span>
+                </div>
+                <div class="card-info">
+                    <div class="name">Comr. Nwibu Roselyn</div>
+                    <div class="status-tag">Executive Council</div>
+                </div>
+            </div>
 
-  <div class="navbar">
-    <h3>SUG Portal Dashboard</h3>
-    <button onclick="logout()" style="padding:5px 10px;">Logout</button>
-  </div>
+            <!-- 3. Speaker -->
+            <div class="exec-card">
+                <div class="card-badge">
+                    <span class="role">SUG Speaker</span>
+                </div>
+                <div class="card-info">
+                    <div class="name">Rt. Hon. Godspower Awajimowa Ebirien</div>
+                    <div class="status-tag">Legislative Head</div>
+                </div>
+            </div>
 
-  <div class="loading" id="loading">Loading module...</div>
+            <!-- 5. Deputy Speaker -->
+            <div class="exec-card">
+                <div class="card-badge">
+                    <span class="role">SUG Deputy Speaker</span>
+                </div>
+                <div class="card-info">
+                    <div class="name">Hon. PraiseGod Barisi</div>
+                    <div class="status-tag">Legislative Council</div>
+                </div>
+            </div>
 
-  <div class="grid">
+            <!-- 6. Secretary -->
+            <div class="exec-card">
+                <div class="card-badge">
+                    <span class="role">SUG Secretary</span>
+                </div>
+                <div class="card-info">
+                    <div class="name">Comr. Favour Mbete</div>
+                    <div class="status-tag">Secretariat</div>
+                </div>
+            </div>
 
-    <div class="card" onclick="openModule('Profile')">👤 Profile</div>
-    <div class="card" onclick="openModule('Results')">📊 Results</div>
-    <div class="card" onclick="openModule('Fees')">💰 Fees</div>
-    <div class="card" onclick="openModule('Courses')">📚 Courses</div>
+            <!-- 7. Provost -->
+            <div class="exec-card">
+                <div class="card-badge">
+                    <span class="role">SUG Provost</span>
+                </div>
+                <div class="card-info">
+                    <div class="name">Comr. Ngerebo Lamech Dimkpa</div>
+                    <div class="status-tag">Directorate of Order</div>
+                </div>
+            </div>
 
-  </div>
+            <!-- 8. Treasurer -->
+            <div class="exec-card">
+                <div class="card-badge">
+                    <span class="role">SUG Treasurer</span>
+                </div>
+                <div class="card-info">
+                    <div class="name">Comr. Vera</div>
+                    <div class="status-tag">Finance Directorate</div>
+                </div>
+            </div>
 
-</div>
+            <!-- 9. P.R.O -->
+            <div class="exec-card">
+                <div class="card-badge">
+                    <span class="role">SUG P.R.O</span>
+                </div>
+                <div class="card-info">
+                    <div class="name">Comr. Bob Orji</div>
+                    <div class="status-tag">Public Relations</div>
+                </div>
+            </div>
 
-<script>
-// SIMPLE LOCAL DATABASE
-let users = [
-  {matric:"SUG001", pass:"1234"}
-];
+            <!-- 10. Fin Sec -->
+            <div class="exec-card">
+                <div class="card-badge">
+                    <span class="role">SUG Fin. Sec</span>
+                </div>
+                <div class="card-info">
+                    <div class="name">Comr. Chinemerem Silver</div>
+                    <div class="status-tag">Finance Secretariat</div>
+                </div>
+            </div>
 
-// LOGIN FUNCTION
-function loginStudent(){
-  let m = document.getElementById("studentMatric").value;
-  let p = document.getElementById("studentPass").value;
-
-  let found = users.find(u => u.matric === m && u.pass === p);
-
-  if(found){
-    localStorage.setItem("student", JSON.stringify(found));
-    document.getElementById("loginPage").style.display="none";
-    document.getElementById("dashboard").style.display="block";
-  }else{
-    alert("Invalid login details");
-  }
-}
-
-// AUTO LOGIN CHECK
-window.onload = function(){
-  let user = localStorage.getItem("student");
-  if(user){
-    document.getElementById("loginPage").style.display="none";
-    document.getElementById("dashboard").style.display="block";
-  }
-}
-
-// MODULE LOADING EFFECT
-function openModule(name){
-  let load = document.getElementById("loading");
-  load.style.display="block";
-  load.innerText = "Loading " + name + "...";
-
-  setTimeout(()=>{
-    load.style.display="none";
-    alert(name + " opened successfully");
-  }, 1200);
-}
-
-// LOGOUT
-function logout(){
-  localStorage.removeItem("student");
-  location.reload();
-}
-</script>
-
-</body>
-                                                                 </html>  text-align: center;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-.card img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-}
-
-.card h3 {
-  margin: 10px 0 5px;
-}
-
-.card p {
-  color: gray;
-  margin-bottom: 15px;
-}
-
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 10;
-  padding-top: 50px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-}
-
-.modal-content {
-  background: white;
-  margin: auto;
-  padding: 20px;
-  width: 90%;
-  max-width: 400px;
-  border-radius: 10px;
-  text-align: center;
-  animation: fadeIn 0.5s;
-}
-
-.modal-content img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.close {
-  float: right;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-/* LOADING */
-.loader {
-  display: none;
-  position: fixed;
-  z-index: 20;
-  width: 100%;
-  height: 100%;
-  background: white;
-  justify-content: center;
-  align-items: center;
-}
-
-.spinner {
-  border: 6px solid #ccc;
-  border-top: 6px solid #002147;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-</style></head><body><header>
-  <h1>SUG Governing Body</h1>
-  <p>Meet the Executives</p>
-</header><div class="container">  <!-- EXEC 1 -->  <div class="card" onclick="openProfile('provost.jpg','Ngerebo Lamech Dimkpa','Provost')">
-    <img src="provost.jpg">
-    <h3>Ngerebo Lamech Dimkpa</h3>
-    <p>Provost</p>
-  </div>  <!-- EXEC 2 -->  <div class="card" onclick="openProfile('speaker.jpg','Godspower Awajimowa Ebirien','Speaker, SRC SUG')">
-    <img src="speaker.jpg">
-    <h3>Godspower Awajimowa Ebirien</h3>
-    <p>Speaker, SRC SUG</p>
-  </div>  <!-- EXEC 3 -->  <div class="card" onclick="openProfile('auditor.jpg','Victor Uche Dakubor','Internal Auditor')">
-    <img src="auditor.jpg">
-    <h3>Victor Uche Dakubor</h3>
-    <p>Internal Auditor</p>
-  </div></div><!-- LOADER --><div class="loader" id="loader">
-  <div class="spinner"></div>
-</div><!-- MODAL --><div id="myModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img id="modalImg">
-    <h2 id="modalName"></h2>
-    <p id="modalRole"></p>
-  </div>
-</div><script>
-function openProfile(img, name, role) {
-  let loader = document.getElementById("loader");
-  loader.style.display = "flex";
-
-  setTimeout(() => {
-    loader.style.display = "none";
-
-    document.getElementById("modalImg").src = img;
-    document.getElementById("modalName").innerText = name;
-    document.getElementById("modalRole").innerText = role;
-
-    document.getElementById("myModal").style.display = "block";
-  }, 1000);
-}
-
-function closeModal() {
-  document.getElementById("myModal").style.display = "none";
-}
-
-window.onclick = function(event) {
-  let modal = document.getElementById("myModal");
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script></body>
-</html>
+            <!-- 11. Welfare -->
+            <div class="exec-card">
+                <div class="card-badge">
+                    <span class="role">SUG Welfare</span>
+                </div>
+                <div class="card-info">
+                    <div class="name">Comr. Maureen</div>
+                  
