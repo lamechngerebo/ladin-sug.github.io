@@ -3,363 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Official SUG Portal | RIVCOHSMAT</title>
+    <title>SUG Platform | RIVCOHSMAT</title>
     <style>
-        /* Modernized Global Style Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-
         :root {
-            --primary-blue: #003366;     /* Deep Matured Corporate Blue */
-            --accent-blue: #0066cc;      /* Vibrant Sky/Aluta Accent Blue */
-            --bg-light: #f5f8fa;         /* Crisp soft white gray */
-            --text-dark: #1a2530;
+            --primary: #00468c;
+            --primary-dark: #002d5c;
+            --secondary: #0073e6;
+            --light: #f5f8fc;
             --white: #ffffff;
+            --dark: #2c3e50;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background-color: var(--light); color: var(--dark); min-height: 100vh; display: flex; flex-direction: column; }
+        nav { background-color: var(--primary); color: var(--white); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .nav-logo-text { font-weight: 800; font-size: 1.3rem; }
+        .nav-links { display: flex; gap: 15px; }
+        .nav-links button { background: none; border: none; color: rgba(255,255,255,0.8); font-size: 0.95rem; font-weight: 600; cursor: pointer; padding: 8px 12px; border-radius: 5px; }
+        .nav-links button:hover, .nav-links button.active { color: var(--white); background-color: rgba(255,255,255,0.15); }
+        header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--white); text-align: center; padding: 40px 20px; border-bottom: 4px solid var(--secondary); }
+        header h1 { font-size: 2.2rem; margin-bottom: 5px; }
+        header p { color: #bcd6ff; font-size: 1.1rem; font-weight: 600; }
+        .page { display: none; max-width: 1100px; margin: 30px auto; padding: 0 20px; flex-grow: 1; width: 100%; }
+        .page.active-page { display: block; }
+        .logo-container { display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; flex-wrap: wrap; }
+        .logo-box { background: var(--white); width: 100px; height: 100px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px solid #e1e8f0; font-weight: bold; font-size: 0.75rem; text-align: center; color: var(--primary); padding: 5px; }
+        .content-card { background: var(--white); padding: 35px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); line-height: 1.8; font-size: 1.05rem; }
+        .content-card h2 { color: var(--primary); margin-bottom: 20px; border-bottom: 2px solid #e1e8f0; padding-bottom: 10px; }
+        .content-card p { margin-bottom: 15px; text-align: justify; }
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .exec-card { background: var(--white); border-radius: 10px; border: 1px solid #e1e8f0; overflow: hidden; cursor: pointer; }
+        .card-title-bar { background-color: var(--primary); color: var(--white); padding: 12px; text-align: center; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; }
+        .card-body-text { padding: 20px; text-align: center; font-weight: 600; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 2000; padding: 20px; }
+        .profile-view-box { background: var(--white); max-width: 450px; width: 100%; border-radius: 14px; overflow: hidden; text-align: center; }
+        .image-placeholder { background: #e9eff6; height: 240px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-weight: bold; font-size: 1.1rem; border-bottom: 4px solid var(--secondary); }
+        .profile-details { padding: 30px 20px; }
+        .profile-details h3 { color: var(--primary); font-size: 1.4rem; margin-bottom: 5px; }
+        .profile-details p { color: #555; font-weight: 600; margin-bottom: 20px; }
+        .admin-tag { background-color: #e1f0ff; color: var(--primary); padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block; }
+        .close-btn { background: var(--primary); color: var(--white); border: none; padding: 10px 25px; border-radius: 6px; font-weight: bold; margin-top: 15px; cursor: pointer; width: 80%; }
+        .form-box, .dashboard-box { background: var(--white); max-width: 600px; margin: 0 auto; padding: 35px; border-radius: 12px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ced8e3; border-radius: 6px; font-size: 1rem; }
+        .submit-btn { background-color: var(--primary); color: var(--white); border: none; width: 100%; padding: 14px; font-size: 1rem; font-weight: bold; border-radius: 6px; cursor: pointer; }
+        .user-avatar-container { width: 130px; height: 130px; border-radius: 50%; background: #e9eff6; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 3px solid var(--primary); }
+        .user-avatar-container img { width: 100%; height: 100%; object-fit: cover; }
+        .success-banner { background-color: #def7ec; color: #03543f; padding: 12px; border-radius: 6px; text-align: center; font-weight: 600; margin-bottom: 25px; }
+        .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f0f4f8; }
+        .info-row span:first-child { font-weight: 600; color: #7f8c8d; }
+        .info-row span:last-child { font-weight: 700; color: var(--dark); }
+        .upload-label { display: inline-block; background: var(--secondary); color: var(--white); padding: 8px 16px; border-radius: 5px; font-size: 0.85rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        footer { background-color: var(--primary-dark); color: rgba(255,255,255,0.7); text-align: center; padding: 25px; font-size: 0.9rem; margin-top: auto; }
+        footer strong { color: var(--white); }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo-text">RIVCOHSMAT SUG</div>
+        <div class="nav-links">
+            <button id="home-btn" class="active" onclick="switchPage('home')">Home</button>
+            <button id="exec-btn" onclick="switchPage('exec')">Executives</button>
+            <button id="reg-btn" onclick="switchPage('reg')">Registration</button>
+        </div>
+    </nav>
+    <header>
+        <h1 id="dynamic-header-title">Rivers State College of Health Science & Management Technology</h1>
+        <p id="dynamic-header-sub">Student Union Government (SUG) Platform</p>
+    </header>
+    <main id="page-home" class="page active-page">
+        <div class="logo-container">
+            <div class="logo-box">🏛️<br>College Logo</div>
+            <div class="logo-box">✊<br>Aluta Logo</div>
+        </div>
+        <div class="content-card">
+            <h2>Official Student Union Government Platform — 2025/2026 Led Administration</h2>
+            <p>The Student Union Government (SUG) serves as the sovereign and democratic administrative ecosystem designed specifically to bridge the communications pipeline between the student body and the central institution management. Fundamentally, an SUG acts as the executive, legislative, and judicial organ that represents individual and collective student interests, actively securing academic liberties, expanding structural welfare initiatives, and fostering structural peace within the collegiate territory.</p>
+            <p>The strategic importance of a highly active and unified Student Union Government cannot be overstated. By serving as an organized framework for collective bargaining, the union prevents administrative isolation, ensuring that issues regarding tuition adjustments, examination processing guidelines, campus transit networks, health clinic support protocols, and infrastructural development directly reflect student demands. It translates isolated student concerns into precise policy negotiations with higher college executives.</p>
+            <p>Furthermore, the dominance of the SUG over the entire student body operates as a standard system of democratic stewardship and total legislative responsibility. As a recognized student governing authority, its decisions hold operational dominance over all faculty clubs, departmental groups, and student unions within the campus environment. Through this structure, the union coordinates wide-reaching academic adjustments, maintains general discipline, and protects civic balance, making it an essential leadership power that guides the campus community toward absolute success.</p>
+        </div>
+    </main>
+        <main id="page-exec" class="page">
+        <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary);">2025/2026 Executive Council</h2>
+        <div class="grid-layout" id="executives-container"></div>
+    </main>
+
+    <div class="overlay" id="profile-overlay" onclick="closeProfileOverlay(event)">
+        <div class="profile-view-box" onclick="event.stopPropagation()">
+            <div class="image-placeholder">👤 [Photo Connected to Secure Vault]</div>
+            <div class="profile-details">
+                <h3 id="modal-name">Executive Name</h3>
+                <p id="modal-role">Executive Position</p>
+                <div class="admin-tag">2025/2026 Led Administration</div>
+                <br>
+                <button class="close-btn" onclick="document.getElementById('profile-overlay').style.display='none'">Close Profile</button>
+            </div>
+        </div>
+    </div>
+
+    <main id="page-reg" class="page">
+        <div id="registration-form-section" class="form-box">
+            <h2 style="color: var(--primary); margin-bottom: 20px; text-align: center;">Student Union Registration</h2>
+            <form id="sug-signup-form" onsubmit="handleRegistrationSubmit(event)">
+                <div class="form-group">
+                    <label for="student-name">Full Name</label>
+                    <input type="text" id="student-name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-matric">Matric Number</label>
+                    <input type="text" id="student-matric" placeholder="e.g. RIVCO/2025/XXXX" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-dept">Department</label>
+                    <input type="text" id="student-dept" list="departments-list" placeholder="Type or pick your department" required>
+                    <datalist id="departments-list">
+                        <option value="Community Health">
+                        <option value="Environmental Health Technology">
+                        <option value="Health Information Management">
+                        <option value="Medical Laboratory Science">
+                        <option value="Public Health Nursing">
+                        <option value="Pharmacy Technician Studies">
+                    </datalist>
+                </div>
+                <button type="submit" class="submit-btn">Register and Activate Membership</button>
+            </form>
+        </div>
+
+        <div id="student-dashboard-section" class="dashboard-box" style="display: none;">
+            <div class="success-banner">✓ Membership Verified! You are now a recognized member of the Union.</div>
+            <h3 style="text-align:center; margin-bottom:15px; color:var(--primary);">Your Student Profile</h3>
+            <div class="user-avatar-container">
+                <img id="user-profile-pic" src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='100' height='100' viewBox='0 0 24 24' fill='%2300468c'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>">
+            </div>
+            <div style="text-align: center; margin-bottom: 25px;">
+                <label for="avatar-upload-input" class="upload-label">Upload Profile Picture</label>
+                <input type="file" id="avatar-upload-input" accept="image/*" style="display: none;" onchange="handleProfileImageUpload(event)">
+                <p style="font-size:0.75rem; color:#888; margin-top:6px;">Only you have control over removing or replacing this photo.</p>
+            </div>
+            <div class="info-row"><span>Registered Member:</span><span id="dash-name">---</span></div>
+            <div class="info-row"><span>Matric Number:</span><span id="dash-matric">---</span></div>
+            <div class="info-row"><span>Assigned Faculty:</span><span id="dash-dept">---</span></div>
+            <div class="info-row"><span>Status Tier:</span><span style="color:#27ae60; font-weight:bold;">Active SUG E-Member</span></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 <strong>RIVCOHSMAT SUG Council</strong>. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const executivesData = [
+            { role: "SUG President", name: "Sen. Comr. Justina Gentle Welli" },
+            { role: "SUG Vice President", name: "Comr. Nwibu Roselyn" },
+            { role: "SUG Speaker", name: "Rt. Hon. Godspower Awajimowa Ebirien" },
+            { role: "SUG Deputy Speaker", name: "Hon. PraiseGod Barisi" },
+            { role: "SUG Secretary", name: "Comr. Favour Mbete" },
+            { role: "SUG Provost", name: "Comr. Ngerebo Lamech Dimkpa" },
+            { role: "SUG Treasurer", name: "Comr. Vera" },
+            { role: "SUG P.R.O", name: "Comr. Bob Orji" },
+            { role: "SUG Financial Secretary", name: "Comr. Chinemerem Silver" },
+            { role: "SUG Welfare", name: "Comr. Maureen" },
+            { role: "Director Of Socials", name: "Comr. Queeneth Amadi" },
+            { role: "Director of Sports", name: "Comr. Nelson" },
+            { role: "Chief Whip", name: "Chinna Success" },
+            { role: "Internal Auditor", name: "Victor Dakubor" },
+            { role: "Majority Leader", name: "Akpobari Barisua" }
+        ];
+
+        function renderExecutiveGrid() {
+            const grid = document.getElementById('executives-container');
+            grid.innerHTML = "";
+            executivesData.forEach(exec => {
+                const card = document.createElement('div');
+                card.className = "exec-card";
+                card.onclick = () => openProfileOverlay(exec.name, exec.role);
+                card.innerHTML = `<div class="card-title-bar">${exec.role}</div><div class="card-body-text">${exec.name}</div>`;
+                grid.appendChild(card);
+            });
         }
 
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
+        function switchPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+            document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+            document.getElementById(`page-${pageId}`).classList.add('active-page');
+            document.getElementById(`${pageId}-btn`).classList.add('active');
+            const title = document.getElementById('dynamic-header-title');
+            const sub = document.getElementById('dynamic-header-sub');
+            if (pageId === 'home') {
+                title.innerText = "Rivers State College of Health Science & Management Technology";
+                sub.innerText = "Student Union Government (SUG) Platform";
+            } else if (pageId === 'exec') {
+                title.innerText = "The Executive Council";
+                sub.innerText = "2025/2026 Administrative Leadership Officers";
+            } else if (pageId === 'reg') {
+                title.innerText = "Union Verification Portal";
+                sub.innerText = "Official E-Registration Services";
+            }
+            window.scrollTo(0,0);
         }
 
-        /* Fixed Premium Header & Navigation */
-        header {
-            background-color: var(--white);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        function openProfileOverlay(name, role) {
+            document.getElementById('modal-name').innerText = name;
+            document.getElementById('modal-role').innerText = role;
+            document.getElementById('profile-overlay').style.display = 'flex';
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
+        function closeProfileOverlay(e) {
+            if(e.target.id === "profile-overlay") document.getElementById('profile-overlay').style.display = 'none';
         }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        function handleRegistrationSubmit(event) {
+            event.preventDefault();
+            document.getElementById('dash-name').innerText = document.getElementById('student-name').value;
+            document.getElementById('dash-matric').innerText = document.getElementById('student-matric').value;
+            document.getElementById('dash-dept').innerText = document.getElementById('student-dept').value;
+            document.getElementById('registration-form-section').style.display = 'none';
+            document.getElementById('student-dashboard-section').style.display = 'block';
         }
 
-        .brand-text h1 {
-            font-size: 1.4rem;
-            color: var(--primary-blue);
-            font-weight: 800;
+        function handleProfileImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) { document.getElementById('user-profile-pic').src = e.target.result; }
+                reader.readAsDataURL(file);
+            }
         }
-
-        .brand-text p {
-            font-size: 0.85rem;
-            color: var(--accent-blue);
-            font-weight: 600;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        nav ul li a.active, nav ul li a:hover {
-            background-color: var(--primary-blue);
-            color: var(--white);
-        }
-
-        /* Layout Container */
-        .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        /* Dynamic Page Switching Control */
-        .page {
-            display: none;
-        }
-
-        .page.active-page {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ==================== HOME PAGE STYLING ==================== */
-        .logo-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 50px;
-            margin-bottom: 30px;
-            background: var(--white);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
-
-        .logo-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: var(--primary-blue);
-            gap: 8px;
-        }
-
-        /* Clean vector logo representations */
-        .logo-placeholder {
-            width: 75px;
-            height: 75px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.4rem;
-        }
-        .college-logo { background: var(--primary-blue); }
-        .aluta-logo { background: #cc0000; } /* Aluta traditional red accent */
-
-        .welcome-hero {
-            background: linear-gradient(135deg, var(--primary-blue), #001f40);
-            color: var(--white);
-            padding: 50px 30px;
-            border-radius: 16px;
-            text-align: center;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 20px rgba(0,51,102,0.15);
-        }
-
-        .welcome-hero h2 { font-size: 2.2rem; margin-bottom: 10px; }
-        .welcome-hero p { color: #b3d1ff; font-size: 1.2rem; font-weight: 500; }
-
-        .essay-section {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            text-align: justify;
-        }
-
-        .essay-section h3 {
-            color: var(--primary-blue);
-            margin-bottom: 20px;
-            font-size: 1.6rem;
-            border-left: 5px solid var(--accent-blue);
-            padding-left: 15px;
-        }
-
-        .essay-section p {
-            margin-bottom: 20px;
-            font-size: 1.05rem;
-            color: #4a5568;
-            line-height: 1.8;
-        }
-
-        /* ==================== EXEC PAGE STYLING ==================== */
-        .exec-instruction {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #616e7c;
-            font-style: italic;
-        }
-
-        .exec-list-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .list-item-btn {
-            background: var(--white);
-            border: 1px solid #e4e7eb;
-            padding: 20px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: left;
-            width: 100%;
-        }
-
-        .list-item-btn:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,102,204,0.08);
-        }
-
-        .btn-meta .role-tag {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--accent-blue);
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .btn-meta .name-tag {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-        }
-
-        .arrow-indicator {
-            color: #a0aec0;
-            font-size: 1.2rem;
-        }
-
-        /* Modal / Profile Overlay View */
-        .profile-view-box {
-            display: none;
-            background: var(--white);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 500px;
-            margin: 0 auto 40px auto;
-            border: 2px solid var(--primary-blue);
-            animation: scaleUp 0.3s ease;
-        }
-
-        @keyframes scaleUp {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .avatar-frame {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background: #e4e7eb;
-            margin: 0 auto 20px auto;
-            border: 4px solid var(--primary-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .avatar-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .profile-view-box h4 {
-            font-size: 1.5rem;
-            color: var(--primary-blue);
-            margin-bottom: 5px;
-        }
-
-        .profile-view-box .role {
-            font-weight: bold;
-            color: var(--accent-blue);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 15px;
-        }
-
-        .profile-view-box .admin-stamp {
-            font-size: 0.9rem;
-            font-weight: bold;
-            background: #e6f0fa;
-            color: var(--primary-blue);
-            padding: 6px 16px;
-            border-radius: 20px;
-            display: inline-block;
-        }
-
-        .close-profile-btn {
-            margin-top: 20px;
-            background: #cbd5e1;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* ==================== REGISTRATION STYLING ==================== */
-        .split-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-
-        @media (max-width: 768px) {
-            .split-layout { grid-template-columns: 1fr; }
-            .logo-row { gap: 20px; }
-        }
-
-        .reg-card {
-            background: var(--white);
-            padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-        }
-
-        .reg-card h3 {
-            color: var(--primary-blue);
-            margin-bottom: 25px;
-            font-size: 1.4rem;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #4a5568;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 1rem;
-            outline: none;
-            transition: border 0.2s;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            border-color: var(--accent-blue);
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: var(--primary-blue);
-            color: var(--white);
-            border: none;
+        window.onload = renderExecutiveGrid;
+    </script>
+</body>
+    </html>
     
