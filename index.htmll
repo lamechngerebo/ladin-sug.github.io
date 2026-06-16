@@ -1,0 +1,198 @@
+learance</button>
+            </form>
+        </div>
+
+        <!-- Hidden Admin Operational Workspace Management Panel -->
+        <div id="admin-panel" style="display: none; background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; margin-top: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem;">
+                <h2 style="color: var(--danger); font-size: 1.6rem;">SUG Portal Central Administrative Command Desk</h2>
+                <button onclick="logoutAdmin()" style="background-color: var(--text-dark); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600;">Exit Workspace</button>
+            </div>
+            
+            <div style="background-color: #fef2f2; border-left: 4px solid var(--danger); padding: 1rem; border-radius: 6px; margin-bottom: 2rem;">
+                <h4 style="color: #991b1b; margin-bottom: 0.25rem;">Global Access Active</h4>
+                <p style="font-size: 0.85rem; color: #7f1d1d;">You now possess master-level administrative deletion privileges. You can purge uploaded media nodes and remove any student commentary logs across the campus portal instantly.</p>
+            </div>
+            
+            <p style="text-align: center; color: var(--text-light); font-weight: bold; padding: 2rem 0; border: 2px dashed #e2e8f0; border-radius: 8px; background: var(--bg-light);">Use the "Campus Feed" top navigation menu channel to manage, audit, and delete live user posts and comments.</p>
+        </div>
+              </section>
+      <!-- Page 7: Campus Interactive Media Feed & Community Board -->
+    <section id="view-feed" class="page-view">
+        <div class="feed-container">
+            
+            <!-- Context-Sensitive Content Upload Engine Panel (Only Visible to Admin Workspace) -->
+            <div class="upload-box" id="media-uploader-box" style="display: none;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem   comments: []
+            };
+
+            postStreamTable.unshift(newBroadcastPost);
+            localStorage.setItem('sug_posts', JSON.stringify(postStreamTable));
+
+            document.getElementById('post-text').value = '';
+            document.getElementById('post-media-url').value = '';
+            alert("Content update broadcast completed successfully.");
+            renderLiveNewsFeedStream();
+        }
+
+        function renderLiveNewsFeedStream() {
+            const feedContainerBoxElement = document.getElementById('dynamic-feed-target');
+            const cachedPostStreamTable = JSON.parse(localStorage.getItem('sug_posts')) || [];
+
+            if (cachedPostStreamTable.length === 0) {
+                feedContainerBoxElement.innerHTML = `<p style="text-align:center; color:var(--text-light); padding:2rem;">No entries found inside the community dashboard index stream.</p>`;
+                return;
+            }
+
+            let computedHtmlBufferString = "";
+
+            cachedPostStreamTable.forEach(post => {
+                let commentItemsHtmlBuffer = "";
+                post.comments.forEach(comment => {
+                    let deleteCommentBtnMarkup = "";
+                    if (sessionAdminActive) {
+                        deleteCommentBtnMarkup = `<button class="btn-delete" onclick="deleteCommentNode(${post.id}, ${comment.id})">Purge</button>`;
+                    }
+                    commentItemsHtmlBuffer += `
+                        <li class="comment-item">
+                            <span>${comment.author}:</span> ${comment.text}
+                            ${deleteCommentBtnMarkup}
+                        </li>`;
+                });
+
+                let adminPostPurgeBtnMarkup = "";
+                if (sessionAdminActive) {
+                    adminPostPurgeBtnMarkup = `<button class="btn-delete" style="font-size:0.9rem;" onclick="deletePostNode(${post.id})">Delete Post</button>`;
+                }
+
+                computedHtmlBufferString += `
+                    <div class="post-card">
+                        <div class="post-header">
+                            <span class="post-author" style="color:var(--accent);">${post.author}</span>
+                            <div style="display:flex; gap:10px; align-items:center;">
+                                <span class="post-time">${new Date(post.id).toLocaleDateString()}</span>
+                                ${adminPostPurgeBtnMarkup}
+                            </div>
+                        </div>
+                        <p style="font-size:1.05rem; margin-bottom:1rem;">${post.text}</p>
+                        <img class="post-media" src="${post.media}" onerror="this.style.display='none'">
+                        
+                        <div class="post-actions">
+                            <button class="action-link" onclick="handleLikeToggle(${post.id})">♥ Like (${post.likes})</button>
+                            <span class="action-link">💬 Discussion Log (${post.comments.length})</span>
+                        </div>
+
+                        <div class="comment-section">
+                            <div class="comment-input-group">
+                                <input type="text" id="com-input-${post.id}" class="form-control" placeholder="Write an anonymous feedback comment..." style="padding:0.5rem 0.75rem; font-size:0.9rem;">
+                                <button onclick="handleCommentSubmission(${post.id})" style="background:var(--primary); color:white; border:none; padding:0 1rem; border-radius:8px; font-weight:bold; cursor:pointer; font-size:0.85rem;">Send</button>
+                            </div>
+                            <ul class="comment-box">${commentItemsHtmlBuffer}</ul>
+                        </div>
+                    </div>`;
+            });
+
+            feedContainerBoxElement.innerHTML = computedHtmlBufferString;
+        }
+        // ==================== INTERACTIVE USER FEED OPERATIONS ==================== */
+        function handleLikeToggle(postId) {
+            if (!sessionUser) {
+                alert("Access Denied: Only registered, logged-in students can interact with this content.");
+                return;
+            }
+
+            let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
+            posts = posts.map(post => {
+                if (post.id === postId) {
+                    if (!post.likedBy) post.likedBy = [];
+                    const userIndex = post.likedBy.indexOf(sessionUser.matric);
+                    if (userIndex === -1) {
+                        post.likedBy.push(sessionUser.matric);
+                        post.likes += 1;
+                    } else {
+                        post.likedBy.splice(userIndex, 1);
+                        post.likes -= 1;
+                    }
+                }
+                return post;
+            });
+
+            localStorage.setItem('sug_posts', JSON.stringify(posts));
+            renderLiveNewsFeedStream();
+        }
+
+        function handleCommentSubmission(postId) {
+            if (!sessionUser) {
+                alert("Access Denied: Only authenticated, logged-in student members can comment.");
+                return;
+            }
+
+            const inputField = document.getElementById(`com-input-${postId}`);
+            const commentText = inputField.value.trim();
+            if (!commentText) return;
+
+            let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
+            posts = posts.map(post => {
+                if (post.id === postId) {
+                    post.comments.push({
+                        id: Date.now(),
+                        text: commentText,
+                        author: "Anonymous Student"
+                    });
+                }
+                return post;
+            });
+
+            localStorage.setItem('sug_posts', JSON.stringify(posts));
+            inputField.value = '';
+            renderLiveNewsFeedStream();
+        }
+
+        // ==================== MASTER ADMIN DATA PURGING OPERATIONS ==================== */
+        function deletePostNode(postId) {
+            if (!sessionAdminActive) return;
+            if (confirm("Are you sure you want to completely purge this post from the campus database?")) {
+                let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
+                posts = posts.filter(post => post.id !== postId);
+                localStorage.setItem('sug_posts', JSON.stringify(posts));
+                renderLiveNewsFeedStream();
+            }
+        }
+
+        function deleteCommentNode(postId, commentId) {
+            if (!sessionAdminActive) return;
+            if (confirm("Are you sure you want to completely wipe this comment from the discussion logs?")) {
+                let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
+                posts = posts.map(post => {
+                    if (post.id === postId) {
+                        post.comments = post.comments.filter(c => c.id !== commentId);
+                    }
+                    return post;
+                });
+                localStorage.setItem('sug_posts', JSON.stringify(posts));
+                renderLiveNewsFeedStream();
+            }
+        }
+
+        // ==================== EXECUTIVE COUNCIL MODAL CONTROL ENGINE ==================== */
+        function openExecModal(name, role, customImgUrl) {
+            document.getElementById('modal-name').textContent = name;
+            document.getElementById('modal-role').textContent = role;
+            
+            if (customImgUrl) {
+                document.getElementById('modal-img').src = customImgUrl;
+            } else {
+                document.getElementById('modal-img').src = "data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100' fill='%2364748b'><circle cx='50' cy='45' r='20'/><path d='M20 80c0-20 15-25 30-25s30 5 30 25z'/></svg>";
+            }
+            document.getElementById('exec-modal').style.display = 'flex';
+        }
+
+        function closeExecModal(e) {
+            if (e.target.id === 'exec-modal') {
+                document.getElementById('exec-modal').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+                </html>
+                  
