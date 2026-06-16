@@ -3,721 +3,1041 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUG Portal - Digital Gateway</title>
+    <title>SUG Portal | 2025/2026 Administration</title>
     <style>
         :root {
-            --primary: #2c3e50;
-            --accent: #16a085;
-            --danger: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #b45309;
+            --accent-light: #fef3c7;
+            --text-dark: #334155;
+            --text-light: #94a3b8;
+            --bg-light: #f8fafc;
             --white: #ffffff;
-            --shadow: 0 4px 15px rgba(0,0,0,0.08);
-            --radius: 12px;
+            --danger: #ef4444;
+            --success: #22c55e;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
-
         body {
-            background-color: #f4f7f6;
-            color: var(--dark);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
             line-height: 1.6;
         }
-
         header {
-            background: linear-gradient(135deg, var(--primary), #34495e);
+            background-color: var(--primary);
             color: var(--white);
-            padding: 25px 20px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            position: relative;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
-
-        header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-        }
-
-        header p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        .auth-status-bar {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 15px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 15px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-        }
-
-        .auth-btn {
-            background: var(--accent);
-            color: var(--white);
-            border: none;
-            padding: 5px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.8rem;
-            transition: background 0.2s;
-        }
-
-        .auth-btn:hover {
-            background: #12876f;
-        }
-
-        .logout-btn {
-            background: var(--danger);
-        }
-
-        .logout-btn:hover {
-            background: #c0392b;
-        }
-
-        main {
-            max-width: 1100px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 8px;
-            color: var(--primary);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        /* Executive Grid Styles */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 5px;
-        }
-
-        .exec-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .exec-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-        }
-
-        .exec-photo {
-            width: 100%;
-            height: 260px;
-            object-fit: cover;
-            background-color: #eaeaea;
-        }
-
-        .exec-info {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .exec-role {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent);
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .exec-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-
-        .exec-bio {
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-
-        .exec-contact {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            border-top: 1px solid #f0f0f0;
-            padding-top: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-                /* Stream/Social Section */
-        .social-section {
-            margin-top: 50px;
-            background: #eaeded;
-            padding: 30px 20px;
-            border-radius: var(--radius);
-        }
-
-        .admin-controls-box {
-            background: var(--white);
-            padding: 20px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 30px;
-        }
-
-        .admin-controls-box h3 {
-            margin-bottom: 15px;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ced8e3;
-            border-radius: 6px;
-            font-size: 0.95rem;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .submit-btn {
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.95rem;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            background: #1a252f;
-        }
-
-        .stream-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            max-width: 700px;
+        .nav-container {
+            max-width: 1200px;
             margin: 0 auto;
-        }
-
-        .feed-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        .feed-media {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            display: block;
-            background: #000;
-        }
-
-        .feed-content {
-            padding: 20px;
-        }
-
-        .feed-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .like-btn {
-            background: #f8d7da;
-            color: #721c24;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .comment-display-box {
-            max-height: 200px;
-            overflow-y: auto;
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .comment-bubble {
-            background: #f1f2f6;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.88rem;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
+            padding: 1rem 2rem;
         }
-
-        .del-comment-link {
-            color: var(--danger);
-            font-size: 0.75rem;
-            cursor: pointer;
-            margin-left: 10px;
-            font-weight: bold;
+                .brand-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-
-        .admin-del-post-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(231, 76, 60, 0.9);
-            color: var(--white);
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 5;
-        }
-
-        /* Authentication Modal Overlay */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
+        .logo-placeholder {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #f59e0b);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
+            font-weight: 900;
+            font-size: 0.65rem;
+            color: var(--primary);
+            border: 2px solid var(--white);
+            text-align: center;
+            line-height: 1.1;
         }
-
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
+        .brand-text h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--white);
         }
-
-        .modal-box {
-            background: var(--white);
-            padding: 30px;
-            border-radius: var(--radius);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-            width: 100%;
-            max-width: 380px;
+        .brand-text p {
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            align-items: center;
+        }
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.4rem 0.7rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .nav-menu a:hover, .nav-menu a.active {
+            background-color: var(--accent);
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .admin-badge {
+            border: 1px dashed var(--accent) !important;
+            color: var(--accent) !important;
+        }
+        .page-view {
+            display: none;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        .page-view.active-view {
+            display: block;
+        }
+        .hero-banner {
+            background: linear-gradient(rgba(15,23,42,0.9), rgba(30,41,59,0.85));
+            color: var(--white);
+            border-radius: 12px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .hero-banner h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .hero-banner h3 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        .banner-tag {
+            display: inline-block;
+            background-color: rgba(180,83,9,0.2);
+            border: 1.5px solid var(--accent);
+            color: var(--accent-light);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            }
+                .editorial-section {
+            background-color: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+        }
+        .editorial-section h4 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.25rem;
             position: relative;
+            padding-bottom: 0.5rem;
         }
-
+        .editorial-section h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+        .editorial-section p {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .exec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exec-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .exec-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+            border-color: var(--accent);
+        }
+        .exec-avatar {
+            width: 70px;
+            height: 70px;
+            background-color: var(--bg-light);
+            color: var(--primary);
+            border-radius: 50%;
+            margin: 0 auto 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 2px solid #cbd5e1;
+        }
+        .exec-card h4 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+        .exec-card p {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-box {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
         .close-modal {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.2rem;
+            top: 0.75rem; right: 0.75rem;
+            font-size: 1.25rem;
             cursor: pointer;
-            color: #95a5a6;
+            color: var(--text-light);
         }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
+        .modal-image-container {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 1.25rem;
+            background-color: #e2e8f0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--accent);
+        }
+        .modal-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .admin-tag {
+            margin-top: 0.75rem;
+            display: inline-block;
+            font-weight: bold;
             font-size: 0.85rem;
-            color: #7f8c8d;
-            background: #fff;
-            margin-top: 50px;
-            border-top: 1px solid #e2e8f0;
-        }
+            color: var(--accent);
+            background-color: #fffbeb;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            border: 1px dashed var(--accent);
+    }
+                /* Forms, Input Fields, and Profile Upload Containers */
+        .form-wrapper { max-width: 550px; margin: 0 auto; background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
+        .section-header { text-align: center; margin-bottom: 2rem; }
+        .section-header h2 { color: var(--text-dark); font-size: 1.75rem; margin-bottom: 0.5rem; }
+        .form-group { margin-bottom: 1.25rem; position: relative; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.95rem; color: var(--primary); }
+        .form-control { width: 100%; padding: 0.75rem 1rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; outline: none; transition: all 0.3s; }
+        .form-control:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(180,83,9,0.15); }
+        
+        /* Dynamic Password reveal elements */
+        .password-toggle { position: absolute; right: 1rem; bottom: 0.75rem; cursor: pointer; font-size: 0.85rem; color: var(--accent); font-weight: 600; user-select: none; }
+        .btn-submit { width: 100%; background-color: var(--primary); color: white; padding: 0.8rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; margin-top: 1rem; }
+        .btn-submit:hover { background-color: #1e293b; }
+        .forgot-link { display: block; margin-top: 0.75rem; text-align: right; font-size: 0.85rem; color: #64748b; text-decoration: none; }
+        .forgot-link:hover { color: var(--accent); }
+        
+        /* Dynamic Profile and Logged-In Account Management Panes */
+        .profile-card { background: white; max-width: 600px; margin: 0 auto; padding: 2.5rem 1.5rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; text-align: center; }
+        .profile-pic-container { position: relative; width: 130px; height: 130px; margin: 0 auto 1.25rem; }
+        .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); background-color: #f1f5f9; }
+        .upload-btn-wrapper { margin-top: 1rem; }
+        .upload-file-input { display: none; }
+        .btn-upload { background-color: var(--accent); color: white; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: inline-block; }
+                /* Dynamic Feed Elements for Post Publishing and Anonymous Commentary */
+        .feed-container { max-width: 700px; margin: 0 auto; }
+        .upload-box { background: white; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
+        .post-card { background: white; border-radius: 10px; padding: 1.25rem; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; }
+        .post-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .post-author { font-weight: bold; color: var(--text-dark); }
+        .post-time { font-size: 0.8rem; color: #94a3b8; }
+        .post-media { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-top: 1rem; background-color: #111827; }
+        .post-actions { display: flex; gap: 1.5rem; margin: 1rem 0; padding: 0.6rem 0; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
+        .action-link { background: none; border: none; cursor: pointer; color: #64748b; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem; font-weight: 500; }
+        .action-link.liked { color: var(--danger); }
+        .comment-section { background-color: #f8fafc; padding: 1rem; border-radius: 8px; }
+        .comment-input-group { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+        .comment-box { list-style: none; }
+        .comment-item { padding: 0.5rem 0.75rem; background-color: white; border-radius: 6px; margin-bottom: 0.5rem; font-size: 0.9rem; border: 1px solid #e2e8f0; display: flex; align-items: center; }
+        .comment-item span { font-weight: bold; color: #64748b; margin-right: 0.5rem; }
+        .btn-delete { background: none; border: none; color: var(--danger); font-size: 0.8rem; cursor: pointer; margin-left: auto; font-weight: 600; }
+        footer { background-color: var(--primary); color: #94a3b8; text-align: center; padding: 2rem; margin-top: 4rem; border-top: 3px solid var(--accent); font-size: 0.85rem; }
     </style>
 </head>
 <body>
-
+        <!-- Main Global Navigation Header -->
     <header>
-        <h1>Student Union Government</h1>
-        <p>Executive Directory & Campus Media Terminal</p>
-        <div class="auth-status-bar">
-            <span id="auth-status-text">Loading access profile...</span>
-            <button id="auth-action-btn" class="auth-btn" onclick="handleAuthAction()">Login</button>
+        <div class="nav-container">
+            <div class="brand-wrapper">
+                <div class="logo-placeholder">COLLEGE<br>LOGO</div>
+                <div class="logo-placeholder" style="background: linear-gradient(135deg, #dc2626, #b45309);">ALUTA<br>LOGO</div>
+                <div class="brand-text">
+                    <h1>SUG PLATFORM</h1>
+                    <p>2025/2026 LED ADMINISTRATION</p>
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a onclick="switchView('home')" id="nav-home" class="active">Home</a></li>
+                    <li><a onclick="switchView('executives')" id="nav-executives">Executives</a></li>
+                    <li><a onclick="switchView('register')" id="nav-register">Register</a></li>
+                    <li><a onclick="switchView('login')" id="nav-login">Student Login</a></li>
+                    <li><a onclick="switchView('feed')" id="nav-feed">Campus Feed</a></li>
+                    <li><a onclick="switchView('admin')" id="nav-admin" class="admin-badge">Admin</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
-        <main>
-        <!-- Executive Section -->
-        <section style="margin-bottom: 40px;">
-            <h2 class="section-title">Executive Cabinet Profiles</h2>
-            <div id="exec-grid" class="grid-container">
-                <!-- Profiles will load here dynamically via JavaScript -->
-            </div>
-        </section>
 
-        <!-- Media Stream Feed Section -->
-        <section class="social-section">
-            <h2 class="section-title">Anonymous Campus Social Feed</h2>
-            
-            <!-- Protected Administrative Input Panel -->
-            <div id="admin-post-panel" class="admin-controls-box" style="display: none;">
-                <h3>🔒 Administrator Content Creator Panel</h3>
-                <div class="form-group">
-                    <label for="post-media-url">Media Asset Link (Image or Video URL)</label>
-                    <input type="url" id="post-media-url" class="form-control" placeholder="https://unsplash.com... or video .mp4 link">
-                </div>
-                <div class="form-group">
-                    <label for="post-caption">Announcement Memo Caption</label>
-                    <textarea id="post-caption" class="form-control" rows="3" placeholder="Enter formal briefing text..."></textarea>
-                </div>
-                <div class="form-group" style="display:flex; gap:15px; align-items:center;">
-                    <label style="margin:0; display:flex; align-items:center; gap:5px; cursor:pointer;">
-                        <input type="checkbox" id="post-is-video"> Check this box if asset URL points to a Video (.mp4) file
-                    </label>
-                </div>
-                <button class="submit-btn" onclick="submitAdminPost()">Broadcast Announcement</button>
-            </div>
-
-            <!-- Feed Stream Grid Mount -->
-            <div id="media-posts-stream" class="stream-grid">
-                <!-- Social media posts will mount here dynamically -->
-            </div>
-        </section>
-    </main>
-
-    <!-- Modal Login Frame -->
-    <div id="login-modal" class="modal-overlay">
-        <div class="modal-box">
-            <button class="close-modal" onclick="toggleLoginModal(false)">&times;</button>
-            <h3 style="margin-bottom:15px; font-size:1.3rem; color:var(--primary);">Sign In Securely</h3>
-            <div class="form-group">
-                <label for="login-username">Access Identifier</label>
-                <input type="text" id="login-username" class="form-control" placeholder="Enter username (e.g. admin)">
-            </div>
-            <div class="form-group">
-                <label for="login-password">Access Password Key</label>
-                <input type="password" id="login-password" class="form-control" placeholder="Enter system security password">
-            </div>
-            <button class="submit-btn" style="background:var(--accent);" onclick="submitLoginProcess()">Authorize Connection</button>
+    <!-- Page 1: Home View Layout -->
+    <main id="view-home" class="page-view active-view">
+        <div class="hero-banner">
+            <span class="banner-tag">Official Student Portal</span>
+            <h2>Student Union Government (SUG)</h2>
+            <h3>Official Student Union Government Platform</h3>
+            <p style="color: var(--accent-light); font-weight: 600; letter-spacing: 1px;">2025/2026 Led Administration</p>
         </div>
-    </div>
 
-    <footer>
-        <p>&copy; 2026 Student Union Government Terminal. Verified Open Source Architecture Engine.</p>
-    </footer>
+        <article class="editorial-section">
+            <h4>Understanding the Essence & Dominance of the SUG</h4>
+            <p>The Student Union Government (SUG) is the official, democratic governing framework established exclusively by and for the student body within an institution of higher learning. Operating as a sovereign student parliament, the SUG acts as the primary intermediary between the campus general assembly and the institution's senior management dashboard. Its foundational blueprint is engineered to safeguard student welfare, defend academic liberties, promote balanced social integration, and amplify collective bargaining power on issues affecting enrollment, facilities, and campus regulations.</p>
+            
+            <p>The core importance of the SUG resides in its unique capacity to democratize campus life. By managing designated welfare programs, negotiating financial grace periods, and establishing structured academic support panels, the union transforms the institutional environment into an inclusive sanctuary. It provides a strategic training platform for future geopolitical statesmen, equipping active student leaders with essential negotiation skills, constitutional awareness, and organizational proficiency. Without an active, structured student union, the collective voice of the campus would remain fragmented, making students vulnerable to unilateral policy shifts without formal avenues for mutual recourse.</p>
+            
+            <p>The structural dominance of the SUG over the general student population is absolute and systemic. It operates with a powerful mandate because every registered student is constitutionally recognized as an automatic stakeholder within the union's jurisdiction. This unified collective enables the executive branch to exert legitimate authority, ensuring widespread compliance during peaceful mobilizations or institutional dialogues. Guided by the unwavering philosophy of Aluta, the SUG maintains a decisive presence on campus. It balances corporate discipline with robust student activism, driving meaningful social reforms and reinforcing its position as the ultimate guardian of student interests.</p>
+        </article>
+            </main>
+        <!-- Page 2: Executive Directory View Layout -->
+    <section id="view-executives" class="page-view">
+        <div class="section-header">
+            <h2>Executive Council Directory</h2>
+            <p>2025/2026 Led Administration Cabinet Members</p>
+        </div>
 
-    <script>
-                                // Core Static Mock Data Framework Setup
-        const defaultExecutives = [
-            { role: "President", name: "Comrade Chidi Okechukwu", bio: "Driving educational equality, systemic campus overhauls, infrastructure developments, and student welfare validation schemes.", email: "president.sug@university.edu", phone: "+234 803 111 2222", photo: "https://unsplash.com" },
-            { role: "Vice President", name: "Amina Yusuf Bello", bio: "Overseeing internal student affairs committees, structural union policy frameworks, and direct academic stakeholder negotiations.", email: "vp.sug@university.edu", phone: "+234 803 333 4444", photo: "https://unsplash.com" },
-            { role: "Secretary General", name: "David Segun Kolawole", bio: "Managing official institutional records, tracking executive correspondence logs, and aligning micro-committee action timelines.", email: "secgen.sug@university.edu", phone: "+234 805 555 6666", photo: "https://unsplash.com" }
-        ];
+        <div class="exec-grid">
+            <!-- Executive Cards with Interactive Click Triggers -->
+            <div class="exec-card" onclick="openExecModal('Sen.Comr.Justina Gentle Welli', 'SUG President')">
+                <div class="exec-avatar">P</div>
+                <h4>Sen.Comr.Justina Gentle Welli</h4>
+                <p>SUG President</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Comr.Nwibu Roselyn', 'SUG Vice President')">
+                <div class="exec-avatar">VP</div>
+                <h4>Comr.Nwibu Roselyn</h4>
+                <p>SUG Vice President</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Rt.Hon.Godspower Awajimowa Ebirien', 'SUG Speaker')">
+                <div class="exec-avatar">SP</div>
+                <h4>Rt.Hon.Godspower Awajimowa Ebirien</h4>
+                <p>SUG Speaker</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Hon.PraiseGod Barisi', 'SUG Deputy Speaker')">
+                <div class="exec-avatar">DS</div>
+                <h4>Hon.PraiseGod Barisi</h4>
+                <p>SUG Deputy Speaker</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Comr.Favour Nbete', 'SUG Secretary')">
+                <div class="exec-avatar">SEC</div>
+                <h4>Comr.Favour Nbete</h4>
+                <p>SUG Secretary</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Comr.Ngerebo Lamech Dimkpa', 'SUG Provost')">
+                <div class="exec-avatar">PR</div>
+                <h4>Comr.Ngerebo Lamech Dimkpa</h4>
+                <p>SUG Provost</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Comr.Vera Sunday', 'SUG Treasurer')">
+                <div class="exec-avatar">TR</div>
+                <h4>Comr.Vera Sunday</h4>
+                <p>SUG Treasurer</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Comr.Bob Orji', 'SUG P.R.O')">
+                <div class="exec-avatar">PRO</div>
+                <h4>Comr.Bob Orji</h4>
+                <p>SUG P.R.O</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Comr.Chinemerem Silver', 'SUG Financial Secretary')">
+                <div class="exec-avatar">FS</div>
+                <h4>Comr.Chinemerem Silver</h4>
+                <p>SUG Financial Secretary</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Comr.Maureen Ebelogwu Chinuzoke', 'SUG Welfare')">
+                <div class="exec-avatar">WF</div>
+                <h4>Comr.Maureen Ebelogwu Chinuzoke</h4>
+                <p>SUG Welfare</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Comr.Queeneth Amadi', 'Director Of Socials')">
+                <div class="exec-avatar">DS</div>
+                <h4>Comr.Queeneth Amadi</h4>
+                <p>Director Of Socials</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Comr.Nelson', 'Director Of Sports')">
+                <div class="exec-avatar">SP</div>
+                <h4>Comr.Nelson</h4>
+                <p>Director Of Sports</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Hon.Chinna Success', 'Chief Whip')">
+                <div class="exec-avatar">CW</div>
+                <h4>Hon.Chinna Success</h4>
+                <p>Chief Whip</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Hon.Victor Dakubor', 'Internal Auditor')">
+                <div class="exec-avatar">IA</div>
+                <h4>Hon.Victor Dakubor</h4>
+                <p>Internal Auditor</p>
+            </div>
+            <div class="exec-card" onclick="openExecModal('Hon.Akpobari Barisua', 'Majority Leader')">
+                <div class="exec-avatar">ML</div>
+                <h4>Hon.Akpobari Barisua</h4>
+                <p>Majority Leader</p>
+            </div>
+        </div>
+    </section>
 
-        const defaultPosts = [
-            { id: 1718000000000, src: "https://unsplash.com", videoFlag: false, caption: "Official briefing on upcoming semester examinations and libraries operations timetable.", timestamp: "15/06/2026, 10:30 AM", likes: 24, likedUsers: [], comments: [{ authorId: "STU_102", msg: "Are libraries open overnight?" }, { authorId: "ADMIN", msg: "Yes, 24-hour schedules apply next week." }] },
-            { id: 1718000000001, src: "https://unsplash.com", videoFlag: false, caption: "The New Innovation Hub lab terminal is officially launched for registration profiles tomorrow.", timestamp: "16/06/2026, 09:15 AM", likes: 42, likedUsers: [], comments: [] }
-        ];
+    <!-- Global Executive Profile Popup Modal Overlay -->
+    <div id="exec-modal" class="modal-overlay" onclick="closeExecModal(event)">
+        <div class="modal-box">
+            <span class="close-modal" onclick="document.getElementById('exec-modal').style.display='none'">&times;</span>
+            <div class="modal-image-container">
+                <!-- Fallback inline placeholder graphic that displays instantly -->
+                <img id="modal-img" src="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100' fill='%2394a3b8'><circle cx='50' cy='45' r='20'/><path d='M20 80c0-20 15-25 30-25s30 5 30 25z'/></svg>" alt="Executive Photo">
+            </div>
+            <h3 id="modal-name" style="color: var(--primary); font-size: 1.4rem;">Officer Name</h3>
+            <p id="modal-role" style="color: var(--accent); font-weight: bold; margin-top: 0.25rem;">Officer Position</p>
+            <span class="admin-tag">2025/2026 Led Administration</span>
+        </div>
+                    </div>
+                        <!-- Page 3: Student Registration View Layout -->
+    <section id="view-register" class="page-view">
+        <div class="form-wrapper">
+            <div class="section-header">
+                <h2>Student Union Portal Registration</h2>
+                <p>Register to validate your union membership status</p>
+            </div>
+            <form onsubmit="handleRegistration(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="reg-name" class="form-control" placeholder="Enter Full Name" required>
+                </div>
+                <div class="form-group">
+                    <label>Matric Number</label>
+                    <input type="text" id="reg-matric" class="form-control" placeholder="Enter Matric Number" required>
+                </div>
+                <div class="form-group">
+                    <label>Department</label>
+                    <input type="text" id="reg-dept" class="form-control" placeholder="Type or choose your department" list="dept-options" required>
+                    <datalist id="dept-options">
+                        <option value="Computer Science"></option>
+                        <option value="Electrical Engineering"></option>
+                        <option value="Business Administration"></option>
+                        <option value="Biochemistry"></option>
+                        <option value="Mechanical Engineering"></option>
+                        <option value="Political Science"></option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label>Create Account Password</label>
+                    <input type="password" id="reg-pass" class="form-control" placeholder="Choose a secure password" required>
+                    <span class="password-toggle" onclick="togglePass('reg-pass')">SHOW</span>
+                </div>
+                <button type="submit" class="btn-submit">Register & Join Union</button>
+            </form>
+        </div>
+    </section>
 
-        // Self-Healing Storage Verification Routine
-        if (!localStorage.getItem('SUG_SOCIAL_STREAM')) {
-            localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(defaultPosts));
-        }
+    <!-- Page 4: Secure Student Profile Dashboard View -->
+    <section id="view-profile" class="page-view">
+        <div class="section-header">
+            <div style="color: var(--success); font-weight: bold; margin-bottom: 0.5rem; font-size: 1.1rem;">✓ Registration Active: Official Union Member</div>
+            <h2>Your Member Profile</h2>
+            <p>Manage your account records and official union card credentials</p>
+        </div>
+        <div class="profile-card">
+            <div class="profile-pic-container">
+                <img id="profile-display-img" class="profile-img" src="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100' fill='%23cbd5e1'><circle cx='50' cy='45' r='20'/><path d='M20 80c0-20 15-25 30-25s30 5 30 25z'/></svg>" alt="Your Avatar">
+            </div>
+            <h3 id="profile-name-text" style="color: var(--primary); font-size: 1.5rem;">Student Name</h3>
+            <p id="profile-matric-text" style="color: var(--text-light); font-weight: 600; margin: 0.25rem 0;">Matric Number</p>
+            <p id="profile-dept-text" style="color: var(--accent); font-weight: bold; text-transform: uppercase; font-size: 0.9rem;">Department Layout</p>
+            
+            <div class="upload-btn-wrapper">
+                <label for="profile-upload-input" class="btn-upload">Upload Personal Profile Picture</label>
+                <input type="file" id="profile-upload-input" class="upload-file-input" accept="image/*" onchange="handleProfilePicUpload(event)">
+            </div>
+            <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 1rem;">Note: Only you have administrative permission to alter or remove this profile photo asset.</p>
+        </div>
+    </section>
+        <!-- Page 5: Student Login View Layout -->
+    <section id="view-login" class="page-view">
+        <div class="form-wrapper">
+            <div class="section-header">
+                <h2>Student Portal Access</h2>
+                <p>Log in to view the interactive campus feed and join discussions</p>
+            </div>
+            <form onsubmit="handleStudentLogin(event)">
+                <div class="form-group">
+                    <label>Matric Number</label>
+                    <input type="text" id="login-matric" class="form-control" placeholder="Enter your Matric Number" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-pass" class="form-control" placeholder="Enter your Account Password" required>
+                    <span class="password-toggle" onclick="togglePass('login-pass')">SHOW</span>
+                </div>
+                <button type="submit" class="btn-submit">Sign In to Dashboard</button>
+                <a href="#" class="forgot-link" onclick="event.preventDefault(); alert('Please contact the ICT Helpdesk or your Departmental SUG Representative to reset your password.');">Forgot Password?</a>
+            </form>
+        </div>
+    </section>
 
-        // Module Engine 1: Layout Render Logic
-        function renderExecutiveGrid() {
-            const grid = document.getElementById('exec-grid');
-            if(!grid) return;
-            grid.innerHTML = "";
-            defaultExecutives.forEach(exec => {
-                const card = document.createElement('div');
-                card.className = 'exec-card';
-                card.innerHTML = `
-                    <img src="${exec.photo}" class="exec-photo" alt="${exec.name}">
-                    <div class="exec-info">
-                        <div class="exec-role">${exec.role}</div>
-                        <div class="exec-name">${exec.name}</div>
-                        <div class="exec-bio">${exec.bio}</div>
-                        <div class="exec-contact">
-                            <span>📧 ${exec.email}</span>
-                            <span>📞 ${exec.phone}</span>
+    <!-- Page 6: Administrative Control Dashboard Authentication -->
+    <section id="view-admin" class="page-view">
+        <div class="form-wrapper" id="admin-login-box">
+            <div class="section-header">
+                <h2 style="color: var(--danger);">Admin Terminal Gateway</h2>
+                <p>Authorized access only for verified SUG system management</p>
+            </div>
+            <form onsubmit="handleAdminLogin(event)">
+                <div class="form-group">
+                    <label>Admin Access Username</label>
+                    <input type="text" id="admin-user" class="form-control" placeholder="Enter Admin Username" required>
+                </div>
+                <div class="form-group">
+                    <label>Secure Master Token Key</label>
+                    <input type="password" id="admin-pass" class="form-control" placeholder="Enter Access Password" required>
+                    <span class="password-toggle" onclick="togglePass('admin-pass')">SHOW</span>
+                </div>
+                <button type="submit" class="btn-submit" style="background-color: var(--danger);">Verify Security Clearance</button>
+            </form>
+        </div>
+
+        <!-- Hidden Admin Operational Workspace Management Panel -->
+        <div id="admin-panel" style="display: none; background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; margin-top: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem;">
+                <h2 style="color: var(--danger); font-size: 1.6rem;">SUG Portal Central Administrative Command Desk</h2>
+                <button onclick="logoutAdmin()" style="background-color: var(--text-dark); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600;">Exit Workspace</button>
+            </div>
+            
+            <div style="background-color: #fef2f2; border-left: 4px solid var(--danger); padding: 1rem; border-radius: 6px; margin-bottom: 2rem;">
+                <h4 style="color: #991b1b; margin-bottom: 0.25rem;">Global Access Active</h4>
+                <p style="font-size: 0.85rem; color: #7f1d1d;">You now possess master-level administrative deletion privileges. You can purge uploaded media nodes and remove any student commentary logs across the campus portal instantly.</p>
+            </div>
+            
+            <p style="text-align: center; color: var(--text-light); font-weight: bold; padding: 2rem 0; border: 2px dashed #e2e8f0; border-radius: 8px; background: var(--bg-light);">Use the "Campus Feed" top navigation menu channel to manage, audit, and delete live user posts and comments.</p>
+        </div>
+    </section>
+        <!-- Page 7: Campus Interactive Media Feed & Community Board -->
+    <section id="view-feed" class="page-view">
+        <div class="feed-container">
+            
+            <!-- Context-Sensitive Content Upload Engine Panel (Only Visible to Admin Workspace) -->
+            <div class="upload-box" id="media-uploader-box" style="display: none;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+                    <span style="width: 10px; height: 10px; background-color: var(--danger); border-radius: 50%;"></span>
+                    Publish New Executive Content Directive
+                </h4>
+                <form onsubmit="handlePostCreation(event)">
+                    <div class="form-group">
+                        <textarea id="post-text" class="form-control" rows="3" placeholder="Write the update caption narrative here..." required style="resize: none;"></textarea>
+                    </div>
+                    <div class="form-group" style="display: flex; gap: 1rem; align-items: center;">
+                        <div style="flex: 1;">
+                            <label style="font-size: 0.8rem; color: var(--text-light);">Media Source Link URL (Image / Video)</label>
+                            <input type="text" id="post-media-url" class="form-control" placeholder="https://example.com">
                         </div>
                     </div>
-                `;
-                grid.appendChild(card);
-            });
-            refreshAuthUIState();
-        }
-                // Module Engine 2: Security Validation System
-        function refreshAuthUIState() {
-            const session = localStorage.getItem('SUG_SESS');
-            const statusText = document.getElementById('auth-status-text');
-            const actionBtn = document.getElementById('auth-action-btn');
-            const adminPanel = document.getElementById('admin-post-panel');
+                    <button type="submit" class="btn-submit" style="background-color: var(--accent); margin-top: 0.5rem;">Broadcast Content Asset</button>
+                </form>
+            </div>
 
-            if (session) {
-                statusText.innerText = session === 'ADMIN' ? 'Authorized as SUG Administrator' : 'Connected as Anonymous Student';
-                actionBtn.innerText = 'Logout';
-                actionBtn.className = 'auth-btn logout-btn';
-                adminPanel.style.display = session === 'ADMIN' ? 'block' : 'none';
-            } else {
-                statusText.innerText = 'Public Safe-Mode Viewer Mode';
-                actionBtn.innerText = 'Sign In';
-                actionBtn.className = 'auth-btn';
-                adminPanel.style.display = 'none';
+            <!-- Dynamic Interactive Social Bulletin Board Stream -->
+            <div id="dynamic-feed-target">
+                <!-- Fallback card to populate layout visual metrics instantly -->
+                <div class="post-card">
+                    <div class="post-header">
+                        <span class="post-author" style="color: var(--accent);">★ SUG Executive Secretariat Notice</span>
+                        <span class="post-time">Official Bulletin Board</span>
+                    </div>
+                    <p style="font-size: 1.05rem; font-weight: 500;">Welcome to the official 2025/2026 interactive portal feed. Verified students can look, read, like, and comment anonymously on executive notifications once logged into their active profiles.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Global Layout System Footer -->
+    <footer>
+        <p>&copy; 2026 Student Union Government Portal | 2025/2026 Led Administration Dashboard</p>
+        <p style="font-size: 0.75rem; margin-top: 0.5rem; color: var(--text-light); letter-spacing: 0.5px;">Solidarity Forever. Aluta Continua, Victoria Acerta.</p>
+    </footer>
+        <!-- Main Interactive Script System Architecture Module -->
+    <script>
+        // ==================== SYSTEM REGISTRATION MEMORY STORAGE ==================== */
+        // Global Local Records Cache Layer acting as a pseudo-relational database table
+        if (!localStorage.getItem('sug_users')) {
+            localStorage.setItem('sug_users', JSON.stringify([
+                { name: "Demo Student", matric: "REG/2025/001", dept: "Computer Science", pass: "password123", avatar: null }
+            ]));
+        }
+
+        // Global System Activity News Stream Table Layer Setup
+        if (!localStorage.getItem('sug_posts')) {
+            localStorage.setItem('sug_posts', JSON.stringify([
+                {
+                    id: 1718114400000,
+                    author: "SUG Executive Secretariat Notice",
+                    text: "The 2025/2026 Led Administration Cabinet has officially finalized infrastructure expansion talks with university management panels today. Major updates coming up!",
+                    media: "data:image/svg+xml,<svg xmlns='http://w3.org' width='600' height='300' viewBox='0 0 600 300'><rect width='600' height='300' fill='%231e293b'/><text x='50%27 y='50%27 fill='%23b45309' font-weight='bold' font-size='24' text-anchor='middle'>ALUTA ACTIVISM REFORMS ACTIVE</text></svg>",
+                    likes: 12,
+                    likedBy: [],
+                    comments: [
+                        { id: 1, text: "Great development! Glad to see student welfare coming first.", author: "Anonymous Student" },
+                        { id: 2, text: "Solidarity forever! Keep up the incredible work, leaders.", author: "Anonymous Student" }
+                    ]
+                }
+            ]));
+        }
+
+        // ==================== RUNTIME APPLICATION SESSION STATES ==================== */
+        let sessionUser = null;          // Holds currently logged-in student user payload configuration
+        let sessionAdminActive = false;  // Global state switch tracking master administrator dashboard authorization
+
+        // ==================== APP LAYOUT CONTROLLER GATEWAYS ==================== */
+        // Main view switching panel handling navigation engine triggers
+        function switchView(viewId) {
+            // Deactivate and mask all active layout panels completely
+            const panels = document.querySelectorAll('.page-view');
+            panels.forEach(panel => panel.classList.remove('active-view'));
+
+            // Demask target workspace module view container
+            const activeTarget = document.getElementById('view-' + viewId);
+            if (activeTarget) {
+                activeTarget.classList.add('active-view');
             }
-            renderSocialFeed();
-        }
 
-        function handleAuthAction() {
-            const session = localStorage.getItem('SUG_SESS');
-            if (session) {
-                localStorage.removeItem('SUG_SESS');
-                refreshAuthUIState();
-            } else {
-                toggleLoginModal(true);
+            // Sync visual navigation link states inside top menu bar
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            const selectedLink = document.getElementById('nav-' + viewId);
+            if (selectedLink) {
+                selectedLink.classList.add('active');
+            }
+
+            // Fire UI stream template rendering algorithms if feed target sector is picked
+            if (viewId === 'feed') {
+                renderLiveNewsFeedStream();
             }
         }
 
-        function toggleLoginModal(open) {
-            const modal = document.getElementById('login-modal');
-            if(open) modal.classList.add('active');
-            else modal.classList.remove('active');
-        }
-
-        function submitLoginProcess() {
-            const u = document.getElementById('login-username').value.trim();
-            const p = document.getElementById('login-password').value.trim();
-
-            if (u.toLowerCase() === 'admin' && p === 'sug2026') {
-                localStorage.setItem('SUG_SESS', 'ADMIN');
-                cleanupLoginFieldsAndClose();
-            } else if (u.length >= 3 && p === 'student') {
-                localStorage.setItem('SUG_SESS', 'STU_' + Math.floor(100 + Math.random() * 900));
-                cleanupLoginFieldsAndClose();
+        // Form field visual state switcher providing user interactive password masks
+        function togglePass(targetFieldId) {
+            const inputField = document.getElementById(targetFieldId);
+            const triggerToggleBtn = inputField.nextElementSibling;
+            
+            if (inputField.type === "password") {
+                inputField.type = "text";
+                triggerToggleBtn.textContent = "HIDE";
             } else {
-                alert('Invalid credential match. Use admin/sug2026 or name/student.');
+                inputField.type = "password";
+                triggerToggleBtn.textContent = "SHOW";
             }
         }
+                // ==================== REGISTRATION ENGINE PROCESSING ==================== */
+        function handleRegistration(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('reg-name').value.trim();
+            const matricNum = document.getElementById('reg-matric').value.trim().toUpperCase();
+            const department = document.getElementById('reg-dept').value.trim();
+            const password = document.getElementById('reg-pass').value;
 
-        function cleanupLoginFieldsAndClose() {
-            document.getElementById('login-username').value = "";
-            document.getElementById('login-password').value = "";
-            toggleLoginModal(false);
-            refreshAuthUIState();
-        }
+            // Fetch dynamic records from system client cache table
+            let currentUsers = JSON.parse(localStorage.getItem('sug_users')) || [];
 
-        // Module Engine 3: Broadcast Publisher Operations
-        function submitAdminPost() {
-            const urlInput = document.getElementById('post-media-url').value.trim();
-            const captionInput = document.getElementById('post-caption').value.trim();
-            const isVideoInput = document.getElementById('post-is-video').checked;
+            // Duplicate Check: Verify if database name or matric code matches existing records
+            const accountExists = currentUsers.some(user => 
+                user.name.toLowerCase() === fullName.toLowerCase() || 
+                user.matric.toLowerCase() === matricNum.toLowerCase()
+            );
 
-            if (!urlInput || !captionInput) {
-                alert('Both the Media Link and Briefing Caption values must be populated.');
+            if (accountExists) {
+                alert("This already exists! Registration halted due to duplicate name or matric entries.");
                 return;
             }
 
-            const posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]');
-            const newPost = {
+            // Create new record entity schema layout
+            const newStudentAccount = {
+                name: fullName,
+                matric: matricNum,
+                dept: department,
+                pass: password,
+                avatar: null
+            };
+
+            // Push and commit to storage layout context
+            currentUsers.push(newStudentAccount);
+            localStorage.setItem('sug_users', JSON.stringify(currentUsers));
+
+            // Authenticate state tracking session automatically
+            sessionUser = newStudentAccount;
+
+            // Synchronize dynamic student account user profile workspace view
+            document.getElementById('profile-name-text').textContent = sessionUser.name;
+            document.getElementById('profile-matric-text').textContent = sessionUser.matric;
+            document.getElementById('profile-dept-text').textContent = sessionUser.dept;
+            document.getElementById('profile-display-img').src = "data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100' fill='%2394a3b8'><circle cx='50' cy='45' r='20'/><path d='M20 80c0-20 15-25 30-25s30 5 30 25z'/></svg>";
+
+            alert("Registration Successful! Welcome to the Union.");
+            switchView('profile');
+        }
+
+        // ==================== ACCREDITED USER AVATAR UPDATE CONTROLLER ==================== */
+        function handleProfilePicUpload(e) {
+            if (!sessionUser) {
+                alert("Security Error: Please sign in or register to manipulate profile configuration.");
+                return;
+            }
+
+            const targetFile = e.target.files[0];
+            if (!targetFile) return;
+
+            const mediaReader = new FileReader();
+            mediaReader.onload = function(eventResult) {
+                const base64EncodedImageString = eventResult.target.result;
+                
+                // Commit new image asset update directly inside memory buffer array records
+                let currentUsers = JSON.parse(localStorage.getItem('sug_users')) || [];
+                currentUsers = currentUsers.map(user => {
+                    if (user.matric === sessionUser.matric) {
+                        user.avatar = base64EncodedImageString;
+                        sessionUser.avatar = base64EncodedImageString; // Sync active workspace runtime session
+                    }
+                    return user;
+                });
+
+                localStorage.setItem('sug_users', JSON.stringify(currentUsers));
+                
+                // Render asset to presentation container element
+                document.getElementById('profile-display-img').src = base64EncodedImageString;
+                alert("Your custom account profile photo element has been successfully committed.");
+            };
+            
+            mediaReader.readAsDataURL(targetFile);
+        }
+                // ==================== USER LOGIN ACCOUNT VERIFICATION ==================== */
+        function handleStudentLogin(e) {
+            e.preventDefault();
+            
+            const inputtedMatric = document.getElementById('login-matric').value.trim().toUpperCase();
+            const inputtedPassword = document.getElementById('login-pass').value;
+
+            // Fetch registration indices data records from cache
+            const usersDatabaseTable = JSON.parse(localStorage.getItem('sug_users')) || [];
+
+            // Query relational table for matching credential sets
+            const verifiedRecordMatch = usersDatabaseTable.find(user => 
+                user.matric === inputtedMatric && user.pass === inputtedPassword
+            );
+
+            if (!verifiedRecordMatch) {
+                alert("Access Denied: Invalid Matric Number or Account Password combination.");
+                return;
+            }
+
+            // Sync user state parameters
+            sessionUser = verifiedRecordMatch;
+
+            // Load and populate user interface dashboard elements
+            document.getElementById('profile-name-text').textContent = sessionUser.name;
+            document.getElementById('profile-matric-text').textContent = sessionUser.matric;
+            document.getElementById('profile-dept-text').textContent = sessionUser.dept;
+            
+            if (sessionUser.avatar) {
+                document.getElementById('profile-display-img').src = sessionUser.avatar;
+            } else {
+                document.getElementById('profile-display-img').src = "data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100' fill='%2394a3b8'><circle cx='50' cy='45' r='20'/><path d='M20 80c0-20 15-25 30-25s30 5 30 25z'/></svg>";
+            }
+
+            alert("Sign-In Successful! Welcome to your member panel workspace.");
+            switchView('profile');
+        }
+
+        // ==================== ADMINISTRATIVE MASTER GATEWAY CONTROL ==================== */
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            
+            const adminUser = document.getElementById('admin-user').value.trim();
+            const adminPass = document.getElementById('admin-pass').value;
+
+            // Enforce explicit master static administrative criteria checks
+            if (adminUser === "admin" && adminPass === "admin123") {
+                sessionAdminActive = true;
+                
+                // Toggle display workspace panels
+                document.getElementById('admin-login-box').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+                
+                // Reveal media content production suite inside stream view
+                document.getElementById('media-uploader-box').style.display = 'block';
+                
+                alert("Master Security Clearance Confirmed. Administrative privileges activated.");
+            } else {
+                alert("Security Violation: Invalid administrative credentials entered.");
+            }
+        }
+
+        function logoutAdmin() {
+            sessionAdminActive = false;
+            document.getElementById('admin-panel').style.display = 'none';
+            document.getElementById('admin-login-box').style.display = 'block';
+            document.getElementById('media-uploader-box').style.display = 'none';
+            
+            alert("Administrative workspace session detached safely.");
+            switchView('home');
+        }
+                // ==================== CAMPUS NEWS FEED MANIPULATION CONTROLLER ==================== */
+        function handlePostCreation(e) {
+            e.preventDefault();
+            if (!sessionAdminActive) {
+                alert("Security Error: Only verified administrators can publish official broadcast records.");
+                return;
+            }
+
+            const textContent = document.getElementById('post-text').value.trim();
+            let mediaLinkUrl = document.getElementById('post-media-url').value.trim();
+
+            if (!mediaLinkUrl) {
+                mediaLinkUrl = "data:image/svg+xml,<svg xmlns='http://w3.org' width='600' height='300' viewBox='0 0 600 300'><rect width='600' height='300' fill='%231e293b'/><text x='50%27 y='50%27 fill='%23b45309' font-weight='bold' font-size='20' text-anchor='middle'>SUG OFFICIAL BULLETIN UPDATE</text></svg>";
+            }
+
+            const postStreamTable = JSON.parse(localStorage.getItem('sug_posts')) || [];
+            
+            const newBroadcastPost = {
                 id: Date.now(),
-                src: urlInput,
-                videoFlag: isVideoInput,
-                caption: captionInput,
-                timestamp: new Date().toLocaleString(),
+                author: "★ SUG Executive Secretariat Notice",
+                text: textContent,
+                media: mediaLinkUrl,
                 likes: 0,
-                likedUsers: [],
+                likedBy: [],
                 comments: []
             };
 
-            posts.unshift(newPost);
-            localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts));
+            postStreamTable.unshift(newBroadcastPost);
+            localStorage.setItem('sug_posts', JSON.stringify(postStreamTable));
 
-            document.getElementById('post-media-url').value = "";
-            document.getElementById('post-caption').value = "";
-            document.getElementById('post-is-video').checked = false;
+            document.getElementById('post-text').value = '';
+            document.getElementById('post-media-url').value = '';
 
-            renderSocialFeed();
+            alert("Content update broadcast completed successfully.");
+            renderLiveNewsFeedStream();
         }
-                // Module Engine 4: Interactive Media Feed Architecture
-        function renderSocialFeed() {
-            const streamContainer = document.getElementById('media-posts-stream'); 
-            if(!streamContainer) return; 
-            streamContainer.innerHTML = "";
-            
-            const s = localStorage.getItem('SUG_SESS'); 
-            const posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]');
-            
-            if(posts.length === 0) { 
-                streamContainer.innerHTML = '<p style="text-align:center; color:#7f8c8d; font-style:italic; padding:20px; background:#fff; border-radius:12px; box-shadow:var(--shadow);">No announcement posts available yet.</p>'; 
-                return; 
-            }
-            
-            posts.forEach(post => {
-                let mediaTag = post.videoFlag ? `<video src="${post.src}" class="feed-media" controls></video>` : `<img src="${post.src}" class="feed-media" alt="Post">`;
-                const card = document.createElement('div'); 
-                card.className = 'feed-card';
-                
-                card.innerHTML = `
-                    ${mediaTag}
-                    <div class="feed-content">
-                        <p style="font-size:0.75rem; color:#7f8c8d; font-weight:bold; margin-bottom:5px;">📢 Posted: ${post.timestamp}</p>
-                        <p style="font-size:1.05rem; margin-bottom:15px; color:var(--dark); font-weight:600;">${post.caption}</p>
-                        <div class="feed-actions">
-                            <button class="like-btn" id="like-btn-${post.id}">❤️ <span>${post.likes}</span> Likes</button>
-                        </div>
-                        <div class="comment-display-box" id="comments-box-${post.id}"></div>
-                        <div style="display:flex; gap:10px;">
-                            <input type="text" id="comment-input-${post.id}" placeholder="Write a comment anonymously..." style="flex-grow:1; padding:8px; border:1px solid #ced8e3; border-radius:6px; font-size:0.9rem;">
-                            <button id="post-comment-btn-${post.id}" style="background:var(--primary); color:var(--white); border:none; padding:8px 15px; border-radius:6px; font-weight:bold; font-size:0.85rem; cursor:pointer;">Post</button>
-                        </div>
-                    </div>
-                `;
-                
-                streamContainer.appendChild(card);
 
-                if (s === 'ADMIN') {
-                    const adminDelBtn = document.createElement('button'); 
-                    adminDelBtn.className = 'admin-del-post-btn'; 
-                    adminDelBtn.innerText = 'Delete Post';
-                    adminDelBtn.onclick = () => deleteAdminPost(post.id); 
-                    card.appendChild(adminDelBtn);
+        function renderLiveNewsFeedStream() {
+            const feedContainerBoxElement = document.getElementById('dynamic-feed-target');
+            const cachedPostStreamTable = JSON.parse(localStorage.getItem('sug_posts')) || [];
+
+            if (cachedPostStreamTable.length === 0) {
+                feedContainerBoxElement.innerHTML = `<p style="text-align:center; color:var(--text-light); padding:2rem;">No entries found inside the community dashboard index stream.</p>`;
+                return;
+            }
+
+            let computedHtmlBufferString = "";
+
+            cachedPostStreamTable.forEach(post => {
+                let commentItemsHtmlBuffer = "";
+                post.comments.forEach(comment => {
+                    let deleteCommentBtnMarkup = "";
+                    if (sessionAdminActive) {
+                        deleteCommentBtnMarkup = `<button class="btn-delete" onclick="deleteCommentNode(${post.id}, ${comment.id})">Purge</button>`;
+                    }
+                    commentItemsHtmlBuffer += `
+                        <li class="comment-item">
+                            <span>${comment.author}:</span> ${comment.text}
+                            ${deleteCommentBtnMarkup}
+                        </li>`;
+                });
+
+                let adminPostPurgeBtnMarkup = "";
+                if (sessionAdminActive) {
+                    adminPostPurgeBtnMarkup = `<button class="btn-delete" style="font-size:0.9rem;" onclick="deletePostNode(${post.id})">Delete Post</button>`;
                 }
 
-                card.querySelector('#like-btn-' + post.id).onclick = () => togglePostLike(post.id);
-                card.querySelector('#post-comment-btn-' + post.id).onclick = () => submitPostComment(post.id);
-                
-                const cBox = card.querySelector('#comments-box-' + post.id);
-                if(post.comments && Array.isArray(post.comments)) {
-                    post.comments.forEach((c, idx) => {
-                        const cBubble = document.createElement('div'); 
-                        cBubble.className = 'comment-bubble';
-                        let visualAuthor = "Anonymous Student";
-                        if(c && c.authorId === 'ADMIN') { visualAuthor = "SUG Admin"; }
+                computedHtmlBufferString += `
+                    <div class="post-card">
+                        <div class="post-header">
+                            <span class="post-author" style="color:var(--accent);">${post.author}</span>
+                            <div style="display:flex; gap:10px; align-items:center;">
+                                <span class="post-time">${new Date(post.id).toLocaleDateString()}</span>
+                                ${adminPostPurgeBtnMarkup}
+                            </div>
+                        </div>
+                        <p style="font-size:1.05rem; margin-bottom:1rem;">${post.text}</p>
+                        <img class="post-media" src="${post.media}" onerror="this.style.display='none'">
                         
-                        cBubble.innerHTML = `<div><strong>${visualAuthor}:</strong> ${c && c.msg ? c.msg : ""}</div>`;
-                        
-                        if (c && (c.authorId === s || s === 'ADMIN')) {
-                            const dBtn = document.createElement('span'); 
-                            dBtn.className = 'del-comment-link'; 
-                            dBtn.innerText = '[Delete]';
-                            dBtn.onclick = () => deleteFeedComment(post.id, idx); 
-                            cBubble.appendChild(dBtn);
-                        }
-                        cBox.appendChild(cBubble);
+                        <div class="post-actions">
+                            <button class="action-link" onclick="handleLikeToggle(${post.id})">
+                                ♥ Like (${post.likes})
+                            </button>
+                            <span class="action-link">💬 Discussion Log (${post.comments.length})</span>
+                        </div>
+
+                        <div class="comment-section">
+                            <div class="comment-input-group">
+                                <input type="text" id="com-input-${post.id}" class="form-control" placeholder="Write an anonymous feedback comment..." style="padding:0.5rem 0.75rem; font-size:0.9rem;">
+                                <button onclick="handleCommentSubmission(${post.id})" style="background:var(--primary); color:white; border:none; padding:0 1rem; border-radius:8px; font-weight:bold; cursor:pointer; font-size:0.85rem;">Send</button>
+                            </div>
+                            <ul class="comment-box">${commentItemsHtmlBuffer}</ul>
+                        </div>
+                    </div>`;
+            });
+
+            feedContainerBoxElement.innerHTML = computedHtmlBufferString;
+        }
+                // ==================== INTERACTIVE USER FEED OPERATIONS ==================== */
+        function handleLikeToggle(postId) {
+            if (!sessionUser) {
+                alert("Access Denied: Only registered, logged-in students can interact with this content.");
+                return;
+            }
+
+            let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
+            posts = posts.map(post => {
+                if (post.id === postId) {
+                    if (!post.likedBy) post.likedBy = [];
+                    
+                    const userIndex = post.likedBy.indexOf(sessionUser.matric);
+                    if (userIndex === -1) {
+                        post.likedBy.push(sessionUser.matric);
+                        post.likes += 1;
+                    } else {
+                        post.likedBy.splice(userIndex, 1);
+                        post.likes -= 1;
+                    }
+                }
+                return post;
+            });
+
+            localStorage.setItem('sug_posts', JSON.stringify(posts));
+            renderLiveNewsFeedStream();
+        }
+
+        function handleCommentSubmission(postId) {
+            if (!sessionUser) {
+                alert("Access Denied: Only authenticated, logged-in student members can comment.");
+                return;
+            }
+
+            const inputField = document.getElementById(`com-input-${postId}`);
+            const commentText = inputField.value.trim();
+
+            if (!commentText) return;
+
+            let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
+            posts = posts.map(post => {
+                if (post.id === postId) {
+                    post.comments.push({
+                        id: Date.now(),
+                        text: commentText,
+                        author: "Anonymous Student" // Hardcoded to guarantee absolute student anonymity
                     });
                 }
+                return post;
             });
+
+            localStorage.setItem('sug_posts', JSON.stringify(posts));
+            inputField.value = '';
+            renderLiveNewsFeedStream();
         }
 
-        function deleteAdminPost(postId) {
-            let posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]');
-            posts = posts.filter(p => p.id !== postId);
-            localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts));
-            renderSocialFeed();
-        }
-
-        function togglePostLike(postId) {
-            const s = localStorage.getItem('SUG_SESS'); 
-            if(!s) { alert('Please login using any username to like posts or participate in comments.'); return; }
-            let posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]'); 
-            const post = posts.find(p => p.id === postId); 
-            if(!post) return;
-            
-            if(!post.likedUsers) post.likedUsers = [];
-            const uIdx = post.likedUsers.indexOf(s);
-            if(uIdx === -1) { 
-                post.likes++; 
-                post.likedUsers.push(s); 
-            } else { 
-                post.likes--; 
-                post.likedUsers.splice(uIdx, 1); 
+        // ==================== MASTER ADMIN DATA PURGING OPERATIONS ==================== */
+        function deletePostNode(postId) {
+            if (!sessionAdminActive) return;
+            if (confirm("Are you sure you want to completely purge this post from the campus database?")) {
+                let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
+                posts = posts.filter(post => post.id !== postId);
+                localStorage.setItem('sug_posts', JSON.stringify(posts));
+                renderLiveNewsFeedStream();
             }
-            localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); 
-            renderSocialFeed();
         }
 
-        function submitPostComment(postId) {
-            const s = localStorage.getItem('SUG_SESS'); 
-            if(!s) { alert('Please click Sign In to post public anonymous remarks.'); return; }
-            const inputField = document.getElementById('comment-input-' + postId);
-            const commentText = inputField.value.trim(); 
-            if(!commentText) return;
+        function deleteCommentNode(postId, commentId) {
+            if (!sessionAdminActive) return;
+            if (confirm("Are you sure you want to completely wipe this comment from the discussion logs?")) {
+                let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
+                posts = posts.map(post => {
+                    if (post.id === postId) {
+                        post.comments = post.comments.filter(c => c.id !== commentId);
+                    }
+                    return post;
+                });
+                localStorage.setItem('sug_posts', JSON.stringify(posts));
+                renderLiveNewsFeedStream();
+            }
+        }
+
+        // ==================== EXECUTIVE COUNCIL MODAL CONTROL ENGINE ==================== */
+        function openExecModal(name, role) {
+            document.getElementById('modal-name').textContent = name;
+            document.getElementById('modal-role').textContent = role;
             
-            let posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]'); 
-            const post = posts.find(p => p.id === postId); 
-            if(!post) return;
-            if(!post.comments) post.comments = [];
+            // Set fallback canvas graphic automatically for seamless rendering without local paths
+            document.getElementById('modal-img').src = "data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100' fill='%2364748b'><circle cx='50' cy='45' r='20'/><path d='M20 80c0-20 15-25 30-25s30 5 30 25z'/></svg>";
             
-            post.comments.push({ authorId: s, msg: commentText }); 
-            localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); 
-            inputField.value = ""; 
-            renderSocialFeed();
+            document.getElementById('exec-modal').style.display = 'flex';
         }
 
-        function deleteFeedComment(postId, commentIndex) {
-            let posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]'); 
-            const post = posts.find(p => p.id === postId); 
-            if(!post) return;
-            if(post.comments) post.comments.splice(commentIndex, 1); 
-            localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); 
-            renderSocialFeed();
+        function closeExecModal(e) {
+            if (e.target.id === 'exec-modal') {
+                document.getElementById('exec-modal').style.display = 'none';
+            }
         }
-
-        // Initialize App on Window Load Event
-        window.onload = renderExecutiveGrid;
     </script>
 </body>
 </html>
