@@ -1,1 +1,168 @@
-<script src="https://jsdelivr.net"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUG Platform</title>
+    <style>
+        :root { --primary: #00468c; --primary-dark: #002d5c; --secondary: #0073e6; --light: #f5f8fc; --white: #ffffff; --dark: #2c3e50; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background-color: var(--light); color: var(--dark); min-height: 100vh; display: flex; flex-direction: column; }
+        nav { background-color: var(--primary); color: var(--white); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .nav-logo-text { font-weight: 800; font-size: 1.2rem; }
+        .nav-links { display: flex; gap: 10px; }
+        .nav-links button { background: none; border: none; color: rgba(255,255,255,0.8); font-size: 0.9rem; font-weight: 600; cursor: pointer; padding: 6px 10px; border-radius: 4px; }
+        .nav-links button.active { color: var(--white); background-color: rgba(255,255,255,0.2); }
+        header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--white); text-align: center; padding: 25px 15px; border-bottom: 4px solid var(--secondary); }
+        .page { display: none; max-width: 800px; margin: 20px auto; padding: 0 15px; flex-grow: 1; width: 100%; }
+        .page.active-page { display: block; }
+        .content-card, .form-box, .dashboard-box { background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
+        .exec-card { background: var(--white); border-radius: 6px; border: 1px solid #e1e8f0; overflow: hidden; cursor: pointer; text-align: center; padding-bottom: 15px; }
+        .card-title-bar { background: var(--primary); color: var(--white); padding: 10px; font-weight: 700; font-size: 0.85rem; }
+        .card-body-text { padding: 15px; font-weight: 600; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ced8e3; border-radius: 4px; }
+        .submit-btn { background: var(--primary); color: var(--white); border: none; width: 100%; padding: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        .feed-card { background: var(--white); border-radius: 8px; border: 1px solid #e1e8f0; margin-bottom: 20px; padding: 15px; position: relative; }
+        .feed-media { width: 100%; max-height: 300px; object-fit: cover; border-radius: 4px; }
+        .admin-del-post-btn { position: absolute; top: 10px; right: 10px; background: #c0392b; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.7 Tum; cursor: pointer; }
+        .comment-bubble { background: #f0f4f8; padding: 6px 10px; border-radius: 6px; margin-top: 5px; display: flex; justify-content: space-between; font-size: 0.85rem; }
+        .del-comment-link { color: #c0392b; cursor: pointer; font-weight: bold; font-size: 0.75rem; }
+        footer { text-align: center; padding: 15px; color: #7f8c8d; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo-text">RIVCOHSMAT SUG</div>
+        <div class="nav-links">
+            <button id="home-btn" class="active" onclick="switchPage('home')">Home</button>
+            <button id="exec-btn" onclick="switchPage('exec')">Executives</button>
+            <button id="reg-btn" onclick="switchPage('reg')">Portal</button>
+        </div>
+    </nav>
+    <header>
+        <h1 style="font-size:1.5rem;">Student Union Government</h1>
+        <p style="font-size:0.9rem; color:#bcd6ff;">Official E-Platform</p>
+    </header>
+
+    <main id="page-home" class="page active-page">
+        <div class="content-card">
+            <h2>Welcome to the Official SUG Portal</h2><br>
+            <p>The Student Union Government serves as the democratic voice connecting students and management. We manage student academic welfare, represent student concerns, and foster leadership values across the entire institution landscape.</p>
+        </div>
+    </main>
+
+    <main id="page-exec" class="page">
+        <div class="grid-layout" id="executives-container"></div>
+      </main>
+          <main id="page-reg" class="page">
+        <div id="auth-section" class="form-box">
+            <h3 style="margin-bottom:15px; text-align:center;">Student Account Gateway</h3>
+            <form id="login-form" onsubmit="handleLoginSubmit(event)">
+                <div class="form-group"><label>Matric Number</label><input type="text" id="login-matric" placeholder="RIVCO/2025/XXXX" required></div>
+                <div class="form-group"><label>Password</label><input type="password" id="login-pass" required></div>
+                <button type="submit" class="submit-btn">Login Access</button>
+            </form>
+        </div>
+
+        <div id="dashboard-section" style="display: none;">
+            <div class="dashboard-box">
+                <h3 id="welcome-banner" style="color:var(--primary); margin-bottom:10px;">Welcome</h3>
+                <p id="dash-matric-view" style="font-weight:700; color:#555; margin-bottom:15px;"></p>
+                <div id="admin-stats" style="display:none; background:#fff3cd; padding:10px; border-radius:4px; margin-bottom:15px; font-weight:bold;"></div>
+                <button class="submit-btn" style="background:#7f8c8d;" onclick="handleLogout()">Log Out</button>
+            </div>
+
+            <div class="form-box">
+                <h3>Secured SUG Complaint Box</h3><br>
+                <form action="https://web3forms.com" method="POST">
+                    <input type="hidden" name="access_key" value="cf1807fc-4071-4cc0-b416-f381b77a1d72">
+                    <div class="form-group"><textarea name="Message" placeholder="Type complaint here..." required></textarea></div>
+                    <button type="submit" class="submit-btn" style="background:var(--secondary);">Send directly to Gmail</button>
+                </form>
+            </div>
+
+            <div class="form-box">
+                <h3>🔊 Campus News Feed</h3><br>
+                <div id="media-posts-stream"></div>
+            </div>
+        </div>
+    </main>
+    <footer>&copy; 2026 RIVCOHSMAT SUG</footer>
+      <script>
+        const execs = [
+            { r: "SUG President", n: "Sen. Comr. Justina Gentle Welli", img: "1781503643336.jpg" },
+            { r: "SUG Vice President", n: "Roselyn Nwibu", img: "IMG-20260616-WA0072.jpg" },
+            { r: "SUG Speaker", n: "Rt. Hon. Godspower Awajimowa Ebirien", img: "photo (1).jpg" },
+            { r: "SUG Deputy Speaker", n: "Hon. PraiseGod Barisi", img: "IMG-20260415-WA0270(1).jpg" },
+            { r: "SUG Secretary", n: "Comr. Favour Mbete", img: "1781507714942.jpg" },
+            { r: "SUG Provost", n: "Comr. Ngerebo Lamech Dimkpa", img: "file_0000000021e4724391c24cccd4c8aa8a.png" },
+            { r: "SUG Treasurer", n: "Vera Sunday", img: "WA_1781560881607.jpeg" },
+            { r: "SUG P.R.O", n: "Comr. Bob Orji", img: "IMG-20260615-WA0058.jpg" },
+            { r: "SUG Financial Secretary", n: "Silver Chinemerem", img: "WA_1781601350244.jpeg" },
+            { r: "SUG Welfare", n: "Maureen Ebelogwu chinuzoke", img: "1781559973250.jpg" },
+            { r: "Director Of Socials", n: "Comr. Queeneth Amadi", img: "WA_1781559458164.jpeg" },
+            { r: "Director of Sports", n: "Comr. Nelson", img: "WA_1781559411308.jpeg" },
+            { r: "Chief Whip", n: "Success Chinna", img: "IMG-20260616-WA0071.jpg" },
+            { r: "Internal Auditor", n: "Victor Dakubor", img: "IMG-20260607-WA0068.jpg" },
+            { r: "Majority Leader", n: "Akpobari Barisua", img: "WA_1781603731794.jpeg" }
+        ];
+
+        function renderGrid() {
+            const container = document.getElementById('executives-container'); container.innerHTML = "";
+            execs.forEach(e => {
+                container.innerHTML += '<div class="exec-card"><div class="card-title-bar">' + e.r + '</div><div class="card-body-text">' + e.n + '</div></div>';
+            });
+        }
+                function switchPage(p) {
+            document.querySelectorAll('.page').forEach(el => el.classList.remove('active-page'));
+            document.querySelectorAll('.nav-links button').forEach(el => el.classList.remove('active'));
+            document.getElementById('page-' + p).classList.add('active-page');
+            document.getElementById(p + '-btn').classList.add('active');
+            if(p === 'reg') checkSession();
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const m = document.getElementById('login-matric').value.trim().toUpperCase();
+            localStorage.setItem('SUG_SESS', m);
+            if(m === 'SUG-ADMIN') {
+                const total = Math.floor(Math.random() * 120) + 45;
+                localStorage.setItem('SUG_COUNT', total);
+            }
+            checkSession();
+        }
+                function checkSession() {
+            const s = localStorage.getItem('SUG_SESS');
+            if(s) {
+                document.getElementById('auth-section').style.display = 'none';
+                document.getElementById('dashboard-section').style.display = 'block';
+                document.getElementById('welcome-banner').innerText = "Verified Member Profile";
+                document.getElementById('dash-matric-view').innerText = "Session ID: " + s;
+                if(s === 'SUG-ADMIN') {
+                    const count = localStorage.getItem('SUG_COUNT') || '68';
+                    document.getElementById('admin-stats').innerText = "📊 Active Registered Students: " + count;
+                    document.getElementById('admin-stats').style.display = 'block';
+                }
+                renderFeed();
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('SUG_SESS');
+            document.getElementById('auth-section').style.display = 'block';
+            document.getElementById('dashboard-section').style.display = 'none';
+            document.getElementById('admin-stats').style.display = 'none';
+        }
+
+        function renderFeed() {
+            const stream = document.getElementById('media-posts-stream');
+            stream.innerHTML = '<div class="feed-card"><p>📢 Welcome to the live timeline announcement thread.</p></div>';
+        }
+
+        window.onload = renderGrid;
+    </script>
+</body>
+</html>
