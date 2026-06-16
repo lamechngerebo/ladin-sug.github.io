@@ -95,7 +95,7 @@
 
     <div class="overlay" id="profile-overlay" onclick="closeProfileOverlay(event)">
         <div class="profile-view-box" onclick="event.stopPropagation()">
-            <div class="image-placeholder">👤 [Photo Connected to Secure Vault]</div>
+            <div class="image-placeholder"></div>
             <div class="profile-details">
                 <h3 id="modal-name">Executive Name</h3>
                 <p id="modal-role">Executive Position</p>
@@ -164,7 +164,7 @@
                 <button class="submit-btn" style="background-color:#7f8c8d;" onclick="handleLogout()">Log Out of Session</button>
             </div>
 
-            <!-- New Secure Web3Forms Private Suggestion Box -->
+            <!-- Web3Forms Suggestion Box -->
             <div class="dashboard-box" style="margin-top: 25px;">
                 <h3 style="color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e1e8f0; padding-bottom: 8px;">Secured SUG Suggestion & Complaint Box</h3>
                 <form action="https://web3forms.com" method="POST">
@@ -193,144 +193,7 @@
     </main>
 
     <footer><p>&copy; 2026 <strong>RIVCOHSMAT SUG Council</strong>. All Rights Reserved.</p></footer>
-    <script>
-        const data = [
-            { r: "SUG President", n: "Sen. Comr. Justina Gentle Welli", img: "1781503643336.jpg" }, 
-            { r: "SUG Vice President", n: "Roselyn Nwibu", img: "IMG-20260616-WA0072.jpg" },
-            { r: "SUG Speaker", n: "Rt. Hon. Godspower Awajimowa Ebirien", img: "photo (1).jpg" }, 
-            { r: "SUG Deputy Speaker", n: "Hon. PraiseGod Barisi", img: "IMG-20260415-WA0270(1).jpg" },
-            { r: "SUG Secretary", n: "Comr. Favour Mbete", img: "1781507714942.jpg" }, 
-            { r: "SUG Provost", n: "Comr. Ngerebo Lamech Dimkpa", img: "file_0000000021e4724391c24cccd4c8aa8a.png" },
-            { r: "SUG Treasurer", n: "Vera Sunday", img: "WA_1781560881607.jpeg" }, 
-            { r: "SUG P.R.O", n: "Comr. Bob Orji", img: "IMG-20260615-WA0058.jpg" },
-            { r: "SUG Financial Secretary", n: "Silver Chinemerem", img: "WA_1781601350244.jpeg" }, 
-            { r: "SUG Welfare", n: "Maureen Ebelogwu chinuzoke", img: "1781559973250.jpg" },
-            { r: "Director Of Socials", n: "Comr. Queeneth Amadi", img: "WA_1781559458164.jpeg" }, 
-            { r: "Director of Sports", n: "Comr. Nelson", img: "WA_1781559411308.jpeg" },
-            { r: "Chief Whip", n: "Success Chinna", img: "IMG-20260616-WA0071.jpg" }, 
-            { r: "Internal Auditor", n: "Victor Dakubor", img: "IMG-20260607-WA0068.jpg" }, 
-            { r: "Majority Leader", n: "Akpobari Barisua", img: "WA_1781603731794.jpeg" }
-        ];
-
-        function renderExecutiveGrid() {
-            const g = document.getElementById('executives-container'); g.innerHTML = "";
-            data.forEach(e => {
-                const c = document.createElement('div'); c.className = "exec-card"; c.onclick = () => openProfileOverlay(e.n, e.r, e.img);
-                c.innerHTML = '<div class="card-title-bar">' + e.r + '</div><div class="card-body-text">' + e.n + '</div>'; g.appendChild(c);
-            });
-        }
-
-        function switchPage(pId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page')); document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
-            document.getElementById('page-' + pId).classList.add('active-page'); document.getElementById(pId + '-btn').classList.add('active');
-            const t = document.getElementById('dynamic-header-title'), s = document.getElementById('dynamic-header-sub');
-            if (pId === 'home') { t.innerText = "Rivers State College of Health Science & Management Technology"; s.innerText = "Student Union Government (SUG) Platform"; }
-            else if (pId === 'exec') { t.innerText = "The Executive Council"; s.innerText = "2025/2026 Administrative Leadership Officers"; }
-            else if (pId === 'reg') { t.innerText = "Union Verification Portal"; s.innerText = "Official E-Registration Services"; chk(); }
-            window.scrollTo(0,0);
-        }
-
-        function toggleAuthMode(m) {
-            const lF = document.getElementById('sug-login-form'), sF = document.getElementById('sug-signup-form'), lB = document.getElementById('tab-login-btn'), sB = document.getElementById('tab-signup-btn');
-            if (m === 'login') { lF.style.display = 'block'; sF.style.display = 'none'; lB.style.color = 'var(--primary)'; lB.style.borderBottom = '3px solid var(--primary)'; sB.style.color = '#7f8c8d'; sB.style.borderBottom = 'none'; }
-            else { lF.style.display = 'none'; sF.style.display = 'block'; lB.style.color = '#7f8c8d'; lB.style.borderBottom = 'none'; sB.style.color = 'var(--primary)'; sB.style.borderBottom = '3px solid var(--primary)'; }
-        }
-
-        function openProfileOverlay(n, r, imgFile) { 
-            document.getElementById('modal-name').innerText = n; document.getElementById('modal-role').innerText = r; 
-            const imgBox = document.querySelector('.image-placeholder');
-            if(imgFile) { imgBox.innerHTML = '<img src="' + imgFile + '" style="width:100%; height:100%; object-fit:cover;">'; } 
-            else { imgBox.innerHTML = '👤 [Photo Connected to Secure Vault]'; }
-            document.getElementById('profile-overlay').style.display = 'flex'; 
-        }
-
-        function closeProfileOverlay(e) { if(e.target.id === "profile-overlay") document.getElementById('profile-overlay').style.display = 'none'; }
-
-        function countRegisteredStudents() {
-            let count = 0;
-            for (let i = 0; i < localStorage.length; i++) {
-                if (localStorage.key(i).startsWith("SUG_U_")) count++;
-            }
-            return count;
-        }
-
-        function handleRegistrationSubmit(e) {
-            e.preventDefault(); 
-            const n = document.getElementById('student-name').value, m = document.getElementById('student-matric').value.trim().toUpperCase(), d = document.getElementById('student-dept').value, l = document.getElementById('student-level').value, c = document.getElementById('student-course').value, pass = document.getElementById('student-pass').value;
-            const p = "data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='100' height='100' viewBox='0 0 24 24' fill='%2300468c'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
-            const prof = { name: n, matric: m, dept: d, level: l, course: c, password: pass, profilePic: p }; 
-            localStorage.setItem('SUG_U_' + m, JSON.stringify(prof)); localStorage.setItem('SUG_SESS', m);
-            ld(prof, "✓ Registration Successful! Welcome to your active dashboard workspace.");
-        }
-
-        function handleLoginSubmit(e) {
-            e.preventDefault(); 
-            const m = document.getElementById('login-matric').value.trim().toUpperCase(), inputPass = document.getElementById('login-pass').value;
-            if(m === 'SUG-ADMIN') { localStorage.setItem('SUG_SESS', 'ADMIN'); loadAdminDashboard(); return; }
-            const lD = localStorage.getItem('SUG_U_' + m);
-            if (lD) { 
-                const prof = JSON.parse(lD); 
-                if (prof.password === inputPass) { localStorage.setItem('SUG_SESS', m); ld(prof, "✓ Portal Verified! Welcome back to the Union."); } 
-                else { alert("Incorrect security password. Please re-enter your password correctly!"); }
-            } else { alert("No record found matching this Matric Number. Please click the Register tab to create your profile!"); }
-        }
-
-        function chk() { 
-            const s = localStorage.getItem('SUG_SESS'); 
-            if (s === 'ADMIN') { loadAdminDashboard(); }
-            else if (s) { const lD = localStorage.getItem('SUG_U_' + s); if (lD) ld(JSON.parse(lD), "✓ Active Session Found. Welcome back!"); } 
-        }
-            function ld(p, t) {
-            document.getElementById('dashboard-banner-text').innerText = t; 
-            document.getElementById('dash-name').innerText = p.name; document.getElementById('dash-matric').innerText = p.matric; document.getElementById('dash-dept').innerText = p.dept; 
-            document.getElementById('dash-level').innerText = p.level || "---"; document.getElementById('dash-course').innerText = p.course || "---"; document.getElementById('user-profile-pic').src = p.profilePic;
-            document.getElementById('form-send-name').value = p.name; document.getElementById('form-send-matric').value = p.matric; document.getElementById('form-send-dept').value = p.dept;
-            document.getElementById('form-send-level').value = p.level || "---"; document.getElementById('form-send-course').value = p.course || "---";
-            document.getElementById('reg-count-row').style.display = 'none';
-            document.getElementById('registration-form-section').style.display = 'none'; document.getElementById('student-dashboard-section').style.display = 'block';
-            renderSocialFeed();
-            const adminBox = document.getElementById('admin-broadcaster-panel'); if(adminBox) adminBox.remove();
-        }
-
-        function loadAdminDashboard() {
-            document.getElementById('registration-form-section').style.display = 'none'; document.getElementById('student-dashboard-section').style.display = 'block';
-            document.getElementById('dashboard-banner-text').innerText = "⚡ SUG ADMINISTRATOR SESSION ACTIVE";
-            document.getElementById('dash-name').innerText = "SUG Governing Body"; document.getElementById('dash-matric').innerText = "OFFICIAL ADMIN"; document.getElementById('dash-dept').innerText = "All Faculty Access"; document.getElementById('dash-level').innerText = "N/A"; document.getElementById('dash-course').innerText = "N/A";
-            document.getElementById('dash-reg-count').innerText = countRegisteredStudents() + " Students";
-            document.getElementById('reg-count-row').style.display = 'flex';
-            let adminBox = document.getElementById('admin-broadcaster-panel');
-            if(!adminBox) { adminBox = document.createElement('div'); adminBox.className = "dashboard-box"; adminBox.id = "admin-broadcaster-panel"; adminBox.style.marginTop = "25px"; document.getElementById('student-dashboard-section').appendChild(adminBox); }
-            adminBox.innerHTML = '<h3 style="color:#d4af37; margin-bottom:15px; border-bottom:2px solid #e1e8f0; padding-bottom:8px;">⚡ SUG Campus Media Broadcaster</h3><form id="admin-broadcast-form" onsubmit="handleAdminMediaPublish(event)"><div class="form-group"><label>Select Media File</label><input type="file" id="broadcast-file-input" accept="image/*,video/*" required></div><div class="form-group"><label>Post Caption</label><textarea id="broadcast-caption" placeholder="Write announcement details..." required></textarea></div><button type="submit" class="submit-btn" style="background-color:#d4af37;">Publish Content</button></form>';
-            renderSocialFeed();
-        }
-
-        function handleLogout() { localStorage.removeItem('SUG_SESS'); document.getElementById('registration-form-section').style.display = 'block'; document.getElementById('student-dashboard-section').style.display = 'none'; document.getElementById('login-matric').value = ""; document.getElementById('login-pass').value = ""; toggleAuthMode('login'); }
-                function handleProfileImageUpload(ev) {
-            const f = ev.target.files, s = localStorage.getItem('SUG_SESS');
-            if (f && s) {
-                const r = new FileReader(); r.onload = function(e) {
-                    const img = new Image(); img.onload = function() {
-                        const canvas = document.createElement('canvas'), ctx = canvas.getContext('2d');
-                        canvas.width = 120; canvas.height = 120; ctx.drawImage(img, 0, 0, 120, 120);
-                        const compactB64 = canvas.toDataURL('image/jpeg', 0.6);
-                        document.getElementById('user-profile-pic').src = compactB64;
-                        const lD = localStorage.getItem('SUG_U_' + s); if (lD) { const prof = JSON.parse(lD); prof.profilePic = compactB64; localStorage.setItem('SUG_U_' + s, JSON.stringify(prof)); }
-                    }; img.src = e.target.result;
-                }; r.readAsDataURL(f);
-            }
-        }
-
-        function handleAdminMediaPublish(e) {
-            e.preventDefault(); 
-            const fIn = document.getElementById('broadcast-file-input').files, cap = document.getElementById('broadcast-caption').value; if(!fIn || !fIn.length) return;
-            const r = new FileReader(); r.onload = function(evt) {
-                const posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]');
-                posts.unshift({ id: 'P_' + Date.now(), src: evt.target.result, videoFlag: fIn[0].type.startsWith('video'), caption: cap, likes: 0, likedUsers: [], comments: [], timestamp: new Date().toLocaleDateString() });
-                localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); document.getElementById('admin-broadcast-form').reset(); renderSocialFeed();
-            }; r.readAsDataURL(fIn[0]);
-        }
-
-        function renderSocialFeed() {
+                                                                                                   function renderSocialFeed() {
             const streamContainer = document.getElementById('media-posts-stream'); if(!streamContainer) return; streamContainer.innerHTML = "";
             const s = localStorage.getItem('SUG_SESS'), posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]');
             if(posts.length === 0) { streamContainer.innerHTML = '<p style="text-align:center; color:#7f8c8d; font-style:italic; padding:20px;">No announcement posts yet.</p>'; return; }
@@ -357,4 +220,35 @@
                 });
             });
         }
-        
+            function deleteAdminPost(postId) {
+            let posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]');
+            posts = posts.filter(p => p.id !== postId);
+            localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts));
+            renderSocialFeed();
+        }
+
+        function togglePostLike(postId) {
+            const s = localStorage.getItem('SUG_SESS'); if(!s) return;
+            const posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]'); const post = posts.find(p => p.id === postId); if(!post) return;
+            const uIdx = post.likedUsers.indexOf(s);
+            if(uIdx === -1) { post.likes++; post.likedUsers.push(s); } else { post.likes--; post.likedUsers.splice(uIdx, 1); }
+            localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); renderSocialFeed();
+        }
+
+        function submitPostComment(postId) {
+            const s = localStorage.getItem('SUG_SESS'); if(!s) return;
+            const inputField = document.getElementById('comment-input-' + postId), commentText = inputField.value.trim(); if(!commentText) return;
+            let authorName = "SUG Admin"; if(s !== 'ADMIN') { authorName = JSON.parse(localStorage.getItem('SUG_U_' + s)).name; }
+            const posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]'); const post = posts.find(p => p.id === postId); if(!post) return;
+            post.comments.push({ authorId: s, author: authorName, msg: commentText }); 
+            localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); inputField.value = ""; renderSocialFeed();
+        }
+
+        function deleteFeedComment(postId, commentIndex) {
+            const posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]'); const post = posts.find(p => p.id === postId); if(!post) return;
+            post.comments.splice(commentIndex, 1); localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); renderSocialFeed();
+        }
+        window.onload = renderExecutiveGrid;
+    </script>
+</body>
+</html>
