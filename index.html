@@ -95,8 +95,8 @@
     <main id="page-exec" class="page">
         <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary);">2025/2026 Executive Council</h2>
         <div class="grid-layout" id="executives-container"></div>
-            </main>
-        <div class="overlay" id="profile-overlay" onclick="closeProfileOverlay(event)">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </main>
+    <div class="overlay" id="profile-overlay" onclick="closeProfileOverlay(event)">
         <div class="profile-view-box" onclick="event.stopPropagation()">
             <div class="image-placeholder">👤 [Photo Connected to Secure Vault]</div>
             <div class="profile-details">
@@ -109,6 +109,7 @@
     </div>
 
     <main id="page-reg" class="page">
+        <!-- Auth View Panel -->
         <div id="registration-form-section" class="form-box">
             <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 25px; border-bottom: 2px solid #e1e8f0; padding-bottom: 10px;">
                 <button id="tab-login-btn" onclick="toggleAuthMode('login')" style="background: none; border: none; font-size: 1.1rem; font-weight: 700; color: var(--primary); cursor: pointer;">Log In</button>
@@ -174,6 +175,56 @@
                 <button class="close-btn" onclick="document.getElementById('password-reset-overlay').style.display='none'" style="width: 100%; margin-top: 10px; background-color: #7f8c8d;">Cancel</button>
             </div>
     </div>
+                            <!-- Dashboard Workspace Area -->
+        <div id="student-dashboard-section" style="display: none;">
+            <div class="dashboard-box">
+                <div class="success-banner" id="dashboard-banner-text">✓ Portal Verified! Welcome back to the Union.</div>
+                <h3 style="text-align:center; margin-bottom:15px; color:var(--primary);">Your Student Profile</h3>
+                <div class="user-avatar-container"><img id="user-profile-pic" src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='100' height='100' viewBox='0 0 24 24' fill='%2300468c'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>"></div>
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <label for="avatar-upload-input" class="upload-label">Change Profile Picture</label>
+                    <input type="file" id="avatar-upload-input" accept="image/*" style="display: none;" onchange="handleProfileImageUpload(event)">
+                    <p style="font-size:0.75rem; color:#888; margin-top:6px;">Only you have control over removing or replacing this photo.</p>
+                </div>
+                <div class="info-row"><span>Registered Member:</span><span id="dash-name">---</span></div>
+                <div class="info-row"><span>Matric Number:</span><span id="dash-matric">---</span></div>
+                <div class="info-row"><span>Assigned Faculty:</span><span id="dash-dept">---</span></div>
+                <div class="info-row"><span>Student Level:</span><span id="dash-level">---</span></div>
+                <div class="info-row"><span>Course Pathway:</span><span id="dash-course">---</span></div>
+                <div class="info-row" id="reg-count-row" style="display: none;"><span>Total Registered Users:</span><span id="dash-reg-count" style="color: #d4af37;">0 Students</span></div>
+                <div class="info-row"><span>Status Tier:</span><span style="color:#27ae60; font-weight:bold;">Active SUG E-Member</span></div><br>
+                <button class="submit-btn" style="background-color:#7f8c8d;" onclick="handleLogout()">Log Out of Session</button>
+            </div>
+
+            <!-- Web3Forms Suggestion Box -->
+            <div class="dashboard-box" style="margin-top: 25px;">
+                <h3 style="color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e1e8f0; padding-bottom: 8px;">Secured SUG Suggestion & Complaint Box</h3>
+                <form action="https://web3forms.com" method="POST">
+                    <input type="hidden" name="access_key" value="cf1807fc-4071-4cc0-b416-f381b77a1d72">
+                    <input type="hidden" name="Student Name" id="form-send-name">
+                    <input type="hidden" name="Matric Number" id="form-send-matric">
+                    <input type="hidden" name="Department" id="form-send-dept">
+                    <input type="hidden" name="Level" id="form-send-level">
+                    <input type="hidden" name="Course Combo" id="form-send-course">
+                    <input type="hidden" name="redirect" value="https://github.io">
+
+                    <div class="form-group">
+                        <label for="complaint-text">Submit Private Complaint / Suggestion to SUG Executives</label>
+                        <textarea name="Complaint Message" id="complaint-text" placeholder="Type your issues here. Web3Forms will securely package this data and deliver it straight to your email." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" style="background-color: var(--secondary);">Submit Secured Complaint</button>
+                </form>
+            </div>
+
+            <!-- Social Media Feed Container -->
+            <div id="campus-social-feed-section" class="feed-container">
+                <h3 style="color: var(--primary); text-align: center; margin-bottom: 20px;">🔊 Campus Social Media News Feed</h3>
+                <div id="media-posts-stream"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer><p>&copy; 2026 <strong>RIVCOHSMAT SUG Council</strong>. All Rights Reserved.</p></footer>
                                 <!-- Dashboard Workspace Area -->
         <div id="student-dashboard-section" style="display: none;">
             <div class="dashboard-box">
@@ -224,7 +275,7 @@
     </main>
 
     <footer><p>&copy; 2026 <strong>RIVCOHSMAT SUG Council</strong>. All Rights Reserved.</p></footer>
-                                                                       <script>
+                        <script>
         const data = [
             { r: "SUG President", n: "Sen. Comr. Justina Gentle Welli", img: "1781503643336.jpg" }, 
             { r: "SUG Vice President", n: "Comr. Roselyn Nwibu", img: "IMG-20260616-WA0072.jpg" },
@@ -250,7 +301,8 @@
                 c.innerHTML = '<div class="card-title-bar">' + e.r + '</div><div class="card-body-text">' + e.n + '</div>'; g.appendChild(c);
             });
         }
-            function switchPage(pId) {
+
+        function switchPage(pId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page')); document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
             document.getElementById('page-' + pId).classList.add('active-page'); document.getElementById(pId + '-btn').classList.add('active');
             const t = document.getElementById('dynamic-header-title'), s = document.getElementById('dynamic-header-sub');
@@ -288,110 +340,8 @@
                     alert("✓ Success! Your brand-new security password has been securely saved. You can now log into your student profile panel.");
                 } else { alert("Identity verification failed. The full name entered does not match the record on file for this Matric Number!"); }
             } else { alert("No active student record found matching this Matric Number. Please verify and try again!"); }
-                                                                           }
-                                                                                   function openProfileOverlay(n, r, imgFile) { 
-            document.getElementById('modal-name').innerText = n; document.getElementById('modal-role').innerText = r; 
-            const imgBox = document.querySelector('.image-placeholder');
-            if(imgFile) { imgBox.innerHTML = '<img src="' + imgFile + '" style="width:100%; height:100%; object-fit:cover;">'; } 
-            else { imgBox.innerHTML = '👤 [Photo Connected to Secure Vault]'; }
-            document.getElementById('profile-overlay').style.display = 'flex'; 
         }
-
-        function closeProfileOverlay(e) { if(e.target.id === "profile-overlay") document.getElementById('profile-overlay').style.display = 'none'; }
-
-        function countRegisteredStudents() {
-            let count = 0;
-            for (let i = 0; i < localStorage.length; i++) {
-                if (localStorage.key(i).startsWith("SUG_U_")) count++;
-            }
-            return count;
-        }
-
-        function handleRegistrationSubmit(e) {
-            e.preventDefault(); 
-            const n = document.getElementById('student-name').value, m = document.getElementById('student-matric').value.trim().toUpperCase(), d = document.getElementById('student-dept').value, l = document.getElementById('student-level').value, c = document.getElementById('student-course').value, pass = document.getElementById('student-pass').value;
-            const p = "data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='100' height='100' viewBox='0 0 24 24' fill='%2300468c'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
-            const prof = { name: n, matric: m, dept: d, level: l, course: c, password: pass, profilePic: p }; 
-            localStorage.setItem('SUG_U_' + m, JSON.stringify(prof)); localStorage.setItem('SUG_SESS', m);
-            ld(prof, "✓ Registration Successful! Welcome to your active dashboard workspace.");
-        }
-
-        function handleLoginSubmit(e) {
-            e.preventDefault(); 
-            const m = document.getElementById('login-matric').value.trim().toUpperCase(), inputPass = document.getElementById('login-pass').value;
-            if(m === 'SUG-ADMIN') { localStorage.setItem('SUG_SESS', 'ADMIN'); loadAdminDashboard(); return; }
-            const lD = localStorage.getItem('SUG_U_' + m);
-            if (lD) { 
-                const prof = JSON.parse(lD); 
-                if (prof.password === inputPass) { localStorage.setItem('SUG_SESS', m); ld(prof, "✓ Portal Verified! Welcome back to the Union."); } 
-                else { alert("Incorrect security password. Please re-enter your password correctly!"); }
-            } else { alert("No record found matching this Matric Number. Please click the Register tab to create your profile!"); }
-        }
-
-        function chk() { 
-            const s = localStorage.getItem('SUG_SESS'); 
-            if (s === 'ADMIN') { loadAdminDashboard(); }
-            else if (s) { const lD = localStorage.getItem('SUG_U_' + s); if (lD) ld(JSON.parse(lD), "✓ Active Session Found. Welcome back!"); } 
-        }
-
-        function ld(p, t) {
-            document.getElementById('dashboard-banner-text').innerText = t; 
-            document.getElementById('dash-name').innerText = p.name; document.getElementById('dash-matric').innerText = p.matric; document.getElementById('dash-dept').innerText = p.dept; 
-            document.getElementById('dash-level').innerText = p.level || "---"; document.getElementById('dash-course').innerText = p.course || "---"; document.getElementById('user-profile-pic').src = p.profilePic;
-            document.getElementById('form-send-name').value = p.name; document.getElementById('form-send-matric').value = p.matric; document.getElementById('form-send-dept').value = p.dept;
-            document.getElementById('form-send-level').value = p.level || "---"; document.getElementById('form-send-course').value = p.course || "---";
-            document.getElementById('reg-count-row').style.display = 'none';
-            document.getElementById('registration-form-section').style.display = 'none'; document.getElementById('student-dashboard-section').style.display = 'block';
-            renderSocialFeed();
-            const adminBox = document.getElementById('admin-broadcaster-panel'); if(adminBox) adminBox.remove();
-
-            const cForm = document.querySelector('form[action*="web3forms.com"]');
-            if(cForm) {
-                cForm.onsubmit = function(e) {
-                    e.preventDefault();
-                    const compInput = document.getElementById('complaint-text');
-                    const msgTxt = compInput ? compInput.value : "";
-                    const sBtn = cForm.querySelector('button[type="submit"]');
-                    if(sBtn) { sBtn.innerText = "Encrypting & Dispatching..."; sBtn.disabled = true; }
-
-                    fetch(cForm.action, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-                        body: JSON.stringify({
-                            access_key: "cf1807fc-4071-4cc0-b416-f381b77a1d72",
-                            "Student Name": p.name,
-                            "Matric Number": p.matric,
-                            "Department": p.dept,
-                            "Level": p.level,
-                            "Course Combo": p.course,
-                            "Complaint Message": msgTxt
-                        })
-                    }).then(res => {
-                        if(sBtn) { sBtn.innerText = "Submit Secured Complaint"; sBtn.disabled = false; }
-                        if(res.ok) {
-                            if(compInput) compInput.value = "";
-                            alert("✓ Success! Your private message has been encrypted and sent straight to the SUG Executive email inbox.");
-                        } else { alert("Web3Forms endpoint rejected connection. Check account status."); }
-                    }).catch(err => {
-                        if(sBtn) { sBtn.innerText = "Submit Secured Complaint"; sBtn.disabled = false; }
-                        alert("Network latency timeout. Please check your internet connection data and try again.");
-                    });
-                };
-            }
-                                                                           }
-                                                                                   function loadAdminDashboard() {
-            document.getElementById('registration-form-section').style.display = 'none'; document.getElementById('student-dashboard-section').style.display = 'block';
-            document.getElementById('dashboard-banner-text').innerText = "⚡ SUG ADMINISTRATOR SESSION ACTIVE";
-            document.getElementById('dash-name').innerText = "SUG Governing Body"; document.getElementById('dash-matric').innerText = "OFFICIAL ADMIN"; document.getElementById('dash-dept').innerText = "All Faculty Access"; document.getElementById('dash-level').innerText = "N/A"; document.getElementById('dash-course').innerText = "N/A";
-            document.getElementById('dash-reg-count').innerText = countRegisteredStudents() + " Students";
-            document.getElementById('reg-count-row').style.display = 'flex';
-            let adminBox = document.getElementById('admin-broadcaster-panel');
-            if(!adminBox) { adminBox = document.createElement('div'); adminBox.className = "dashboard-box"; adminBox.id = "admin-broadcaster-panel"; adminBox.style.marginTop = "25px"; document.getElementById('student-dashboard-section').appendChild(adminBox); }
-            adminBox.innerHTML = '<h3 style="color:#d4af37; margin-bottom:15px; border-bottom:2px solid #e1e8f0; padding-bottom:8px;">⚡ SUG Campus Media Broadcaster</h3><form id="admin-broadcast-form" onsubmit="handleAdminMediaPublish(event)"><div class="form-group"><label>Select Media File</label><input type="file" id="broadcast-file-input" accept="image/*,video/*" required></div><div class="form-group"><label>Post Caption</label><textarea id="broadcast-caption" placeholder="Write announcement details..." required></textarea></div><button type="submit" class="submit-btn" style="background-color:#d4af37;">Publish Content</button></form>';
-            renderSocialFeed();
-        }
-
-        function handleLogout() { localStorage.removeItem('SUG_SESS'); document.getElementById('registration-form-section').style.display = 'block'; document.getElementById('student-dashboard-section').style.display = 'none'; document.getElementById('login-matric').value = ""; document.getElementById('login-pass').value = ""; toggleAuthMode('login'); }
+            function handleLogout() { localStorage.removeItem('SUG_SESS'); document.getElementById('registration-form-section').style.display = 'block'; document.getElementById('student-dashboard-section').style.display = 'none'; document.getElementById('login-matric').value = ""; document.getElementById('login-pass').value = ""; toggleAuthMode('login'); }
 
         function handleProfileImageUpload(ev) {
             const f = ev.target.files, s = localStorage.getItem('SUG_SESS');
@@ -421,9 +371,8 @@
                 const formEl = document.getElementById('admin-broadcast-form'); if(formEl) formEl.reset();
                 renderSocialFeed();
             }; r.readAsDataURL(fIn);
-        }
-
-        function renderSocialFeed() {
+                            }
+                                    function renderSocialFeed() {
             const streamContainer = document.getElementById('media-posts-stream'); if(!streamContainer) return; streamContainer.innerHTML = "";
             const s = localStorage.getItem('SUG_SESS'), posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]');
             if(posts.length === 0) { streamContainer.innerHTML = '<p style="text-align:center; color:#7f8c8d; font-style:italic; padding:20px;">No announcement posts yet.</p>'; return; }
@@ -439,17 +388,20 @@
                 card.querySelector('#like-btn-' + post.id).onclick = () => togglePostLike(post.id);
                 card.querySelector('#post-comment-btn-' + post.id).onclick = () => submitPostComment(post.id);
                 const cBox = card.querySelector('#comments-box-' + post.id);
-                post.comments.forEach((c, idx) => {
-                    const cBubble = document.createElement('div'); cBubble.className = 'comment-bubble';
-                    let visualAuthor = "Anonymous Student";
-                    if(c.authorId === 'ADMIN') { visualAuthor = "SUG Admin"; }
-                    cBubble.innerHTML = '<div><strong>' + visualAuthor + ':</strong> ' + c.msg + '</div>';
-                    if (c.authorId === s || s === 'ADMIN') {
-                        const dBtn = document.createElement('span'); dBtn.className = 'del-comment-link'; dBtn.innerText = '[Delete]';
-                        dBtn.onclick = () => deleteFeedComment(post.id, idx); cBubble.appendChild(dBtn);
-                    }
-                    cBox.appendChild(cBubble);
-                });
+                
+                if(post.comments && Array.isArray(post.comments)) {
+                    post.comments.forEach((c, idx) => {
+                        const cBubble = document.createElement('div'); cBubble.className = 'comment-bubble';
+                        let visualAuthor = "Anonymous Student";
+                        if(c && c.authorId === 'ADMIN') { visualAuthor = "SUG Admin"; }
+                        cBubble.innerHTML = '<div><strong>' + visualAuthor + ':</strong> ' + (c && c.msg ? c.msg : "") + '</div>';
+                        if (c && (c.authorId === s || s === 'ADMIN')) {
+                            const dBtn = document.createElement('span'); dBtn.className = 'del-comment-link'; dBtn.innerText = '[Delete]';
+                            dBtn.onclick = () => deleteFeedComment(post.id, idx); cBubble.appendChild(dBtn);
+                        }
+                        cBox.appendChild(cBubble);
+                    });
+                }
             });
         }
 
@@ -471,15 +423,16 @@
         function submitPostComment(postId) {
             const s = localStorage.getItem('SUG_SESS'); if(!s) return;
             const inputField = document.getElementById('comment-input-' + postId), commentText = inputField.value.trim(); if(!commentText) return;
-            let authorName = "SUG Admin"; if(s !== 'ADMIN') { authorName = JSON.parse(localStorage.getItem('SUG_U_' + s)).name; }
             const posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]'); const post = posts.find(p => p.id === postId); if(!post) return;
-            post.comments.push({ authorId: s, author: authorName, msg: commentText }); 
+            if(!post.comments) post.comments = [];
+            post.comments.push({ authorId: s, msg: commentText }); 
             localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); inputField.value = ""; renderSocialFeed();
         }
 
         function deleteFeedComment(postId, commentIndex) {
             const posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]'); const post = posts.find(p => p.id === postId); if(!post) return;
-            post.comments.splice(commentIndex, 1); localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); renderSocialFeed();
+            if(post.comments) post.comments.splice(commentIndex, 1); 
+            localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); renderSocialFeed();
         }
         window.onload = renderExecutiveGrid;
     </script>
