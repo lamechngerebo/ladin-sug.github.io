@@ -38,6 +38,9 @@
         .form-box, .dashboard-box { background: var(--white); max-width: 600px; margin: 0 auto 25px auto; padding: 35px; border-radius: 12px; border: 1px solid #e1e8f0; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .password-field-wrapper { position: relative; display: flex; align-items: center; }
+        .password-field-wrapper input { padding-right: 45px; width: 100%; padding: 12px; border: 1px solid #ced8e3; border-radius: 6px; font-size: 1rem; }
+        .password-visibility-trigger { position: absolute; right: 15px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #7f8c8d; padding: 0; user-select: none; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ced8e3; border-radius: 6px; font-size: 1rem; }
         .form-group textarea { resize: vertical; height: 100px; }
         .submit-btn { background-color: var(--primary); color: var(--white); border: none; width: 100%; padding: 14px; font-size: 1rem; font-weight: bold; border-radius: 6px; cursor: pointer; }
@@ -88,12 +91,12 @@
             <p>Furthermore, the dominance of the SUG over the entire student body operates as a standard system of democratic stewardship and total legislative responsibility. As a recognized student governing authority, its decisions hold operational dominance over all faculty clubs, departmental groups, and student unions within the campus environment. Through this structure, the union coordinates wide-reaching academic adjustments, maintains general discipline, and protects civic balance, making it an essential leadership power that guides the campus community toward absolute success.</p>
         </div>
     </main>
-        <main id="page-exec" class="page">
+
+    <main id="page-exec" class="page">
         <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary);">2025/2026 Executive Council</h2>
         <div class="grid-layout" id="executives-container"></div>
-    </main>
-
-    <div class="overlay" id="profile-overlay" onclick="closeProfileOverlay(event)">
+            </main>
+        <div class="overlay" id="profile-overlay" onclick="closeProfileOverlay(event)">
         <div class="profile-view-box" onclick="event.stopPropagation()">
             <div class="image-placeholder">👤 [Photo Connected to Secure Vault]</div>
             <div class="profile-details">
@@ -111,11 +114,22 @@
                 <button id="tab-login-btn" onclick="toggleAuthMode('login')" style="background: none; border: none; font-size: 1.1rem; font-weight: 700; color: var(--primary); cursor: pointer;">Log In</button>
                 <button id="tab-signup-btn" onclick="toggleAuthMode('signup')" style="background: none; border: none; font-size: 1.1rem; font-weight: 700; color: #7f8c8d; cursor: pointer;">Register</button>
             </div>
+            
             <form id="sug-login-form" onsubmit="handleLoginSubmit(event)">
                 <div class="form-group"><label for="login-matric">Matric Number</label><input type="text" id="login-matric" placeholder="e.g. RIVCO/2025/XXXX" required></div>
-                <div class="form-group"><label for="login-pass">Security Password</label><input type="password" id="login-pass" placeholder="Enter your password" required></div>
+                <div class="form-group">
+                    <label for="login-pass">Security Password</label>
+                    <div class="password-field-wrapper">
+                        <input type="password" id="login-pass" placeholder="Enter your password" required>
+                        <button type="button" class="password-visibility-trigger" onclick="togglePasswordVisibility('login-pass', this)">👁️</button>
+                    </div>
+                </div>
+                <div style="text-align: right; margin-bottom: 15px;">
+                    <span onclick="openResetModal()" style="color: var(--secondary); font-size: 0.9rem; font-weight: 600; cursor: pointer; text-decoration: underline;">Forgot Password?</span>
+                </div>
                 <button type="submit" class="submit-btn">Access Student Profile</button>
             </form>
+            
             <form id="sug-signup-form" onsubmit="handleRegistrationSubmit(event)" style="display: none;">
                 <div class="form-group"><label for="student-name">Full Name</label><input type="text" id="student-name" placeholder="Enter your full name" required></div>
                 <div class="form-group"><label for="student-matric">Matric Number</label><input type="text" id="student-matric" placeholder="e.g. RIVCO/2025/XXXX" required></div>
@@ -137,11 +151,30 @@
                     </select>
                 </div>
                 <div class="form-group"><label for="student-course">Course Combination / Options</label><input type="text" id="student-course" placeholder="e.g. ND, HND, Technician Option" required></div>
-                <div class="form-group"><label for="student-pass">Create Security Password</label><input type="password" id="student-pass" placeholder="Create login password" required></div>
+                <div class="form-group">
+                    <label for="student-pass">Create Security Password</label>
+                    <div class="password-field-wrapper">
+                        <input type="password" id="student-pass" placeholder="Create login password" required>
+                        <button type="button" class="password-visibility-trigger" onclick="togglePasswordVisibility('student-pass', this)">👁️</button>
+                    </div>
+                </div>
                 <button type="submit" class="submit-btn">Register and Activate Membership</button>
             </form>
         </div>
 
+        <div id="password-reset-overlay" class="overlay" style="display: none;" onclick="closeResetModal(event)">
+            <div class="form-box" onclick="event.stopPropagation()" style="max-width: 400px; width: 100%; margin: 0;">
+                <h3 style="color: var(--primary); text-align: center; margin-bottom: 20px;">Key Pass Reset</h3>
+                
+                    <div class="form-group"><label for="reset-matric">Matric Number</label><input type="text" id="reset-matric" placeholder="RIVCO/2025/XXXX" required></div>
+                    <div class="form-group"><label for="reset-name">Confirm Your Full Name</label><input type="text" id="reset-name" placeholder="Type name exactly as registered" required></div>
+                    <div class="form-group"><label for="reset-new-pass">Create New Password</label><input type="password" id="reset-new-pass" placeholder="Enter new password" required></div>
+                    <button type="submit" class="submit-btn">Save New Password</button>
+                </form>
+                <button class="close-btn" onclick="document.getElementById('password-reset-overlay').style.display='none'" style="width: 100%; margin-top: 10px; background-color: #7f8c8d;">Cancel</button>
+            </div>
+    </div>
+                                <!-- Dashboard Workspace Area -->
         <div id="student-dashboard-section" style="display: none;">
             <div class="dashboard-box">
                 <div class="success-banner" id="dashboard-banner-text">✓ Portal Verified! Welcome back to the Union.</div>
@@ -162,6 +195,7 @@
                 <button class="submit-btn" style="background-color:#7f8c8d;" onclick="handleLogout()">Log Out of Session</button>
             </div>
 
+            <!-- Web3Forms Suggestion Box -->
             <div class="dashboard-box" style="margin-top: 25px;">
                 <h3 style="color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e1e8f0; padding-bottom: 8px;">Secured SUG Suggestion & Complaint Box</h3>
                 <form action="https://web3forms.com" method="POST">
@@ -175,12 +209,13 @@
 
                     <div class="form-group">
                         <label for="complaint-text">Submit Private Complaint / Suggestion to SUG Executives</label>
-                        <textarea name="Complaint Message" id="complaint-text" placeholder="Type your issues here. Web3Forms will securely deliver it straight to your email." required></textarea>
+                        <textarea name="Complaint Message" id="complaint-text" placeholder="Type your issues here. Web3Forms will securely package this data and deliver it straight to your email." required></textarea>
                     </div>
                     <button type="submit" class="submit-btn" style="background-color: var(--secondary);">Submit Secured Complaint</button>
                 </form>
             </div>
 
+            <!-- Social Media Feed Container -->
             <div id="campus-social-feed-section" class="feed-container">
                 <h3 style="color: var(--primary); text-align: center; margin-bottom: 20px;">🔊 Campus Social Media News Feed</h3>
                 <div id="media-posts-stream"></div>
@@ -189,23 +224,23 @@
     </main>
 
     <footer><p>&copy; 2026 <strong>RIVCOHSMAT SUG Council</strong>. All Rights Reserved.</p></footer>
-                        <script>
+                                                                       <script>
         const data = [
             { r: "SUG President", n: "Sen. Comr. Justina Gentle Welli", img: "1781503643336.jpg" }, 
-            { r: "SUG Vice President", n: "Roselyn Nwibu", img: "IMG-20260616-WA0072.jpg" },
+            { r: "SUG Vice President", n: "Comr. Roselyn Nwibu", img: "IMG-20260616-WA0072.jpg" },
             { r: "SUG Speaker", n: "Rt. Hon. Godspower Awajimowa Ebirien", img: "photo (1).jpg" }, 
             { r: "SUG Deputy Speaker", n: "Hon. PraiseGod Barisi", img: "IMG-20260415-WA0270(1).jpg" },
             { r: "SUG Secretary", n: "Comr. Favour Mbete", img: "1781507714942.jpg" }, 
             { r: "SUG Provost", n: "Comr. Ngerebo Lamech Dimkpa", img: "file_0000000021e4724391c24cccd4c8aa8a.png" },
-            { r: "SUG Treasurer", n: "Vera Sunday", img: "WA_1781560881607.jpeg" }, 
+            { r: "SUG Treasurer", n: "Comr. Vera Sunday", img: "WA_1781560881607.jpeg" }, 
             { r: "SUG P.R.O", n: "Comr. Bob Orji", img: "IMG-20260615-WA0058.jpg" },
-            { r: "SUG Financial Secretary", n: "Silver Chinemerem", img: "WA_1781601350244.jpeg" }, 
-            { r: "SUG Welfare", n: "Maureen Ebelogwu chinuzoke", img: "1781559973250.jpg" },
+            { r: "SUG Financial Secretary", n: "Comr. Silver Chinemerem", img: "WA_1781601350244.jpeg" }, 
+            { r: "SUG Welfare", n: "Comr. Maureen Ebelogwu chinuzoke", img: "1781559973250.jpg" },
             { r: "Director Of Socials", n: "Comr. Queeneth Amadi", img: "WA_1781559458164.jpeg" }, 
             { r: "Director of Sports", n: "Comr. Nelson", img: "WA_1781559411308.jpeg" },
-            { r: "Chief Whip", n: "Success Chinna", img: "IMG-20260616-WA0071.jpg" }, 
-            { r: "Internal Auditor", n: "Victor Dakubor", img: "IMG-20260607-WA0068.jpg" }, 
-            { r: "Majority Leader", n: "Akpobari Barisua", img: "WA_1781603731794.jpeg" }
+            { r: "Chief Whip", n: "Hon. Success Chinna", img: "IMG-20260616-WA0071.jpg" }, 
+            { r: "Internal Auditor", n: "Hon. Victor Dakubor", img: "IMG-20260607-WA0068.jpg" }, 
+            { r: "Majority Leader", n: "Hon. Akpobari Barisua", img: "WA_1781603731794.jpeg" }
         ];
 
         function renderExecutiveGrid() {
@@ -215,8 +250,7 @@
                 c.innerHTML = '<div class="card-title-bar">' + e.r + '</div><div class="card-body-text">' + e.n + '</div>'; g.appendChild(c);
             });
         }
-
-        function switchPage(pId) {
+            function switchPage(pId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page')); document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
             document.getElementById('page-' + pId).classList.add('active-page'); document.getElementById(pId + '-btn').classList.add('active');
             const t = document.getElementById('dynamic-header-title'), s = document.getElementById('dynamic-header-sub');
@@ -231,7 +265,31 @@
             if (m === 'login') { lF.style.display = 'block'; sF.style.display = 'none'; lB.style.color = 'var(--primary)'; lB.style.borderBottom = '3px solid var(--primary)'; sB.style.color = '#7f8c8d'; sB.style.borderBottom = 'none'; }
             else { lF.style.display = 'none'; sF.style.display = 'block'; lB.style.color = '#7f8c8d'; lB.style.borderBottom = 'none'; sB.style.color = 'var(--primary)'; sB.style.borderBottom = '3px solid var(--primary)'; }
         }
-                                    function openProfileOverlay(n, r, imgFile) { 
+
+        function togglePasswordVisibility(inputFieldId, triggerBtn) {
+            const inputField = document.getElementById(inputFieldId);
+            if (inputField.type === "password") { inputField.type = "text"; triggerBtn.innerText = "🙈"; } 
+            else { inputField.type = "password"; triggerBtn.innerText = "👁️"; }
+        }
+
+        function openResetModal() { document.getElementById('password-reset-overlay').style.display = 'flex'; }
+
+        function closeResetModal(e) { if(e.target.id === "password-reset-overlay") document.getElementById('password-reset-overlay').style.display = 'none'; }
+
+        function handlePasswordReset(e) {
+            e.preventDefault();
+            const m = document.getElementById('reset-matric').value.trim().toUpperCase(), n = document.getElementById('reset-name').value.trim(), newPass = document.getElementById('reset-new-pass').value;
+            const lD = localStorage.getItem('SUG_U_' + m);
+            if(lD) {
+                const prof = JSON.parse(lD);
+                if(prof.name.toLowerCase() === n.toLowerCase()) {
+                    prof.password = newPass; localStorage.setItem('SUG_U_' + m, JSON.stringify(prof));
+                    document.getElementById('password-reset-overlay').style.display = 'none'; document.getElementById('reset-identity-form').reset();
+                    alert("✓ Success! Your brand-new security password has been securely saved. You can now log into your student profile panel.");
+                } else { alert("Identity verification failed. The full name entered does not match the record on file for this Matric Number!"); }
+            } else { alert("No active student record found matching this Matric Number. Please verify and try again!"); }
+                                                                           }
+                                                                                   function openProfileOverlay(n, r, imgFile) { 
             document.getElementById('modal-name').innerText = n; document.getElementById('modal-role').innerText = r; 
             const imgBox = document.querySelector('.image-placeholder');
             if(imgFile) { imgBox.innerHTML = '<img src="' + imgFile + '" style="width:100%; height:100%; object-fit:cover;">'; } 
@@ -274,8 +332,9 @@
             const s = localStorage.getItem('SUG_SESS'); 
             if (s === 'ADMIN') { loadAdminDashboard(); }
             else if (s) { const lD = localStorage.getItem('SUG_U_' + s); if (lD) ld(JSON.parse(lD), "✓ Active Session Found. Welcome back!"); } 
-                            }
-                                    function ld(p, t) {
+        }
+
+        function ld(p, t) {
             document.getElementById('dashboard-banner-text').innerText = t; 
             document.getElementById('dash-name').innerText = p.name; document.getElementById('dash-matric').innerText = p.matric; document.getElementById('dash-dept').innerText = p.dept; 
             document.getElementById('dash-level').innerText = p.level || "---"; document.getElementById('dash-course').innerText = p.course || "---"; document.getElementById('user-profile-pic').src = p.profilePic;
@@ -285,9 +344,42 @@
             document.getElementById('registration-form-section').style.display = 'none'; document.getElementById('student-dashboard-section').style.display = 'block';
             renderSocialFeed();
             const adminBox = document.getElementById('admin-broadcaster-panel'); if(adminBox) adminBox.remove();
-        }
 
-        function loadAdminDashboard() {
+            const cForm = document.querySelector('form[action*="web3forms.com"]');
+            if(cForm) {
+                cForm.onsubmit = function(e) {
+                    e.preventDefault();
+                    const compInput = document.getElementById('complaint-text');
+                    const msgTxt = compInput ? compInput.value : "";
+                    const sBtn = cForm.querySelector('button[type="submit"]');
+                    if(sBtn) { sBtn.innerText = "Encrypting & Dispatching..."; sBtn.disabled = true; }
+
+                    fetch(cForm.action, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                        body: JSON.stringify({
+                            access_key: "cf1807fc-4071-4cc0-b416-f381b77a1d72",
+                            "Student Name": p.name,
+                            "Matric Number": p.matric,
+                            "Department": p.dept,
+                            "Level": p.level,
+                            "Course Combo": p.course,
+                            "Complaint Message": msgTxt
+                        })
+                    }).then(res => {
+                        if(sBtn) { sBtn.innerText = "Submit Secured Complaint"; sBtn.disabled = false; }
+                        if(res.ok) {
+                            if(compInput) compInput.value = "";
+                            alert("✓ Success! Your private message has been encrypted and sent straight to the SUG Executive email inbox.");
+                        } else { alert("Web3Forms endpoint rejected connection. Check account status."); }
+                    }).catch(err => {
+                        if(sBtn) { sBtn.innerText = "Submit Secured Complaint"; sBtn.disabled = false; }
+                        alert("Network latency timeout. Please check your internet connection data and try again.");
+                    });
+                };
+            }
+                                                                           }
+                                                                                   function loadAdminDashboard() {
             document.getElementById('registration-form-section').style.display = 'none'; document.getElementById('student-dashboard-section').style.display = 'block';
             document.getElementById('dashboard-banner-text').innerText = "⚡ SUG ADMINISTRATOR SESSION ACTIVE";
             document.getElementById('dash-name').innerText = "SUG Governing Body"; document.getElementById('dash-matric').innerText = "OFFICIAL ADMIN"; document.getElementById('dash-dept').innerText = "All Faculty Access"; document.getElementById('dash-level').innerText = "N/A"; document.getElementById('dash-course').innerText = "N/A";
@@ -300,7 +392,8 @@
         }
 
         function handleLogout() { localStorage.removeItem('SUG_SESS'); document.getElementById('registration-form-section').style.display = 'block'; document.getElementById('student-dashboard-section').style.display = 'none'; document.getElementById('login-matric').value = ""; document.getElementById('login-pass').value = ""; toggleAuthMode('login'); }
-                                    function handleProfileImageUpload(ev) {
+
+        function handleProfileImageUpload(ev) {
             const f = ev.target.files, s = localStorage.getItem('SUG_SESS');
             if (f && s) {
                 const r = new FileReader(); r.onload = function(e) {
@@ -317,11 +410,16 @@
 
         function handleAdminMediaPublish(e) {
             e.preventDefault(); 
-            const fIn = document.getElementById('broadcast-file-input').files, cap = document.getElementById('broadcast-caption').value; if(!fIn || !fIn.length) return;
+            const fIn = document.getElementById('broadcast-file-input').files;
+            const captionInput = document.getElementById('broadcast-caption');
+            const cap = captionInput ? captionInput.value : "";
+            if(!fIn || !fIn.length) return;
             const r = new FileReader(); r.onload = function(evt) {
                 const posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]');
                 posts.unshift({ id: 'P_' + Date.now(), src: evt.target.result, videoFlag: fIn.type.startsWith('video'), caption: cap, likes: 0, likedUsers: [], comments: [], timestamp: new Date().toLocaleDateString() });
-                localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); document.getElementById('admin-broadcast-form').reset(); renderSocialFeed();
+                localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); 
+                const formEl = document.getElementById('admin-broadcast-form'); if(formEl) formEl.reset();
+                renderSocialFeed();
             }; r.readAsDataURL(fIn);
         }
 
@@ -343,7 +441,9 @@
                 const cBox = card.querySelector('#comments-box-' + post.id);
                 post.comments.forEach((c, idx) => {
                     const cBubble = document.createElement('div'); cBubble.className = 'comment-bubble';
-                    cBubble.innerHTML = '<div><strong>' + c.author + ':</strong> ' + c.msg + '</div>';
+                    let visualAuthor = "Anonymous Student";
+                    if(c.authorId === 'ADMIN') { visualAuthor = "SUG Admin"; }
+                    cBubble.innerHTML = '<div><strong>' + visualAuthor + ':</strong> ' + c.msg + '</div>';
                     if (c.authorId === s || s === 'ADMIN') {
                         const dBtn = document.createElement('span'); dBtn.className = 'del-comment-link'; dBtn.innerText = '[Delete]';
                         dBtn.onclick = () => deleteFeedComment(post.id, idx); cBubble.appendChild(dBtn);
