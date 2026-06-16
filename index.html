@@ -193,7 +193,7 @@
     </main>
 
     <footer><p>&copy; 2026 <strong>RIVCOHSMAT SUG Council</strong>. All Rights Reserved.</p></footer>
-                        <script>
+    <script>
         const data = [
             { r: "SUG President", n: "Sen. Comr. Justina Gentle Welli", img: "1781503643336.jpg" }, 
             { r: "SUG Vice President", n: "Roselyn Nwibu", img: "IMG-20260616-WA0072.jpg" },
@@ -305,7 +305,7 @@
         }
 
         function handleLogout() { localStorage.removeItem('SUG_SESS'); document.getElementById('registration-form-section').style.display = 'block'; document.getElementById('student-dashboard-section').style.display = 'none'; document.getElementById('login-matric').value = ""; document.getElementById('login-pass').value = ""; toggleAuthMode('login'); }
-                                    function handleProfileImageUpload(ev) {
+                function handleProfileImageUpload(ev) {
             const f = ev.target.files, s = localStorage.getItem('SUG_SESS');
             if (f && s) {
                 const r = new FileReader(); r.onload = function(e) {
@@ -356,5 +356,5 @@
                     cBox.appendChild(cBubble);
                 });
             });
-                            }
-                            
+        }
+        
