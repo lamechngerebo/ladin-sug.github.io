@@ -188,7 +188,7 @@
     </main>
 
     <footer><p>&copy; 2026 <strong>RIVCOHSMAT SUG Council</strong>. All Rights Reserved.</p></footer>
-                        <script>
+        <script>
         const data = [
             { r: "SUG President", n: "Sen. Comr. Justina Gentle Welli", img: "1781503643336.jpg" }, 
             { r: "SUG Vice President", n: "Comr. Nwibu Roselyn", img: "" },
@@ -249,7 +249,46 @@
             localStorage.setItem(`SUG_U_${m}`, JSON.stringify(prof)); localStorage.setItem('SUG_SESS', m);
             ld(prof, "✓ Registration Successful! Welcome to your active dashboard workspace.");
         }
-                                    function loadAdminDashboard() {
+               function handleLoginSubmit(e) {
+            e.preventDefault(); 
+            const m = document.getElementById('login-matric').value.trim().toUpperCase();
+            const inputPass = document.getElementById('login-pass').value;
+            if(m === 'SUG-ADMIN') { localStorage.setItem('SUG_SESS', 'ADMIN'); loadAdminDashboard(); return; }
+            const lD = localStorage.getItem(`SUG_U_${m}`);
+            if (lD) { 
+                const prof = JSON.parse(lD); 
+                if (prof.password === inputPass) {
+                    localStorage.setItem('SUG_SESS', m); 
+                    ld(prof, "✓ Portal Verified! Welcome back to the Union."); 
+                } else { alert("Incorrect security password. Please re-enter your password correctly!"); }
+            } else { alert("No record found matching this Matric Number. Please click the Register tab to create your profile!"); }
+        }
+
+        function chk() { 
+            const s = localStorage.getItem('SUG_SESS'); 
+            if (s === 'ADMIN') { loadAdminDashboard(); }
+            else if (s) { const lD = localStorage.getItem(`SUG_U_${s}`); if (lD) ld(JSON.parse(lD), "✓ Active Session Found. Welcome back!"); } 
+        }
+
+        function ld(p, t) {
+            document.getElementById('dashboard-banner-text').innerText = t; 
+            document.getElementById('dash-name').innerText = p.name; 
+            document.getElementById('dash-matric').innerText = p.matric; 
+            document.getElementById('dash-dept').innerText = p.dept; 
+            document.getElementById('dash-level').innerText = p.level || "---"; 
+            document.getElementById('dash-course').innerText = p.course || "---"; 
+            document.getElementById('user-profile-pic').src = p.profilePic;
+            document.getElementById('form-send-name').value = p.name;
+            document.getElementById('form-send-matric').value = p.matric;
+            document.getElementById('form-send-dept').value = p.dept;
+            document.getElementById('form-send-level').value = p.level || "---";
+            document.getElementById('form-send-course').value = p.course || "---";
+            document.getElementById('registration-form-section').style.display = 'none'; 
+            document.getElementById('student-dashboard-section').style.display = 'block';
+            renderSocialFeed();
+            const adminBox = document.getElementById('admin-broadcaster-panel'); if(adminBox) adminBox.remove();
+            }
+               function loadAdminDashboard() {
             document.getElementById('registration-form-section').style.display = 'none'; 
             document.getElementById('student-dashboard-section').style.display = 'block';
             document.getElementById('dashboard-banner-text').innerText = "⚡ SUG ADMINISTRATOR SESSION ACTIVE";
@@ -282,39 +321,5 @@
                     }; img.src = e.target.result;
                 }; r.readAsDataURL(f);
             }
-                            }
-                                    function loadAdminDashboard() {
-            document.getElementById('registration-form-section').style.display = 'none'; 
-            document.getElementById('student-dashboard-section').style.display = 'block';
-            document.getElementById('dashboard-banner-text').innerText = "⚡ SUG ADMINISTRATOR SESSION ACTIVE";
-            document.getElementById('dash-name').innerText = "SUG Governing Body"; 
-            document.getElementById('dash-matric').innerText = "OFFICIAL ADMIN"; 
-            document.getElementById('dash-dept').innerText = "All Departments Access"; 
-            document.getElementById('dash-level').innerText = "N/A"; 
-            document.getElementById('dash-course').innerText = "N/A";
-            let adminBox = document.getElementById('admin-broadcaster-panel');
-            if(!adminBox) { 
-                adminBox = document.createElement('div'); adminBox.className = "dashboard-box"; adminBox.id = "admin-broadcaster-panel"; adminBox.style.marginTop = "25px"; 
-                document.getElementById('student-dashboard-section').appendChild(adminBox); 
             }
-            adminBox.innerHTML = `<h3 style="color:#d4af37; margin-bottom:15px; border-bottom:2px solid #e1e8f0; padding-bottom:8px;">⚡ SUG Campus Media Broadcaster</h3><form id="admin-broadcast-form" onsubmit="handleAdminMediaPublish(event)"><div class="form-group"><label>Select Media File (Photo/Video)</label><input type="file" id="broadcast-file-input" accept="image/*,video/*" required></div><div class="form-group"><label>Post Caption</label><textarea id="broadcast-caption" placeholder="Write announcement details..." required></textarea></div><button type="submit" class="submit-btn" style="background-color:#d4af37;">Publish News Content</button></form>`;
-            renderSocialFeed();
-        }
-
-        function handleLogout() { localStorage.removeItem('SUG_SESS'); document.getElementById('registration-form-section').style.display = 'block'; document.getElementById('student-dashboard-section').style.display = 'none'; document.getElementById('login-matric').value = ""; document.getElementById('login-pass').value = ""; toggleAuthMode('login'); }
-
-        function handleProfileImageUpload(ev) {
-            const f = ev.target.files, s = localStorage.getItem('SUG_SESS');
-            if (f && s) {
-                const r = new FileReader(); r.onload = function(e) {
-                    const img = new Image(); img.onload = function() {
-                        const canvas = document.createElement('canvas'), ctx = canvas.getContext('2d');
-                        canvas.width = 120; canvas.height = 120; ctx.drawImage(img, 0, 0, 120, 120);
-                        const compactB64 = canvas.toDataURL('image/jpeg', 0.6);
-                        document.getElementById('user-profile-pic').src = compactB64;
-                        const lD = localStorage.getItem(`SUG_U_${s}`); if (lD) { const prof = JSON.parse(lD); prof.profilePic = compactB64; localStorage.setItem(`SUG_U_${s}`, JSON.stringify(prof)); }
-                    }; img.src = e.target.result;
-                }; r.readAsDataURL(f);
-            }
-                            }
-                            
+            
