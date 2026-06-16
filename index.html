@@ -60,8 +60,8 @@
         footer { background-color: var(--primary-dark); color: rgba(255,255,255,0.7); text-align: center; padding: 25px; font-size: 0.9rem; margin-top: auto; }
         footer strong { color: var(--white); }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <nav>
         <div class="nav-logo-text">RIVCOHSMAT SUG</div>
         <div class="nav-links">
@@ -86,8 +86,8 @@
             <p>The strategic importance of a highly active and unified Student Union Government cannot be overstated. By serving as an organized framework for collective bargaining, the union prevents administrative isolation, ensuring that issues regarding tuition adjustments, examination processing guidelines, campus transit networks, health clinic support protocols, and infrastructural development directly reflect student demands. It translates isolated student concerns into precise policy negotiations with higher college executives.</p>
             <p>Furthermore, the dominance of the SUG over the entire student body operates as a standard system of democratic stewardship and total legislative responsibility. As a recognized student governing authority, its decisions hold operational dominance over all faculty clubs, departmental groups, and student unions within the campus environment. Through this structure, the union coordinates wide-reaching academic adjustments, maintains general discipline, and protects civic balance, making it an essential leadership power that guides the campus community toward absolute success.</p>
         </div>
-              </main>
-              <main id="page-exec" class="page">
+    </main>
+        <main id="page-exec" class="page">
         <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary);">2025/2026 Executive Council</h2>
         <div class="grid-layout" id="executives-container"></div>
     </main>
@@ -188,23 +188,23 @@
     </main>
 
     <footer><p>&copy; 2026 <strong>RIVCOHSMAT SUG Council</strong>. All Rights Reserved.</p></footer>
-                                              <script>
+          <script>
         const data = [
             { r: "SUG President", n: "Sen. Comr. Justina Gentle Welli", img: "1781503643336.jpg" }, 
-            { r: "SUG Vice President", n: "Comr. Nwibu Roselyn", img: "" },
+            { r: "SUG Vice President", n: "Roselyn Nwibu", img: "IMG-20260616-WA0072.jpg" },
             { r: "SUG Speaker", n: "Rt. Hon. Godspower Awajimowa Ebirien", img: "photo (1).jpg" }, 
             { r: "SUG Deputy Speaker", n: "Hon. PraiseGod Barisi", img: "IMG-20260415-WA0270(1).jpg" },
             { r: "SUG Secretary", n: "Comr. Favour Mbete", img: "1781507714942.jpg" }, 
             { r: "SUG Provost", n: "Comr. Ngerebo Lamech Dimkpa", img: "file_0000000021e4724391c24cccd4c8aa8a.png" },
             { r: "SUG Treasurer", n: "Vera Sunday", img: "WA_1781560881607.jpeg" }, 
             { r: "SUG P.R.O", n: "Comr. Bob Orji", img: "IMG-20260615-WA0058.jpg" },
-            { r: "SUG Financial Secretary", n: "Comr. Chinemerem Silver", img: "" }, 
+            { r: "SUG Financial Secretary", n: "Silver Chinemerem", img: "WA_1781601350244.jpeg" }, 
             { r: "SUG Welfare", n: "Maureen Ebelogwu chinuzoke", img: "1781559973250.jpg" },
             { r: "Director Of Socials", n: "Comr. Queeneth Amadi", img: "WA_1781559458164.jpeg" }, 
             { r: "Director of Sports", n: "Comr. Nelson", img: "WA_1781559411308.jpeg" },
-            { r: "Chief Whip", n: "Chinna Success", img: "" }, 
+            { r: "Chief Whip", n: "Success Chinna", img: "IMG-20260616-WA0071.jpg" }, 
             { r: "Internal Auditor", n: "Victor Dakubor", img: "IMG-20260607-WA0068.jpg" }, 
-            { r: "Majority Leader", n: "Akpobari Barisua", img: "" }
+            { r: "Majority Leader", n: "Akpobari Barisua", img: "WA_1781603731794.jpeg" }
         ];
 
         function renderExecutiveGrid() {
@@ -267,7 +267,7 @@
             if (s === 'ADMIN') { loadAdminDashboard(); }
             else if (s) { const lD = localStorage.getItem(`SUG_U_${s}`); if (lD) ld(JSON.parse(lD), "✓ Active Session Found. Welcome back!"); } 
         }
-         function ld(p, t) {
+                      function ld(p, t) {
             document.getElementById('dashboard-banner-text').innerText = t; 
             document.getElementById('dash-name').innerText = p.name; document.getElementById('dash-matric').innerText = p.matric; document.getElementById('dash-dept').innerText = p.dept; 
             document.getElementById('dash-level').innerText = p.level || "---"; document.getElementById('dash-course').innerText = p.course || "---"; document.getElementById('user-profile-pic').src = p.profilePic;
@@ -307,12 +307,12 @@
 
         function handleAdminMediaPublish(e) {
             e.preventDefault(); 
-            const fIn = document.getElementById('broadcast-file-input').files, cap = document.getElementById('broadcast-caption').value; if(!fIn || !fIn[0]) return;
+            const fIn = document.getElementById('broadcast-file-input').files, cap = document.getElementById('broadcast-caption').value; if(!fIn || !fIn) return;
             const r = new FileReader(); r.onload = function(evt) {
                 const posts = JSON.parse(localStorage.getItem('SUG_SOCIAL_STREAM') || '[]');
-                posts.unshift({ id: 'P_' + Date.now(), src: evt.target.result, videoFlag: fIn[0].type.startsWith('video'), caption: cap, likes: 0, likedUsers: [], comments: [], timestamp: new Date().toLocaleDateString() });
+                posts.unshift({ id: 'P_' + Date.now(), src: evt.target.result, videoFlag: fIn.type.startsWith('video'), caption: cap, likes: 0, likedUsers: [], comments: [], timestamp: new Date().toLocaleDateString() });
                 localStorage.setItem('SUG_SOCIAL_STREAM', JSON.stringify(posts)); document.getElementById('admin-broadcast-form').reset(); renderSocialFeed();
-            }; r.readAsDataURL(fIn[0]);
+            }; r.readAsDataURL(fIn);
         }
 
         function renderSocialFeed() {
