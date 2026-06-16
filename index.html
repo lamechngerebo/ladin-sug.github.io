@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUG Portal | 2025/2026 Administration</title>
+    <title>SUG Portal | Rivers State College of Health</title>
     <style>
         :root {
             --primary: #0f172a;
@@ -17,281 +17,61 @@
             --danger: #ef4444;
             --success: #22c55e;
         }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-        header {
-            background-color: var(--primary);
-            color: var(--white);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-                .brand-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .logo-placeholder {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), #f59e0b);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 0.65rem;
-            color: var(--primary);
-            border: 2px solid var(--white);
-            text-align: center;
-            line-height: 1.1;
-        }
-        .brand-text h1 {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: var(--white);
-        }
-        .brand-text p {
-            font-size: 0.7rem;
-            color: var(--accent);
-            font-weight: 600;
-        }
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 1rem;
-            align-items: center;
-        }
-        .nav-menu a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            padding: 0.4rem 0.7rem;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-        .nav-menu a:hover, .nav-menu a.active {
-            background-color: var(--accent);
-            color: var(--primary);
-            font-weight: 700;
-        }
-        .admin-badge {
-            border: 1px dashed var(--accent) !important;
-            color: var(--accent) !important;
-        }
-        .page-view {
-            display: none;
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-        .page-view.active-view {
-            display: block;
-        }
-        .hero-banner {
-            background: linear-gradient(rgba(15,23,42,0.9), rgba(30,41,59,0.85));
-            color: var(--white);
-            border-radius: 12px;
-            padding: 4rem 2rem;
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-        .hero-banner h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--accent);
-        }
-        .hero-banner h3 {
-            font-size: 1.3rem;
-            font-weight: 400;
-            opacity: 0.9;
-            margin-bottom: 1.5rem;
-        }
-        .banner-tag {
-            display: inline-block;
-            background-color: rgba(180,83,9,0.2);
-            border: 1.5px solid var(--accent);
-            color: var(--accent-light);
-            padding: 0.3rem 1rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            }
-                .editorial-section {
-            background-color: var(--white);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            border: 1px solid #e2e8f0;
-        }
-        .editorial-section h4 {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 1.25rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-        .editorial-section h4::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 50px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-        .editorial-section p {
-            font-size: 1rem;
-            color: var(--text-dark);
-            margin-bottom: 1.2rem;
-            text-align: justify;
-        }
-        .exec-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        .exec-card {
-            background-color: var(--white);
-            border-radius: 10px;
-            padding: 1.25rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            border: 1px solid #e2e8f0;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .exec-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
-            border-color: var(--accent);
-        }
-        .exec-avatar {
-            width: 70px;
-            height: 70px;
-            background-color: var(--bg-light);
-            color: var(--primary);
-            border-radius: 50%;
-            margin: 0 auto 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            border: 2px solid #cbd5e1;
-        }
-        .exec-card h4 {
-            font-size: 1rem;
-            color: var(--primary);
-            margin-bottom: 0.25rem;
-        }
-        .exec-card p {
-            font-size: 0.8rem;
-            color: var(--accent);
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(4px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-box {
-            background-color: var(--white);
-            padding: 2rem;
-            border-radius: 12px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        .close-modal {
-            position: absolute;
-            top: 0.75rem; right: 0.75rem;
-            font-size: 1.25rem;
-            cursor: pointer;
-            color: var(--text-light);
-        }
-        .modal-image-container {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            margin: 0 auto 1.25rem;
-            background-color: #e2e8f0;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid var(--accent);
-        }
-        .modal-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .admin-tag {
-            margin-top: 0.75rem;
-            display: inline-block;
-            font-weight: bold;
-            font-size: 0.85rem;
-            color: var(--accent);
-            background-color: #fffbeb;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            border: 1px dashed var(--accent);
-    }
-                /* Forms, Input Fields, and Profile Upload Containers */
-        .form-wrapper { max-width: 550px; margin: 0 auto; background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+        header { background-color: var(--primary); color: var(--white); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .brand-wrapper { display: flex; align-items: center; gap: 12px; }
+        .logo-placeholder { width: 45px; height: 45px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #e2e8f0; }
+        .logo-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+                .brand-text h1 { font-size: 1.15rem; font-weight: 800; color: var(--white); }
+        .brand-text p { font-size: 0.7rem; color: var(--accent); font-weight: 600; }
+        .nav-menu { display: flex; list-style: none; gap: 1rem; align-items: center; }
+        .nav-menu a { color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 0.4rem 0.7rem; border-radius: 6px; transition: all 0.2s ease; cursor: pointer; }
+        .nav-menu a:hover, .nav-menu a.active { background-color: var(--accent); color: var(--primary); font-weight: 700; }
+        .admin-badge { border: 1px dashed var(--accent) !important; color: var(--accent) !important; }
+        .page-view { display: none; max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+        .page-view.active-view { display: block; }
+        .hero-banner { background: linear-gradient(rgba(15,23,42,0.9), rgba(30,41,59,0.85)); color: var(--white); border-radius: 12px; padding: 4rem 2rem; text-align: center; margin-bottom: 2.5rem; }
+        .hero-banner h2 { font-size: 2.2rem; font-weight: 800; color: var(--accent); }
+        .hero-banner h3 { font-size: 1.3rem; font-weight: 400; opacity: 0.9; margin-bottom: 1.5rem; }
+        .banner-tag { display: inline-block; background-color: rgba(180,83,9,0.2); border: 1.5px solid var(--accent); color: var(--accent-light); padding: 0.3rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.8rem; }
+                .editorial-section { background-color: var(--white); padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
+        .editorial-section h4 { font-size: 1.5rem; color: var(--primary); margin-bottom: 1.25rem; position: relative; padding-bottom: 0.5rem; }
+        .editorial-section h4::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50px; height: 4px; background-color: var(--accent); border-radius: 2px; }
+        .editorial-section p { font-size: 1rem; color: var(--text-dark); margin-bottom: 1.2rem; text-align: justify; }
+        .exec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+        .exec-card { background-color: var(--white); border-radius: 10px; padding: 1.25rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; cursor: pointer; transition: all 0.2s ease; }
+        .exec-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px rgba(0,0,0,0.05); border-color: var(--accent); }
+        .exec-avatar { width: 70px; height: 70px; background-color: var(--bg-light); color: var(--primary); border-radius: 50%; margin: 0 auto 0.75rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border: 2px solid #cbd5e1; }
+        .exec-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        .exec-card h4 { font-size: 1rem; color: var(--primary); margin-bottom: 0.25rem; }
+        .exec-card p { font-size: 0.8rem; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+                .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px); z-index: 2000; align-items: center; justify-content: center; }
+        .modal-box { background-color: var(--white); padding: 2rem; border-radius: 12px; max-width: 400px; width: 90%; text-align: center; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .close-modal { position: absolute; top: 0.75rem; right: 0.75rem; font-size: 1.25rem; cursor: pointer; color: var(--text-light); }
+        .modal-image-container { width: 180px; height: 180px; border-radius: 50%; margin: 0 auto 1.25rem; background-color: #e2e8f0; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 3px solid var(--accent); }
+        .modal-image-container img { width: 100%; height: 100%; object-fit: cover; }
+        .admin-tag { margin-top: 0.75rem; display: inline-block; font-weight: bold; font-size: 0.85rem; color: var(--accent); background-color: #fffbeb; padding: 0.4rem 0.8rem; border-radius: 6px; border: 1px dashed var(--accent); }
+                .form-wrapper { max-width: 550px; margin: 0 auto; background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
         .section-header { text-align: center; margin-bottom: 2rem; }
         .section-header h2 { color: var(--text-dark); font-size: 1.75rem; margin-bottom: 0.5rem; }
         .form-group { margin-bottom: 1.25rem; position: relative; }
         .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.95rem; color: var(--primary); }
         .form-control { width: 100%; padding: 0.75rem 1rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; outline: none; transition: all 0.3s; }
         .form-control:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(180,83,9,0.15); }
-        
-        /* Dynamic Password reveal elements */
         .password-toggle { position: absolute; right: 1rem; bottom: 0.75rem; cursor: pointer; font-size: 0.85rem; color: var(--accent); font-weight: 600; user-select: none; }
         .btn-submit { width: 100%; background-color: var(--primary); color: white; padding: 0.8rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; margin-top: 1rem; }
         .btn-submit:hover { background-color: #1e293b; }
         .forgot-link { display: block; margin-top: 0.75rem; text-align: right; font-size: 0.85rem; color: #64748b; text-decoration: none; }
         .forgot-link:hover { color: var(--accent); }
-        
-        /* Dynamic Profile and Logged-In Account Management Panes */
         .profile-card { background: white; max-width: 600px; margin: 0 auto; padding: 2.5rem 1.5rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; text-align: center; }
         .profile-pic-container { position: relative; width: 130px; height: 130px; margin: 0 auto 1.25rem; }
         .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); background-color: #f1f5f9; }
         .upload-btn-wrapper { margin-top: 1rem; }
         .upload-file-input { display: none; }
         .btn-upload { background-color: var(--accent); color: white; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: inline-block; }
-                /* Dynamic Feed Elements for Post Publishing and Anonymous Commentary */
-        .feed-container { max-width: 700px; margin: 0 auto; }
+                .feed-container { max-width: 700px; margin: 0 auto; }
         .upload-box { background: white; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
         .post-card { background: white; border-radius: 10px; padding: 1.25rem; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; }
         .post-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
@@ -311,12 +91,12 @@
     </style>
 </head>
 <body>
-        <!-- Main Global Navigation Header -->
+        <!-- Main Global Navigation Header with GitHub Hosted Logo Upgrades -->
     <header>
         <div class="nav-container">
             <div class="brand-wrapper">
-                <div class="logo-placeholder">COLLEGE<br>LOGO</div>
-                <div class="logo-placeholder" style="background: linear-gradient(135deg, #dc2626, #b45309);">ALUTA<br>LOGO</div>
+                <div class="logo-placeholder"><img src="https://github.io" alt="School Logo"></div>
+                <div class="logo-placeholder"><img src="https://github.io" alt="Aluta Logo"></div>
                 <div class="brand-text">
                     <h1>SUG PLATFORM</h1>
                     <p>2025/2026 LED ADMINISTRATION</p>
@@ -335,15 +115,15 @@
         </div>
     </header>
 
-    <!-- Page 1: Home View Layout -->
+    <!-- Page 1: Home View Layout Area -->
     <main id="view-home" class="page-view active-view">
         <div class="hero-banner">
-            <span class="banner-tag">Official Student Portal</span>
+            <span class="banner-tag">RIVERS STATE COLLEGE OF HEALTH SCIENCE AND MANAGEMENT TECHNOLOGY</span>
             <h2>Student Union Government (SUG)</h2>
             <h3>Official Student Union Government Platform</h3>
-            <p style="color: var(--accent-light); font-weight: 600; letter-spacing: 1px;">2025/2026 Led Administration</p>
+            <p style="color: var(--accent-light); font-weight: 600; letter-spacing: 0.5px;">2025/2026 Led Administration</p>
         </div>
-
+        
         <article class="editorial-section">
             <h4>Understanding the Essence & Dominance of the SUG</h4>
             <p>The Student Union Government (SUG) is the official, democratic governing framework established exclusively by and for the student body within an institution of higher learning. Operating as a sovereign student parliament, the SUG acts as the primary intermediary between the campus general assembly and the institution's senior management dashboard. Its foundational blueprint is engineered to safeguard student welfare, defend academic liberties, promote balanced social integration, and amplify collective bargaining power on issues affecting enrollment, facilities, and campus regulations.</p>
@@ -352,8 +132,8 @@
             
             <p>The structural dominance of the SUG over the general student population is absolute and systemic. It operates with a powerful mandate because every registered student is constitutionally recognized as an automatic stakeholder within the union's jurisdiction. This unified collective enables the executive branch to exert legitimate authority, ensuring widespread compliance during peaceful mobilizations or institutional dialogues. Guided by the unwavering philosophy of Aluta, the SUG maintains a decisive presence on campus. It balances corporate discipline with robust student activism, driving meaningful social reforms and reinforcing its position as the ultimate guardian of student interests.</p>
         </article>
-            </main>
-        <!-- Page 2: Executive Directory View Layout -->
+    </main>
+        <!-- Page 2: Upgraded Executive Directory View Layout -->
     <section id="view-executives" class="page-view">
         <div class="section-header">
             <h2>Executive Council Directory</h2>
@@ -361,99 +141,155 @@
         </div>
 
         <div class="exec-grid">
-            <!-- Executive Cards with Interactive Click Triggers -->
-            <div class="exec-card" onclick="openExecModal('Sen.Comr.Justina Gentle Welli', 'SUG President')">
-                <div class="exec-avatar">P</div>
+            <!-- 1. SUG President -->
+            <div class="exec-card" onclick="openExecModal('Sen.Comr.Justina Gentle Welli', 'SUG President', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="President">
+                </div>
                 <h4>Sen.Comr.Justina Gentle Welli</h4>
                 <p>SUG President</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Comr.Nwibu Roselyn', 'SUG Vice President')">
-                <div class="exec-avatar">VP</div>
+
+            <!-- 2. SUG Vice President -->
+            <div class="exec-card" onclick="openExecModal('Comr.Nwibu Roselyn', 'SUG Vice President', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="Vice President">
+                </div>
                 <h4>Comr.Nwibu Roselyn</h4>
                 <p>SUG Vice President</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Rt.Hon.Godspower Awajimowa Ebirien', 'SUG Speaker')">
-                <div class="exec-avatar">SP</div>
+
+            <!-- 3. SUG Speaker -->
+            <div class="exec-card" onclick="openExecModal('Rt.Hon.Godspower Awajimowa Ebirien', 'SUG Speaker', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="Speaker">
+                </div>
                 <h4>Rt.Hon.Godspower Awajimowa Ebirien</h4>
                 <p>SUG Speaker</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Hon.PraiseGod Barisi', 'SUG Deputy Speaker')">
-                <div class="exec-avatar">DS</div>
+
+            <!-- 5. SUG Deputy Speaker -->
+            <div class="exec-card" onclick="openExecModal('Hon.PraiseGod Barisi', 'SUG Deputy Speaker', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="Deputy Speaker">
+                </div>
                 <h4>Hon.PraiseGod Barisi</h4>
                 <p>SUG Deputy Speaker</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Comr.Favour Nbete', 'SUG Secretary')">
-                <div class="exec-avatar">SEC</div>
+
+            <!-- 6. SUG Secretary -->
+            <div class="exec-card" onclick="openExecModal('Comr.Favour Nbete', 'SUG Secretary', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="Secretary">
+                </div>
                 <h4>Comr.Favour Nbete</h4>
                 <p>SUG Secretary</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Comr.Ngerebo Lamech Dimkpa', 'SUG Provost')">
-                <div class="exec-avatar">PR</div>
+
+            <!-- 7. SUG Provost -->
+            <div class="exec-card" onclick="openExecModal('Comr.Ngerebo Lamech Dimkpa', 'SUG Provost', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="Provost">
+                </div>
                 <h4>Comr.Ngerebo Lamech Dimkpa</h4>
                 <p>SUG Provost</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Comr.Vera Sunday', 'SUG Treasurer')">
-                <div class="exec-avatar">TR</div>
+
+            <!-- 8. SUG Treasurer -->
+            <div class="exec-card" onclick="openExecModal('Comr.Vera Sunday', 'SUG Treasurer', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="Treasurer">
+                </div>
                 <h4>Comr.Vera Sunday</h4>
                 <p>SUG Treasurer</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Comr.Bob Orji', 'SUG P.R.O')">
-                <div class="exec-avatar">PRO</div>
+
+            <!-- 9. SUG P.R.O -->
+            <div class="exec-card" onclick="openExecModal('Comr.Bob Orji', 'SUG P.R.O', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="P.R.O">
+                </div>
                 <h4>Comr.Bob Orji</h4>
                 <p>SUG P.R.O</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Comr.Chinemerem Silver', 'SUG Financial Secretary')">
-                <div class="exec-avatar">FS</div>
+                        <!-- 10. SUG Financial Secretary -->
+            <div class="exec-card" onclick="openExecModal('Comr.Chinemerem Silver', 'SUG Financial Secretary', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="Financial Secretary">
+                </div>
                 <h4>Comr.Chinemerem Silver</h4>
                 <p>SUG Financial Secretary</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Comr.Maureen Ebelogwu Chinuzoke', 'SUG Welfare')">
-                <div class="exec-avatar">WF</div>
-                <h4>Comr.Maureen Ebelogwu Chinuzoke</h4>
+
+            <!-- 11. SUG Welfare -->
+            <div class="exec-card" onclick="openExecModal('Comr.Maureen Ebelogwu chinuzoke', 'SUG Welfare', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="Welfare">
+                </div>
+                <h4>Comr.Maureen Ebelogwu chinuzoke</h4>
                 <p>SUG Welfare</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Comr.Queeneth Amadi', 'Director Of Socials')">
-                <div class="exec-avatar">DS</div>
+
+            <!-- 12. Director Of Socials -->
+            <div class="exec-card" onclick="openExecModal('Comr.Queeneth Amadi', 'Director Of Socials', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="Director Of Socials">
+                </div>
                 <h4>Comr.Queeneth Amadi</h4>
                 <p>Director Of Socials</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Comr.Nelson', 'Director Of Sports')">
-                <div class="exec-avatar">SP</div>
+
+            <!-- 13. Director Of Sports -->
+            <div class="exec-card" onclick="openExecModal('Comr.Nelson', 'Director Of Sports', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="Director Of Sports">
+                </div>
                 <h4>Comr.Nelson</h4>
                 <p>Director Of Sports</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Hon.Chinna Success', 'Chief Whip')">
-                <div class="exec-avatar">CW</div>
+
+            <!-- 14. Chief Whip -->
+            <div class="exec-card" onclick="openExecModal('Hon.Chinna Success', 'Chief Whip', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="Chief Whip">
+                </div>
                 <h4>Hon.Chinna Success</h4>
                 <p>Chief Whip</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Hon.Victor Dakubor', 'Internal Auditor')">
-                <div class="exec-avatar">IA</div>
+
+            <!-- 15. Internal Auditor -->
+            <div class="exec-card" onclick="openExecModal('Hon.Victor Dakubor', 'Internal Auditor', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="Internal Auditor">
+                </div>
                 <h4>Hon.Victor Dakubor</h4>
                 <p>Internal Auditor</p>
             </div>
-            <div class="exec-card" onclick="openExecModal('Hon.Akpobari Barisua', 'Majority Leader')">
-                <div class="exec-avatar">ML</div>
+
+            <!-- 16. Majority Leader -->
+            <div class="exec-card" onclick="openExecModal('Hon.Akpobari Barisua', 'Majority Leader', 'https://github.io')">
+                <div class="exec-avatar">
+                    <img src="https://github.io" alt="Majority Leader">
+                </div>
                 <h4>Hon.Akpobari Barisua</h4>
                 <p>Majority Leader</p>
             </div>
         </div>
     </section>
 
-    <!-- Global Executive Profile Popup Modal Overlay -->
+    <!-- Global Executive Profile Popup Modal Framework -->
     <div id="exec-modal" class="modal-overlay" onclick="closeExecModal(event)">
         <div class="modal-box">
             <span class="close-modal" onclick="document.getElementById('exec-modal').style.display='none'">&times;</span>
             <div class="modal-image-container">
-                <!-- Fallback inline placeholder graphic that displays instantly -->
-                <img id="modal-img" src="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100' fill='%2394a3b8'><circle cx='50' cy='45' r='20'/><path d='M20 80c0-20 15-25 30-25s30 5 30 25z'/></svg>" alt="Executive Photo">
+                <img id="modal-img" src="" alt="Executive Photo">
             </div>
             <h3 id="modal-name" style="color: var(--primary); font-size: 1.4rem;">Officer Name</h3>
             <p id="modal-role" style="color: var(--accent); font-weight: bold; margin-top: 0.25rem;">Officer Position</p>
             <span class="admin-tag">2025/2026 Led Administration</span>
         </div>
-                    </div>
-                        <!-- Page 3: Student Registration View Layout -->
+    </div>
+        <!-- Page 3: Student Registration View Layout -->
     <section id="view-register" class="page-view">
         <div class="form-wrapper">
             <div class="section-header">
@@ -473,12 +309,14 @@
                     <label>Department</label>
                     <input type="text" id="reg-dept" class="form-control" placeholder="Type or choose your department" list="dept-options" required>
                     <datalist id="dept-options">
-                        <option value="Computer Science"></option>
-                        <option value="Electrical Engineering"></option>
-                        <option value="Business Administration"></option>
-                        <option value="Biochemistry"></option>
-                        <option value="Mechanical Engineering"></option>
-                        <option value="Political Science"></option>
+                        <option value="Computer Science Technology"></option>
+                        <option value="Environmental Health Technology"></option>
+                        <option value="Community Health"></option>
+                        <option value="Medical Laboratory Science"></option>
+                        <option value="Public Health Nursing"></option>
+                        <option value="Health Information Management"></option>
+                        <option value="Pharmacy Technician"></option>
+                        <option value="Dental Health Technology"></option>
                     </datalist>
                 </div>
                 <div class="form-group">
@@ -571,8 +409,8 @@
             
             <p style="text-align: center; color: var(--text-light); font-weight: bold; padding: 2rem 0; border: 2px dashed #e2e8f0; border-radius: 8px; background: var(--bg-light);">Use the "Campus Feed" top navigation menu channel to manage, audit, and delete live user posts and comments.</p>
         </div>
-    </section>
-        <!-- Page 7: Campus Interactive Media Feed & Community Board -->
+                </section>
+                <!-- Page 7: Campus Interactive Media Feed & Community Board -->
     <section id="view-feed" class="page-view">
         <div class="feed-container">
             
@@ -586,11 +424,9 @@
                     <div class="form-group">
                         <textarea id="post-text" class="form-control" rows="3" placeholder="Write the update caption narrative here..." required style="resize: none;"></textarea>
                     </div>
-                    <div class="form-group" style="display: flex; gap: 1rem; align-items: center;">
-                        <div style="flex: 1;">
-                            <label style="font-size: 0.8rem; color: var(--text-light);">Media Source Link URL (Image / Video)</label>
-                            <input type="text" id="post-media-url" class="form-control" placeholder="https://example.com">
-                        </div>
+                    <div class="form-group">
+                        <label style="font-size: 0.8rem; color: var(--text-light);">Media Source Link URL (Image / Video)</label>
+                        <input type="text" id="post-media-url" class="form-control" placeholder="https://example.com">
                     </div>
                     <button type="submit" class="btn-submit" style="background-color: var(--accent); margin-top: 0.5rem;">Broadcast Content Asset</button>
                 </form>
@@ -613,7 +449,7 @@
 
     <!-- Global Layout System Footer -->
     <footer>
-        <p>&copy; 2026 Student Union Government Portal | 2025/2026 Led Administration Dashboard</p>
+        <p>&copy; 2026 Student Union Government Portal | Rivers State College of Health Science and Management Technology</p>
         <p style="font-size: 0.75rem; margin-top: 0.5rem; color: var(--text-light); letter-spacing: 0.5px;">Solidarity Forever. Aluta Continua, Victoria Acerta.</p>
     </footer>
         <!-- Main Interactive Script System Architecture Module -->
@@ -698,7 +534,6 @@
             const department = document.getElementById('reg-dept').value.trim();
             const password = document.getElementById('reg-pass').value;
 
-            // Fetch dynamic records from system client cache table
             let currentUsers = JSON.parse(localStorage.getItem('sug_users')) || [];
 
             // Duplicate Check: Verify if database name or matric code matches existing records
@@ -712,7 +547,6 @@
                 return;
             }
 
-            // Create new record entity schema layout
             const newStudentAccount = {
                 name: fullName,
                 matric: matricNum,
@@ -721,14 +555,10 @@
                 avatar: null
             };
 
-            // Push and commit to storage layout context
             currentUsers.push(newStudentAccount);
             localStorage.setItem('sug_users', JSON.stringify(currentUsers));
-
-            // Authenticate state tracking session automatically
             sessionUser = newStudentAccount;
 
-            // Synchronize dynamic student account user profile workspace view
             document.getElementById('profile-name-text').textContent = sessionUser.name;
             document.getElementById('profile-matric-text').textContent = sessionUser.matric;
             document.getElementById('profile-dept-text').textContent = sessionUser.dept;
@@ -745,26 +575,23 @@
                 return;
             }
 
-            const targetFile = e.target.files[0];
+            const targetFile = e.target.files;
             if (!targetFile) return;
 
             const mediaReader = new FileReader();
             mediaReader.onload = function(eventResult) {
                 const base64EncodedImageString = eventResult.target.result;
                 
-                // Commit new image asset update directly inside memory buffer array records
                 let currentUsers = JSON.parse(localStorage.getItem('sug_users')) || [];
                 currentUsers = currentUsers.map(user => {
                     if (user.matric === sessionUser.matric) {
                         user.avatar = base64EncodedImageString;
-                        sessionUser.avatar = base64EncodedImageString; // Sync active workspace runtime session
+                        sessionUser.avatar = base64EncodedImageString;
                     }
                     return user;
                 });
 
                 localStorage.setItem('sug_users', JSON.stringify(currentUsers));
-                
-                // Render asset to presentation container element
                 document.getElementById('profile-display-img').src = base64EncodedImageString;
                 alert("Your custom account profile photo element has been successfully committed.");
             };
@@ -774,14 +601,10 @@
                 // ==================== USER LOGIN ACCOUNT VERIFICATION ==================== */
         function handleStudentLogin(e) {
             e.preventDefault();
-            
             const inputtedMatric = document.getElementById('login-matric').value.trim().toUpperCase();
             const inputtedPassword = document.getElementById('login-pass').value;
-
-            // Fetch registration indices data records from cache
             const usersDatabaseTable = JSON.parse(localStorage.getItem('sug_users')) || [];
 
-            // Query relational table for matching credential sets
             const verifiedRecordMatch = usersDatabaseTable.find(user => 
                 user.matric === inputtedMatric && user.pass === inputtedPassword
             );
@@ -791,10 +614,7 @@
                 return;
             }
 
-            // Sync user state parameters
             sessionUser = verifiedRecordMatch;
-
-            // Load and populate user interface dashboard elements
             document.getElementById('profile-name-text').textContent = sessionUser.name;
             document.getElementById('profile-matric-text').textContent = sessionUser.matric;
             document.getElementById('profile-dept-text').textContent = sessionUser.dept;
@@ -812,21 +632,14 @@
         // ==================== ADMINISTRATIVE MASTER GATEWAY CONTROL ==================== */
         function handleAdminLogin(e) {
             e.preventDefault();
-            
             const adminUser = document.getElementById('admin-user').value.trim();
             const adminPass = document.getElementById('admin-pass').value;
 
-            // Enforce explicit master static administrative criteria checks
             if (adminUser === "admin" && adminPass === "admin123") {
                 sessionAdminActive = true;
-                
-                // Toggle display workspace panels
                 document.getElementById('admin-login-box').style.display = 'none';
                 document.getElementById('admin-panel').style.display = 'block';
-                
-                // Reveal media content production suite inside stream view
                 document.getElementById('media-uploader-box').style.display = 'block';
-                
                 alert("Master Security Clearance Confirmed. Administrative privileges activated.");
             } else {
                 alert("Security Violation: Invalid administrative credentials entered.");
@@ -838,17 +651,13 @@
             document.getElementById('admin-panel').style.display = 'none';
             document.getElementById('admin-login-box').style.display = 'block';
             document.getElementById('media-uploader-box').style.display = 'none';
-            
             alert("Administrative workspace session detached safely.");
             switchView('home');
-        }
+    }
                 // ==================== CAMPUS NEWS FEED MANIPULATION CONTROLLER ==================== */
         function handlePostCreation(e) {
             e.preventDefault();
-            if (!sessionAdminActive) {
-                alert("Security Error: Only verified administrators can publish official broadcast records.");
-                return;
-            }
+            if (!sessionAdminActive) return;
 
             const textContent = document.getElementById('post-text').value.trim();
             let mediaLinkUrl = document.getElementById('post-media-url').value.trim();
@@ -858,7 +667,6 @@
             }
 
             const postStreamTable = JSON.parse(localStorage.getItem('sug_posts')) || [];
-            
             const newBroadcastPost = {
                 id: Date.now(),
                 author: "★ SUG Executive Secretariat Notice",
@@ -874,7 +682,6 @@
 
             document.getElementById('post-text').value = '';
             document.getElementById('post-media-url').value = '';
-
             alert("Content update broadcast completed successfully.");
             renderLiveNewsFeedStream();
         }
@@ -922,9 +729,7 @@
                         <img class="post-media" src="${post.media}" onerror="this.style.display='none'">
                         
                         <div class="post-actions">
-                            <button class="action-link" onclick="handleLikeToggle(${post.id})">
-                                ♥ Like (${post.likes})
-                            </button>
+                            <button class="action-link" onclick="handleLikeToggle(${post.id})">♥ Like (${post.likes})</button>
                             <span class="action-link">💬 Discussion Log (${post.comments.length})</span>
                         </div>
 
@@ -951,7 +756,6 @@
             posts = posts.map(post => {
                 if (post.id === postId) {
                     if (!post.likedBy) post.likedBy = [];
-                    
                     const userIndex = post.likedBy.indexOf(sessionUser.matric);
                     if (userIndex === -1) {
                         post.likedBy.push(sessionUser.matric);
@@ -976,7 +780,6 @@
 
             const inputField = document.getElementById(`com-input-${postId}`);
             const commentText = inputField.value.trim();
-
             if (!commentText) return;
 
             let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
@@ -985,7 +788,7 @@
                     post.comments.push({
                         id: Date.now(),
                         text: commentText,
-                        author: "Anonymous Student" // Hardcoded to guarantee absolute student anonymity
+                        author: "Anonymous Student"
                     });
                 }
                 return post;
@@ -1023,13 +826,15 @@
         }
 
         // ==================== EXECUTIVE COUNCIL MODAL CONTROL ENGINE ==================== */
-        function openExecModal(name, role) {
+        function openExecModal(name, role, customImgUrl) {
             document.getElementById('modal-name').textContent = name;
             document.getElementById('modal-role').textContent = role;
             
-            // Set fallback canvas graphic automatically for seamless rendering without local paths
-            document.getElementById('modal-img').src = "data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100' fill='%2364748b'><circle cx='50' cy='45' r='20'/><path d='M20 80c0-20 15-25 30-25s30 5 30 25z'/></svg>";
-            
+            if (customImgUrl) {
+                document.getElementById('modal-img').src = customImgUrl;
+            } else {
+                document.getElementById('modal-img').src = "data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100' fill='%2364748b'><circle cx='50' cy='45' r='20'/><path d='M20 80c0-20 15-25 30-25s30 5 30 25z'/></svg>";
+            }
             document.getElementById('exec-modal').style.display = 'flex';
         }
 
