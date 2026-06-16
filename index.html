@@ -19,32 +19,32 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
         body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
-        header { background-color: var(--primary); color: var(--white); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+                header { background-color: var(--primary); color: var(--white); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
         .brand-wrapper { display: flex; align-items: center; gap: 12px; }
-        .logo-placeholder { width: 45px; height: 45px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #e2e8f0; }
+        .logo-placeholder { width: 45px; height: 45px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #e2e8f0; font-weight: 800; font-size: 0.7rem; color: var(--primary); }
         .logo-placeholder img { width: 100%; height: 100%; object-fit: cover; }
-                .brand-text h1 { font-size: 1.15rem; font-weight: 800; color: var(--white); }
+        .brand-text h1 { font-size: 1.15rem; font-weight: 800; color: var(--white); }
         .brand-text p { font-size: 0.7rem; color: var(--accent); font-weight: 600; }
         .nav-menu { display: flex; list-style: none; gap: 1rem; align-items: center; }
         .nav-menu a { color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 0.4rem 0.7rem; border-radius: 6px; transition: all 0.2s ease; cursor: pointer; }
         .nav-menu a:hover, .nav-menu a.active { background-color: var(--accent); color: var(--primary); font-weight: 700; }
         .admin-badge { border: 1px dashed var(--accent) !important; color: var(--accent) !important; }
-        .page-view { display: none; max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+                .page-view { display: none; max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
         .page-view.active-view { display: block; }
         .hero-banner { background: linear-gradient(rgba(15,23,42,0.9), rgba(30,41,59,0.85)); color: var(--white); border-radius: 12px; padding: 4rem 2rem; text-align: center; margin-bottom: 2.5rem; }
         .hero-banner h2 { font-size: 2.2rem; font-weight: 800; color: var(--accent); }
         .hero-banner h3 { font-size: 1.3rem; font-weight: 400; opacity: 0.9; margin-bottom: 1.5rem; }
         .banner-tag { display: inline-block; background-color: rgba(180,83,9,0.2); border: 1.5px solid var(--accent); color: var(--accent-light); padding: 0.3rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.8rem; }
-                .editorial-section { background-color: var(--white); padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
+        .editorial-section { background-color: var(--white); padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
         .editorial-section h4 { font-size: 1.5rem; color: var(--primary); margin-bottom: 1.25rem; position: relative; padding-bottom: 0.5rem; }
         .editorial-section h4::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50px; height: 4px; background-color: var(--accent); border-radius: 2px; }
         .editorial-section p { font-size: 1rem; color: var(--text-dark); margin-bottom: 1.2rem; text-align: justify; }
-        .exec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+                .exec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
         .exec-card { background-color: var(--white); border-radius: 10px; padding: 1.25rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; cursor: pointer; transition: all 0.2s ease; }
         .exec-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px rgba(0,0,0,0.05); border-color: var(--accent); }
-        .exec-avatar { width: 70px; height: 70px; background-color: var(--bg-light); color: var(--primary); border-radius: 50%; margin: 0 auto 0.75rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border: 2px solid #cbd5e1; }
-        .exec-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        .exec-avatar { width: 70px; height: 70px; background-color: var(--bg-light); color: var(--primary); border-radius: 50%; margin: 0 auto 0.75rem; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; border: 2px solid #cbd5e1; overflow: hidden; }
+        .exec-avatar img { width: 100%; height: 100%; object-fit: cover; }
         .exec-card h4 { font-size: 1rem; color: var(--primary); margin-bottom: 0.25rem; }
         .exec-card p { font-size: 0.8rem; color: var(--accent); font-weight: 700; text-transform: uppercase; }
                 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px); z-index: 2000; align-items: center; justify-content: center; }
@@ -88,15 +88,12 @@
         .comment-item span { font-weight: bold; color: #64748b; margin-right: 0.5rem; }
         .btn-delete { background: none; border: none; color: var(--danger); font-size: 0.8rem; cursor: pointer; margin-left: auto; font-weight: 600; }
         footer { background-color: var(--primary); color: #94a3b8; text-align: center; padding: 2rem; margin-top: 4rem; border-top: 3px solid var(--accent); font-size: 0.85rem; }
-    </style>
-</head>
-<body>
-        <!-- Main Global Navigation Header with GitHub Hosted Logo Upgrades -->
+    </    <!-- Main Global Navigation Header with Image Error Handling Fallbacks -->
     <header>
         <div class="nav-container">
             <div class="brand-wrapper">
-                <div class="logo-placeholder"><img src="https://github.io" alt="School Logo"></div>
-                <div class="logo-placeholder"><img src="https://github.io" alt="Aluta Logo"></div>
+                <div class="logo-placeholder"><img src="https://github.io" onerror="this.style.display='none'; this.parentElement.innerText='SCH';"></div>
+                <div class="logo-placeholder"><img src="https://github.io" onerror="this.style.display='none'; this.parentElement.innerText='ALT';"></div>
                 <div class="brand-text">
                     <h1>SUG PLATFORM</h1>
                     <p>2025/2026 LED ADMINISTRATION</p>
@@ -121,19 +118,17 @@
             <span class="banner-tag">RIVERS STATE COLLEGE OF HEALTH SCIENCE AND MANAGEMENT TECHNOLOGY</span>
             <h2>Student Union Government (SUG)</h2>
             <h3>Official Student Union Government Platform</h3>
-            <p style="color: var(--accent-light); font-weight: 600; letter-spacing: 0.5px;">2025/2026 Led Administration</p>
+            <p style="color: var(--accent-light); font-weight: 600;">2025/2026 Led Administration</p>
         </div>
         
         <article class="editorial-section">
             <h4>Understanding the Essence & Dominance of the SUG</h4>
             <p>The Student Union Government (SUG) is the official, democratic governing framework established exclusively by and for the student body within an institution of higher learning. Operating as a sovereign student parliament, the SUG acts as the primary intermediary between the campus general assembly and the institution's senior management dashboard. Its foundational blueprint is engineered to safeguard student welfare, defend academic liberties, promote balanced social integration, and amplify collective bargaining power on issues affecting enrollment, facilities, and campus regulations.</p>
-            
             <p>The core importance of the SUG resides in its unique capacity to democratize campus life. By managing designated welfare programs, negotiating financial grace periods, and establishing structured academic support panels, the union transforms the institutional environment into an inclusive sanctuary. It provides a strategic training platform for future geopolitical statesmen, equipping active student leaders with essential negotiation skills, constitutional awareness, and organizational proficiency. Without an active, structured student union, the collective voice of the campus would remain fragmented, making students vulnerable to unilateral policy shifts without formal avenues for mutual recourse.</p>
-            
             <p>The structural dominance of the SUG over the general student population is absolute and systemic. It operates with a powerful mandate because every registered student is constitutionally recognized as an automatic stakeholder within the union's jurisdiction. This unified collective enables the executive branch to exert legitimate authority, ensuring widespread compliance during peaceful mobilizations or institutional dialogues. Guided by the unwavering philosophy of Aluta, the SUG maintains a decisive presence on campus. It balances corporate discipline with robust student activism, driving meaningful social reforms and reinforcing its position as the ultimate guardian of student interests.</p>
         </article>
-    </main>
-        <!-- Page 2: Upgraded Executive Directory View Layout -->
+                       </main>
+            <!-- Page 2: Upgraded Error-Proof Executive View Layout -->
     <section id="view-executives" class="page-view">
         <div class="section-header">
             <h2>Executive Council Directory</h2>
@@ -144,7 +139,7 @@
             <!-- 1. SUG President -->
             <div class="exec-card" onclick="openExecModal('Sen.Comr.Justina Gentle Welli', 'SUG President', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="President">
+                    <img src="https://github.io" alt="President" onerror="this.style.display='none'; this.parentElement.innerText='P';">
                 </div>
                 <h4>Sen.Comr.Justina Gentle Welli</h4>
                 <p>SUG President</p>
@@ -153,7 +148,7 @@
             <!-- 2. SUG Vice President -->
             <div class="exec-card" onclick="openExecModal('Comr.Nwibu Roselyn', 'SUG Vice President', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="Vice President">
+                    <img src="https://github.io" alt="Vice President" onerror="this.style.display='none'; this.parentElement.innerText='VP';">
                 </div>
                 <h4>Comr.Nwibu Roselyn</h4>
                 <p>SUG Vice President</p>
@@ -162,7 +157,7 @@
             <!-- 3. SUG Speaker -->
             <div class="exec-card" onclick="openExecModal('Rt.Hon.Godspower Awajimowa Ebirien', 'SUG Speaker', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="Speaker">
+                    <img src="https://github.io" alt="Speaker" onerror="this.style.display='none'; this.parentElement.innerText='SP';">
                 </div>
                 <h4>Rt.Hon.Godspower Awajimowa Ebirien</h4>
                 <p>SUG Speaker</p>
@@ -171,7 +166,7 @@
             <!-- 5. SUG Deputy Speaker -->
             <div class="exec-card" onclick="openExecModal('Hon.PraiseGod Barisi', 'SUG Deputy Speaker', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="Deputy Speaker">
+                    <img src="https://github.io" alt="Deputy Speaker" onerror="this.style.display='none'; this.parentElement.innerText='DS';">
                 </div>
                 <h4>Hon.PraiseGod Barisi</h4>
                 <p>SUG Deputy Speaker</p>
@@ -180,7 +175,7 @@
             <!-- 6. SUG Secretary -->
             <div class="exec-card" onclick="openExecModal('Comr.Favour Nbete', 'SUG Secretary', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="Secretary">
+                    <img src="https://github.io" alt="Secretary" onerror="this.style.display='none'; this.parentElement.innerText='SEC';">
                 </div>
                 <h4>Comr.Favour Nbete</h4>
                 <p>SUG Secretary</p>
@@ -189,7 +184,7 @@
             <!-- 7. SUG Provost -->
             <div class="exec-card" onclick="openExecModal('Comr.Ngerebo Lamech Dimkpa', 'SUG Provost', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="Provost">
+                    <img src="https://github.io" alt="Provost" onerror="this.style.display='none'; this.parentElement.innerText='PR';">
                 </div>
                 <h4>Comr.Ngerebo Lamech Dimkpa</h4>
                 <p>SUG Provost</p>
@@ -198,7 +193,7 @@
             <!-- 8. SUG Treasurer -->
             <div class="exec-card" onclick="openExecModal('Comr.Vera Sunday', 'SUG Treasurer', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="Treasurer">
+                    <img src="https://github.io" alt="Treasurer" onerror="this.style.display='none'; this.parentElement.innerText='TR';">
                 </div>
                 <h4>Comr.Vera Sunday</h4>
                 <p>SUG Treasurer</p>
@@ -207,15 +202,18 @@
             <!-- 9. SUG P.R.O -->
             <div class="exec-card" onclick="openExecModal('Comr.Bob Orji', 'SUG P.R.O', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="P.R.O">
+                    <img src="https://github.io" alt="P.R.O" onerror="this.style.display='none'; this.parentElement.innerText='PRO';">
                 </div>
                 <h4>Comr.Bob Orji</h4>
                 <p>SUG P.R.O</p>
             </div>
-                        <!-- 10. SUG Financial Secretary -->
+        style>
+</head>
+<body>
+                <!-- 10. SUG Financial Secretary -->
             <div class="exec-card" onclick="openExecModal('Comr.Chinemerem Silver', 'SUG Financial Secretary', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="Financial Secretary">
+                    <img src="https://github.io" alt="Financial Secretary" onerror="this.style.display='none'; this.parentElement.innerText='FS';">
                 </div>
                 <h4>Comr.Chinemerem Silver</h4>
                 <p>SUG Financial Secretary</p>
@@ -224,7 +222,7 @@
             <!-- 11. SUG Welfare -->
             <div class="exec-card" onclick="openExecModal('Comr.Maureen Ebelogwu chinuzoke', 'SUG Welfare', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="Welfare">
+                    <img src="https://github.io" alt="Welfare" onerror="this.style.display='none'; this.parentElement.innerText='WF';">
                 </div>
                 <h4>Comr.Maureen Ebelogwu chinuzoke</h4>
                 <p>SUG Welfare</p>
@@ -233,7 +231,7 @@
             <!-- 12. Director Of Socials -->
             <div class="exec-card" onclick="openExecModal('Comr.Queeneth Amadi', 'Director Of Socials', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="Director Of Socials">
+                    <img src="https://github.io" alt="Director Of Socials" onerror="this.style.display='none'; this.parentElement.innerText='DS';">
                 </div>
                 <h4>Comr.Queeneth Amadi</h4>
                 <p>Director Of Socials</p>
@@ -242,7 +240,7 @@
             <!-- 13. Director Of Sports -->
             <div class="exec-card" onclick="openExecModal('Comr.Nelson', 'Director Of Sports', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="Director Of Sports">
+                    <img src="https://github.io" alt="Director Of Sports" onerror="this.style.display='none'; this.parentElement.innerText='SP';">
                 </div>
                 <h4>Comr.Nelson</h4>
                 <p>Director Of Sports</p>
@@ -251,7 +249,7 @@
             <!-- 14. Chief Whip -->
             <div class="exec-card" onclick="openExecModal('Hon.Chinna Success', 'Chief Whip', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="Chief Whip">
+                    <img src="https://github.io" alt="Chief Whip" onerror="this.style.display='none'; this.parentElement.innerText='CW';">
                 </div>
                 <h4>Hon.Chinna Success</h4>
                 <p>Chief Whip</p>
@@ -260,7 +258,7 @@
             <!-- 15. Internal Auditor -->
             <div class="exec-card" onclick="openExecModal('Hon.Victor Dakubor', 'Internal Auditor', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="Internal Auditor">
+                    <img src="https://github.io" alt="Internal Auditor" onerror="this.style.display='none'; this.parentElement.innerText='IA';">
                 </div>
                 <h4>Hon.Victor Dakubor</h4>
                 <p>Internal Auditor</p>
@@ -269,7 +267,7 @@
             <!-- 16. Majority Leader -->
             <div class="exec-card" onclick="openExecModal('Hon.Akpobari Barisua', 'Majority Leader', 'https://github.io')">
                 <div class="exec-avatar">
-                    <img src="https://github.io" alt="Majority Leader">
+                    <img src="https://github.io" alt="Majority Leader" onerror="this.style.display='none'; this.parentElement.innerText='ML';">
                 </div>
                 <h4>Hon.Akpobari Barisua</h4>
                 <p>Majority Leader</p>
@@ -277,19 +275,19 @@
         </div>
     </section>
 
-    <!-- Global Executive Profile Popup Modal Framework -->
+    <!-- Global Executive Profile Popup Modal Overlay Framework -->
     <div id="exec-modal" class="modal-overlay" onclick="closeExecModal(event)">
         <div class="modal-box">
             <span class="close-modal" onclick="document.getElementById('exec-modal').style.display='none'">&times;</span>
             <div class="modal-image-container">
-                <img id="modal-img" src="" alt="Executive Photo">
+                <img id="modal-img" src="" alt="Executive Photo" onerror="this.style.display='none';">
             </div>
             <h3 id="modal-name" style="color: var(--primary); font-size: 1.4rem;">Officer Name</h3>
             <p id="modal-role" style="color: var(--accent); font-weight: bold; margin-top: 0.25rem;">Officer Position</p>
             <span class="admin-tag">2025/2026 Led Administration</span>
         </div>
     </div>
-        <!-- Page 3: Student Registration View Layout -->
+            <!-- Page 3: Student Registration View Layout -->
     <section id="view-register" class="page-view">
         <div class="form-wrapper">
             <div class="section-header">
@@ -351,7 +349,7 @@
             <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 1rem;">Note: Only you have administrative permission to alter or remove this profile photo asset.</p>
         </div>
     </section>
-        <!-- Page 5: Student Login View Layout -->
+            <!-- Page 5: Student Login View Layout -->
     <section id="view-login" class="page-view">
         <div class="form-wrapper">
             <div class="section-header">
@@ -409,8 +407,8 @@
             
             <p style="text-align: center; color: var(--text-light); font-weight: bold; padding: 2rem 0; border: 2px dashed #e2e8f0; border-radius: 8px; background: var(--bg-light);">Use the "Campus Feed" top navigation menu channel to manage, audit, and delete live user posts and comments.</p>
         </div>
-                </section>
-                <!-- Page 7: Campus Interactive Media Feed & Community Board -->
+    </section>
+            <!-- Page 7: Campus Interactive Media Feed & Community Board -->
     <section id="view-feed" class="page-view">
         <div class="feed-container">
             
@@ -452,17 +450,15 @@
         <p>&copy; 2026 Student Union Government Portal | Rivers State College of Health Science and Management Technology</p>
         <p style="font-size: 0.75rem; margin-top: 0.5rem; color: var(--text-light); letter-spacing: 0.5px;">Solidarity Forever. Aluta Continua, Victoria Acerta.</p>
     </footer>
-        <!-- Main Interactive Script System Architecture Module -->
+            <!-- Main Interactive Script System Architecture Module -->
     <script>
         // ==================== SYSTEM REGISTRATION MEMORY STORAGE ==================== */
-        // Global Local Records Cache Layer acting as a pseudo-relational database table
         if (!localStorage.getItem('sug_users')) {
             localStorage.setItem('sug_users', JSON.stringify([
-                { name: "Demo Student", matric: "REG/2025/001", dept: "Computer Science", pass: "password123", avatar: null }
+                { name: "Demo Student", matric: "REG/2025/001", dept: "Computer Science Technology", pass: "password123", avatar: null }
             ]));
         }
 
-        // Global System Activity News Stream Table Layer Setup
         if (!localStorage.getItem('sug_posts')) {
             localStorage.setItem('sug_posts', JSON.stringify([
                 {
@@ -481,23 +477,19 @@
         }
 
         // ==================== RUNTIME APPLICATION SESSION STATES ==================== */
-        let sessionUser = null;          // Holds currently logged-in student user payload configuration
-        let sessionAdminActive = false;  // Global state switch tracking master administrator dashboard authorization
+        let sessionUser = null;          
+        let sessionAdminActive = false;  
 
         // ==================== APP LAYOUT CONTROLLER GATEWAYS ==================== */
-        // Main view switching panel handling navigation engine triggers
         function switchView(viewId) {
-            // Deactivate and mask all active layout panels completely
             const panels = document.querySelectorAll('.page-view');
             panels.forEach(panel => panel.classList.remove('active-view'));
 
-            // Demask target workspace module view container
             const activeTarget = document.getElementById('view-' + viewId);
             if (activeTarget) {
                 activeTarget.classList.add('active-view');
             }
 
-            // Sync visual navigation link states inside top menu bar
             const navLinks = document.querySelectorAll('.nav-menu a');
             navLinks.forEach(link => link.classList.remove('active'));
 
@@ -506,13 +498,11 @@
                 selectedLink.classList.add('active');
             }
 
-            // Fire UI stream template rendering algorithms if feed target sector is picked
             if (viewId === 'feed') {
                 renderLiveNewsFeedStream();
             }
         }
 
-        // Form field visual state switcher providing user interactive password masks
         function togglePass(targetFieldId) {
             const inputField = document.getElementById(targetFieldId);
             const triggerToggleBtn = inputField.nextElementSibling;
@@ -576,7 +566,7 @@
             }
 
             const targetFile = e.target.files;
-            if (!targetFile) return;
+            if (!targetFile || targetFile.length === 0) return;
 
             const mediaReader = new FileReader();
             mediaReader.onload = function(eventResult) {
@@ -593,10 +583,10 @@
 
                 localStorage.setItem('sug_users', JSON.stringify(currentUsers));
                 document.getElementById('profile-display-img').src = base64EncodedImageString;
-                alert("Your custom account profile photo element has been successfully committed.");
+                alert("Your personal profile photo has been successfully updated.");
             };
             
-            mediaReader.readAsDataURL(targetFile);
+            mediaReader.readAsDataURL(targetFile[0]);
         }
                 // ==================== USER LOGIN ACCOUNT VERIFICATION ==================== */
         function handleStudentLogin(e) {
@@ -653,8 +643,9 @@
             document.getElementById('media-uploader-box').style.display = 'none';
             alert("Administrative workspace session detached safely.");
             switchView('home');
-    }
-                // ==================== CAMPUS NEWS FEED MANIPULATION CONTROLLER ==================== */
+        }
+
+        // ==================== CAMPUS NEWS FEED MANIPULATION CONTROLLER ==================== */
         function handlePostCreation(e) {
             e.preventDefault();
             if (!sessionAdminActive) return;
@@ -685,8 +676,7 @@
             alert("Content update broadcast completed successfully.");
             renderLiveNewsFeedStream();
         }
-
-        function renderLiveNewsFeedStream() {
+                function renderLiveNewsFeedStream() {
             const feedContainerBoxElement = document.getElementById('dynamic-feed-target');
             const cachedPostStreamTable = JSON.parse(localStorage.getItem('sug_posts')) || [];
 
@@ -745,7 +735,8 @@
 
             feedContainerBoxElement.innerHTML = computedHtmlBufferString;
         }
-                // ==================== INTERACTIVE USER FEED OPERATIONS ==================== */
+
+        // ==================== INTERACTIVE USER FEED OPERATIONS ==================== */
         function handleLikeToggle(postId) {
             if (!sessionUser) {
                 alert("Access Denied: Only registered, logged-in students can interact with this content.");
@@ -830,10 +821,13 @@
             document.getElementById('modal-name').textContent = name;
             document.getElementById('modal-role').textContent = role;
             
+            const modalImgElement = document.getElementById('modal-img');
             if (customImgUrl) {
-                document.getElementById('modal-img').src = customImgUrl;
+                modalImgElement.src = customImgUrl;
+                modalImgElement.style.display = 'block';
             } else {
-                document.getElementById('modal-img').src = "data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100' fill='%2364748b'><circle cx='50' cy='45' r='20'/><path d='M20 80c0-20 15-25 30-25s30 5 30 25z'/></svg>";
+                modalImgElement.src = "";
+                modalImgElement.style.display = 'none';
             }
             document.getElementById('exec-modal').style.display = 'flex';
         }
@@ -846,3 +840,4 @@
     </script>
 </body>
 </html>
+        
