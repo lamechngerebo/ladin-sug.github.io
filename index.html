@@ -19,7 +19,7 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
         body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
-            header { background-color: var(--primary); color: var(--white); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+                header { background-color: var(--primary); color: var(--white); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
         .brand-wrapper { display: flex; align-items: center; gap: 12px; }
         .logo-placeholder { width: 45px; height: 45px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #e2e8f0; font-weight: 800; font-size: 0.7rem; color: var(--primary); }
@@ -107,7 +107,9 @@
                     <li><a onclick="switchView('executives')" id="nav-executives">Executives</a></li>
                     <li><a onclick="switchView('register')" id="nav-register">Register</a></li>
                     <li><a onclick="switchView('login')" id="nav-login">Student Login</a></li>
+                    <li><a onclick="switchView('profile')" id="nav-profile" style="display: none;">My Profile</a></li>
                     <li><a onclick="switchView('feed')" id="nav-feed">Campus Feed</a></li>
+                    <li><a onclick="handleStudentLogout()" id="nav-logout" style="display: none; background-color: var(--danger); color: white;">Logout</a></li>
                     <li><a onclick="switchView('admin')" id="nav-admin" class="admin-badge">Admin</a></li>
                 </ul>
             </nav>
@@ -284,8 +286,8 @@
             <p id="modal-role" style="color: var(--accent); font-weight: bold; margin-top: 0.25rem;">Officer Position</p>
             <span class="admin-tag">2025/2026 Led Administration</span>
         </div>
-                                                                                                                      </div>
-                    <!-- Page 3: Student Registration View Layout -->
+                    </div>
+        <!-- Page 3: Student Registration View Layout -->
     <section id="view-register" class="page-view">
         <div class="form-wrapper">
             <div class="section-header">
@@ -420,24 +422,24 @@
                     <div class="form-group">
                         <textarea id="post-text" class="form-control" rows="3" placeholder="Write the update caption narrative here..." required style="resize: none;"></textarea>
                     </div>
+                    
+                    <!-- Flexible Media Node Input Splitting Layout Frame -->
                     <div class="form-group">
-                        <label style="font-size: 0.8rem; color: var(--text-light);">Media Source Link URL (Image / Video)</label>
-                        <input type="text" id="post-media-url" class="form-control" placeholder="https://example.com">
+                        <label style="font-size: 0.8rem; color: var(--text-light); font-weight: 600;">Optional: Add Image File Link URL</label>
+                        <input type="text" id="post-image-url" class="form-control" placeholder="https://example.com (Leave blank if none)">
                     </div>
+                    <div class="form-group">
+                        <label style="font-size: 0.8rem; color: var(--text-light); font-weight: 600;">Optional: Add Video File Link URL (.mp4 / stream)</label>
+                        <input type="text" id="post-video-url" class="form-control" placeholder="https://example.com (Leave blank if none)">
+                    </div>
+                    
                     <button type="submit" class="btn-submit" style="background-color: var(--accent); margin-top: 0.5rem;">Broadcast Content Asset</button>
                 </form>
             </div>
 
-            <!-- Dynamic Interactive Social Bulletin Board Stream -->
+            <!-- Dynamic Interactive Social Bulletin Board Stream Target -->
             <div id="dynamic-feed-target">
-                <!-- Fallback card to populate layout visual metrics instantly -->
-                <div class="post-card">
-                    <div class="post-header">
-                        <span class="post-author" style="color: var(--accent);">★ SUG Executive Secretariat Notice</span>
-                        <span class="post-time">Official Bulletin Board</span>
-                    </div>
-                    <p style="font-size: 1.05rem; font-weight: 500;">Welcome to the official 2025/2026 interactive portal feed. Verified students can look, read, like, and comment anonymously on executive notifications once logged into their active profiles.</p>
-                </div>
+                <!-- Data container dynamically hydrated via security script loops -->
             </div>
 
         </div>
@@ -461,9 +463,10 @@
             localStorage.setItem('sug_posts', JSON.stringify([
                 {
                     id: 1718114400000,
-                    author: "SUG Executive Secretariat Notice",
-                    text: "The 2025/2026 Led Administration Cabinet has officially finalized infrastructure expansion talks with university management panels today. Major updates coming up!",
-                    media: "data:image/svg+xml,<svg xmlns='http://w3.org' width='600' height='300' viewBox='0 0 600 300'><rect width='600' height='300' fill='%231e293b'/><text x='50%27 y='50%27 fill='%23b45309' font-weight='bold' font-size='24' text-anchor='middle'>ALUTA ACTIVISM REFORMS ACTIVE</text></svg>",
+                    author: "★ SUG Executive Secretariat Notice",
+                    text: "The 2025/2026 Led Administration Cabinet has officially finalized infrastructure talks with university management panels today. Major upgrades coming soon!",
+                    image: "https://githubusercontent.com",
+                    video: null,
                     likes: 12,
                     likedBy: [],
                     comments: [
@@ -473,10 +476,30 @@
                 }
             ]));
         }
-
-        // ==================== RUNTIME APPLICATION SESSION STATES ==================== */
-        let sessionUser = null;          
+                // ==================== RUNTIME APPLICATION SESSION STATES ==================== */
+        // Look up persistent local storage cache to reload an ongoing session on refresh
+        let sessionUser = localStorage.getItem('sug_active_session') ? 
+                          JSON.parse(localStorage.getItem('sug_active_session')) : null;          
         let sessionAdminActive = false;  
+
+        // Auto-run routine verifying session data state upon page layout lifecycle boot
+        window.addEventListener('DOMContentLoaded', () => {
+            if (sessionUser) {
+                // If student was logged in before refresh, sync dashboard views & restore profile
+                document.getElementById('profile-name-text').textContent = sessionUser.name;
+                document.getElementById('profile-matric-text').textContent = sessionUser.matric;
+                document.getElementById('profile-dept-text').textContent = sessionUser.dept;
+                
+                if (sessionUser.avatar) {
+                    document.getElementById('profile-display-img').src = sessionUser.avatar;
+                }
+                
+                updateNavigationVisibility();
+                switchView('profile');
+            } else {
+                updateNavigationVisibility();
+            }
+        });
 
         // ==================== APP LAYOUT CONTROLLER GATEWAYS ==================== */
         function switchView(viewId) {
@@ -513,7 +536,29 @@
                 triggerToggleBtn.textContent = "SHOW";
             }
         }
-                // ==================== REGISTRATION ENGINE PROCESSING ==================== */
+                // ==================== NAVIGATION VISIBILITY ENGINE CONTROLLER ==================== */
+        function updateNavigationVisibility() {
+            const registerLink = document.getElementById('nav-register');
+            const loginLink = document.getElementById('nav-login');
+            const profileLink = document.getElementById('nav-profile');
+            const logoutLink = document.getElementById('nav-logout');
+
+            if (sessionUser) {
+                // Hide landing gateways, reveal account workspace & session termination controls
+                registerLink.style.display = 'none';
+                loginLink.style.display = 'none';
+                profileLink.style.display = 'inline-block';
+                logoutLink.style.display = 'inline-block';
+            } else {
+                // Restore standard defaults when session user payload context is vacant
+                registerLink.style.display = 'inline-block';
+                loginLink.style.display = 'inline-block';
+                profileLink.style.display = 'none';
+                logoutLink.style.display = 'none';
+            }
+        }
+
+        // ==================== REGISTRATION ENGINE PROCESSING ==================== */
         function handleRegistration(e) {
             e.preventDefault();
             
@@ -524,7 +569,6 @@
 
             let currentUsers = JSON.parse(localStorage.getItem('sug_users')) || [];
 
-            // Duplicate Check: Verify if database name or matric code matches existing records
             const accountExists = currentUsers.some(user => 
                 user.name.toLowerCase() === fullName.toLowerCase() || 
                 user.matric.toLowerCase() === matricNum.toLowerCase()
@@ -545,13 +589,17 @@
 
             currentUsers.push(newStudentAccount);
             localStorage.setItem('sug_users', JSON.stringify(currentUsers));
+            
+            // Set persistent refresh memory configurations instantly
             sessionUser = newStudentAccount;
+            localStorage.setItem('sug_active_session', JSON.stringify(newStudentAccount));
 
             document.getElementById('profile-name-text').textContent = sessionUser.name;
             document.getElementById('profile-matric-text').textContent = sessionUser.matric;
             document.getElementById('profile-dept-text').textContent = sessionUser.dept;
             document.getElementById('profile-display-img').src = "data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100' fill='%2394a3b8'><circle cx='50' cy='45' r='20'/><path d='M20 80c0-20 15-25 30-25s30 5 30 25z'/></svg>";
 
+            updateNavigationVisibility();
             alert("Registration Successful! Welcome to the Union.");
             switchView('profile');
         }
@@ -580,6 +628,7 @@
                 });
 
                 localStorage.setItem('sug_users', JSON.stringify(currentUsers));
+                localStorage.setItem('sug_active_session', JSON.stringify(sessionUser));
                 document.getElementById('profile-display-img').src = base64EncodedImageString;
                 alert("Your personal profile photo has been successfully updated.");
             };
@@ -603,6 +652,8 @@
             }
 
             sessionUser = verifiedRecordMatch;
+            localStorage.setItem('sug_active_session', JSON.stringify(verifiedRecordMatch));
+            
             document.getElementById('profile-name-text').textContent = sessionUser.name;
             document.getElementById('profile-matric-text').textContent = sessionUser.matric;
             document.getElementById('profile-dept-text').textContent = sessionUser.dept;
@@ -613,8 +664,19 @@
                 document.getElementById('profile-display-img').src = "data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100' fill='%2394a3b8'><circle cx='50' cy='45' r='20'/><path d='M20 80c0-20 15-25 30-25s30 5 30 25z'/></svg>";
             }
 
+            updateNavigationVisibility();
             alert("Sign-In Successful! Welcome to your member panel workspace.");
             switchView('profile');
+        }
+
+        function handleStudentLogout() {
+            if (confirm("Are you sure you want to log out of your secure member portal profile?")) {
+                sessionUser = null; 
+                localStorage.removeItem('sug_active_session');
+                updateNavigationVisibility();
+                alert("You have logged out safely.");
+                switchView('home');
+            }
         }
 
         // ==================== ADMINISTRATIVE MASTER GATEWAY CONTROL ==================== */
@@ -649,18 +711,17 @@
             if (!sessionAdminActive) return;
 
             const textContent = document.getElementById('post-text').value.trim();
-            let mediaLinkUrl = document.getElementById('post-media-url').value.trim();
-
-            if (!mediaLinkUrl) {
-                mediaLinkUrl = "data:image/svg+xml,<svg xmlns='http://w3.org' width='600' height='300' viewBox='0 0 600 300'><rect width='600' height='300' fill='%231e293b'/><text x='50%27 y='50%27 fill='%23b45309' font-weight='bold' font-size='20' text-anchor='middle'>SUG OFFICIAL BULLETIN UPDATE</text></svg>";
-            }
+            const imageUrl = document.getElementById('post-image-url').value.trim();
+            const videoUrl = document.getElementById('post-video-url').value.trim();
 
             const postStreamTable = JSON.parse(localStorage.getItem('sug_posts')) || [];
+            
             const newBroadcastPost = {
                 id: Date.now(),
                 author: "★ SUG Executive Secretariat Notice",
                 text: textContent,
-                media: mediaLinkUrl,
+                image: imageUrl ? imageUrl : null,
+                video: videoUrl ? videoUrl : null,
                 likes: 0,
                 likedBy: [],
                 comments: []
@@ -670,12 +731,30 @@
             localStorage.setItem('sug_posts', JSON.stringify(postStreamTable));
 
             document.getElementById('post-text').value = '';
-            document.getElementById('post-media-url').value = '';
+            document.getElementById('post-image-url').value = '';
+            document.getElementById('post-video-url').value = '';
+            
             alert("Content update broadcast completed successfully.");
             renderLiveNewsFeedStream();
         }
                 function renderLiveNewsFeedStream() {
             const feedContainerBoxElement = document.getElementById('dynamic-feed-target');
+            
+            // SECURITY LOCK ENGINE: Check if student session or admin clearance is active
+            if (!sessionUser && !sessionAdminActive) {
+                feedContainerBoxElement.innerHTML = `
+                    <div style="background-color: var(--white); border-radius: 12px; padding: 3rem 1.5rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 2px dashed var(--accent); margin-top: 1rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+                        <h3 style="color: var(--primary); font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 700;">Secure Portal Stream Protected</h3>
+                        <p style="color: var(--text-dark); max-width: 450px; margin: 0 auto 1.5rem; font-size: 0.95rem;">Official updates, media directives, and discussion logs are restricted exclusively to verified union members.</p>
+                        <div style="display: flex; gap: 10px; justify-content: center;">
+                            <button onclick="switchView('login')" style="background-color: var(--primary); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">Student Login</button>
+                            <button onclick="switchView('register')" style="background-color: var(--accent); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">Register Here</button>
+                        </div>
+                    </div>`;
+                return;
+            }
+
             const cachedPostStreamTable = JSON.parse(localStorage.getItem('sug_posts')) || [];
 
             if (cachedPostStreamTable.length === 0) {
@@ -704,6 +783,13 @@
                     adminPostPurgeBtnMarkup = `<button class="btn-delete" style="font-size:0.9rem;" onclick="deletePostNode(${post.id})">Delete Post</button>`;
                 }
 
+                let mediaElementOutput = "";
+                if (post.image) {
+                    mediaElementOutput = `<img class="post-media" src="${post.image}" onerror="this.style.display='none'">`;
+                } else if (post.video) {
+                    mediaElementOutput = `<video class="post-media" src="${post.video}" controls style="background-color:#1e293b; max-height:450px;" onerror="this.style.display='none'"></video>`;
+                }
+
                 computedHtmlBufferString += `
                     <div class="post-card">
                         <div class="post-header">
@@ -714,7 +800,7 @@
                             </div>
                         </div>
                         <p style="font-size:1.05rem; margin-bottom:1rem;">${post.text}</p>
-                        <img class="post-media" src="${post.media}" onerror="this.style.display='none'">
+                        ${mediaElementOutput}
                         
                         <div class="post-actions">
                             <button class="action-link" onclick="handleLikeToggle(${post.id})">♥ Like (${post.likes})</button>
@@ -819,7 +905,11 @@
             document.getElementById('modal-role').textContent = role;
             
             const modalImgElement = document.getElementById('modal-img');
-            if (customImgUrl) {
+            
+            if (name.includes("Godspower") || role.includes("Speaker")) {
+                modalImgElement.src = "speaker.jpg";
+                modalImgElement.style.display = 'block';
+            } else if (customImgUrl) {
                 modalImgElement.src = customImgUrl;
                 modalImgElement.style.display = 'block';
             } else {
