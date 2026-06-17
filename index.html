@@ -115,7 +115,7 @@
             </nav>
         </div>
     </header>
-       <!-- Page 1: Home View Layout Area -->
+        <!-- Page 1: Home View Layout Area -->
     <main id="view-home" class="page-view active-view">
         <div class="hero-banner">
             <span class="banner-tag">RIVERS STATE COLLEGE OF HEALTH SCIENCE AND MANAGEMENT TECHNOLOGY</span>
@@ -209,8 +209,8 @@
                 </div>
                 <h4>Comr.Bob Orji</h4>
                 <p>SUG P.R.O</p>
-    </div>
-                                    <!-- 10. SUG Financial Secretary -->
+            </div>
+                        <!-- 10. SUG Financial Secretary -->
             <div class="exec-card" onclick="openExecModal('Comr.Chinemerem Silver', 'SUG Financial Secretary', 'WA_1781601350244.jpeg')">
                 <div class="exec-avatar">
                     <img src="WA_1781601350244.jpeg" alt="Financial Secretary" onerror="this.style.display='none'; this.parentElement.innerText='FS';">
@@ -286,8 +286,8 @@
             <p id="modal-role" style="color: var(--accent); font-weight: bold; margin-top: 0.25rem;">Officer Position</p>
             <span class="admin-tag">2025/2026 Led Administration</span>
         </div>
-                    </div>
-                        <!-- Page 3: Student Registration View Layout -->
+    </div>
+        <!-- Page 3: Student Registration View Layout -->
     <section id="view-register" class="page-view">
         <div class="form-wrapper">
             <div class="section-header">
@@ -348,8 +348,8 @@
             </div>
             <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 1rem;">Note: Only you have administrative permission to alter or remove this profile photo asset.</p>
         </div>
-                                                                                                         </section>
-                                                                                                             <!-- Page 5: Student Login View Layout -->
+    </section>
+        <!-- Page 5: Student Login View Layout -->
     <section id="view-login" class="page-view">
         <div class="form-wrapper">
             <div class="section-header">
@@ -402,7 +402,7 @@
             
             <div style="background-color: #fffbeb; border-left: 4px solid var(--accent); padding: 1rem; border-radius: 6px; margin-bottom: 2rem;">
                 <h4 style="color: #92400e; margin-bottom: 0.25rem;">🌐 Sync Feed & Comments Across All Student Devices</h4>
-                <p style="font-size: 0.85rem; color: #b45309; line-height:1.4;">To make new posts and student comments visible to everyone, tap the export button below, open your <b>index.html</b> file on GitHub, and paste the code directly into the <b>Part 13</b> memory storage bracket!</p>
+                <p style="font-size: 0.85rem; color: #b45309; line-height:1.4;">To make new posts and student comments visible to everyone, your token automation handles it [PerQueryResult index: 2]. Alternatively, tap the button below to generate a hardcoded text fallback if needed [PerQueryResult index: 2]!</p>
                 <button onclick="exportDatabaseToCode()" style="background-color: var(--accent); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: bold; font-size: 0.8rem; margin-top: 0.75rem; cursor: pointer;">💾 Generate GitHub Sync Code</button>
             </div>
             
@@ -411,8 +411,8 @@
                 <textarea id="admin-db-output" class="form-control" rows="5" readonly placeholder="Click the button above to generate sync text strings..." style="background:#f8fafc; font-family:monospace; font-size:0.8rem; resize:none;"></textarea>
             </div>
         </div>
-                        </section>
-                            <!-- Page 7: Campus Interactive Media Feed & Community Board -->
+    </section>
+        <!-- Page 7: Campus Interactive Media Feed & Community Board -->
     <section id="view-feed" class="page-view">
         <div class="feed-container">
             
@@ -465,7 +465,7 @@
                 {
                     id: 1718114400000,
                     author: "★ SUG Executive Secretariat Notice",
-                    text: "The 2025/2026 Led Administration Cabinet has officially finalized infrastructure expansion talks with university management panels today. Major updates coming up!",
+                    text: "The 2025/2026 Led Administration Cabinet has officially finalized infrastructure expansion talks with university management panels today. Major upgrades coming up!",
                     image: "https://githubusercontent.com",
                     video: null,
                     likes: 12,
@@ -478,15 +478,20 @@
             ]));
         }
                 // ==================== RUNTIME APPLICATION SESSION STATES ==================== */
-        // Look up persistent local storage cache to reload an ongoing session on refresh
         let sessionUser = localStorage.getItem('sug_active_session') ? 
                           JSON.parse(localStorage.getItem('sug_active_session')) : null;          
         let sessionAdminActive = false;  
 
+        // REVOLUTIONARY BACKGROUND AUTOMATION SYNC BRIDGE CONFIGURATION CONTROLS
+        const GITHUB_CONFIG = {
+            username: "ladin-sug",
+            repository: "ladin-sug.github.io",
+            token: "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" // 👈 Secure automation key integrated [INDEX]
+        };
+
         // Auto-run routine verifying session data state upon page layout lifecycle boot
         window.addEventListener('DOMContentLoaded', () => {
             if (sessionUser) {
-                // If student was logged in before refresh, sync dashboard views & restore profile
                 document.getElementById('profile-name-text').textContent = sessionUser.name;
                 document.getElementById('profile-matric-text').textContent = sessionUser.matric;
                 document.getElementById('profile-dept-text').textContent = sessionUser.dept;
@@ -651,7 +656,7 @@
             );
 
             if (!verifiedRecordMatch) {
-                alert("Access Denied: Invalid Matric Number or Account Password combination.");
+                alert("Access Denied: Invalid Matric Number or Password combination.");
                 return;
             }
 
@@ -674,7 +679,7 @@
         }
 
         function handleStudentLogout() {
-            if (confirm("Are you sure you want to log out of your secure member portal profile?")) {
+            if (confirm("Are you sure you want to log out?")) {
                 sessionUser = null; 
                 localStorage.removeItem('sug_active_session');
                 updateNavigationVisibility();
@@ -710,259 +715,145 @@
         }
 
         // ==================== CAMPUS NEWS FEED MANIPULATION CONTROLLER ==================== */
-        function handlePostCreation(e) {
-            e.preventDefault();
-            if (!sessionAdminActive) return;
-
+        async function handlePostCreation(e) {
+            e.preventDefault(); if (!sessionAdminActive) return;
             const textContent = document.getElementById('post-text').value.trim();
-            const mediaFileInput = document.getElementById('post-file-upload').files[0];
+            const mediaFileInput = document.getElementById('post-file-upload').files;
             const postStreamTable = JSON.parse(localStorage.getItem('sug_posts')) || [];
 
-            function finalizePostSave(mediaBase64String, isVideo = false) {
-                const newBroadcastPost = {
-                    id: Date.now(),
-                    author: "★ SUG Executive Secretariat Notice",
-                    text: textContent,
-                    image: !isVideo ? mediaBase64String : null,
-                    video: isVideo ? mediaBase64String : null,
-                    likes: 0,
-                    likedBy: [],
-                    comments: []
-                };
-
+            async function uploadDirectToGitHubFile(mediaBase64String = null, isVideo = false) {
+                const newBroadcastPost = { id: Date.now(), author: "★ SUG Executive Secretariat Notice", text: textContent, image: !isVideo ? mediaBase64String : null, video: isVideo ? mediaBase64String : null, likes: 0, likedBy: [], comments: [] };
                 postStreamTable.unshift(newBroadcastPost);
                 localStorage.setItem('sug_posts', JSON.stringify(postStreamTable));
 
-                document.getElementById('post-text').value = '';
-                document.getElementById('post-file-upload').value = '';
-                
-                alert("Post created locally! Click 'Generate GitHub Sync Code' in your Admin menu to distribute it to all student devices.");
-                renderLiveNewsFeedStream();
+                try {
+                    const fileLookupUrl = `https://github.com{GITHUB_CONFIG.username}/${GITHUB_CONFIG.repository}/contents/index.html`;
+                    const currentFileResponse = await fetch(fileLookupUrl, { headers: { "Authorization": `token ${GITHUB_CONFIG.token}` } });
+                    if (!currentFileResponse.ok) throw new Error("Fetch failed.");
+                    const currentFileData = await currentFileResponse.json();
+                    let fullHtmlStringCode = decodeURIComponent(escape(atob(currentFileData.content)));
+                    
+                    const targetDataMarkerStart = "if (!localStorage.getItem('sug_posts')) {\n            localStorage.setItem('sug_posts', JSON.stringify(";
+                    const targetDataMarkerEnd = "));\n        }";
+                    const startIndex = fullHtmlStringCode.indexOf(targetDataMarkerStart);
+                    const endIndex = fullHtmlStringCode.indexOf(targetDataMarkerEnd, startIndex);
+
+                    if (startIndex === -1 || endIndex === -1) { alert("Format sync issue. Saved locally."); return; }
+                    const fullyInjectedCodePayload = fullHtmlStringCode.substring(0, startIndex + targetDataMarkerStart.length) + JSON.stringify(postStreamTable) + fullHtmlStringCode.substring(endIndex);
+
+                    const updateCommitResponse = await fetch(fileLookupUrl, {
+                        method: "PUT",
+                        headers: { "Authorization": `token ${GITHUB_CONFIG.token}`, "Content-Type": "application/json" },
+                        body: JSON.stringify({ message: "🎯 Automated Executive Bulletin Update [API Sync]", content: btoa(unescape(encodeURIComponent(fullyInjectedCodePayload))), sha: currentFileData.sha })
+                    });
+
+                    if (updateCommitResponse.ok) {
+                        alert("🚀 Post published and committed to GitHub automatically! Live across campus in 60 seconds.");
+                        document.getElementById('post-text').value = ''; document.getElementById('post-file-upload').value = '';
+                        renderLiveNewsFeedStream();
+                    } else { throw new Error("Commit rejected."); }
+                } catch (error) { alert("Local Save Active. Network sync failed. Check token key setup."); }
             }
 
-            if (mediaFileInput) {
+            if (mediaFileInput && mediaFileInput.length > 0) {
                 const fileReader = new FileReader();
                 fileReader.onload = function(eventResult) {
                     const base64Result = eventResult.target.result;
-                    if (mediaFileInput.type.startsWith('video/')) {
-                        finalizePostSave(base64Result, true);
-                    } else {
-                        const img = new Image();
-                        img.src = base64Result;
+                    if (mediaFileInput[0].type.startsWith('video/')) { uploadDirectToGitHubFile(base64Result, true); }
+                    else {
+                        const img = new Image(); img.src = base64Result;
                         img.onload = function() {
-                            const canvas = document.createElement('canvas');
-                            const ctx = canvas.getContext('2d');
-                            const maxW = 600;
-                            const scale = maxW / img.width;
-                            canvas.width = maxW;
-                            canvas.height = img.height * scale;
+                            const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d');
+                            canvas.width = 500; canvas.height = (500 / img.width) * img.height;
                             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                            finalizePostSave(canvas.toDataURL('image/jpeg', 0.65), false);
+                            uploadDirectToGitHubFile(canvas.toDataURL('image/jpeg', 0.60), false);
                         };
                     }
                 };
-                fileReader.readAsDataURL(mediaFileInput);
-            } else {
-                finalizePostSave(null, false);
-            }
+                fileReader.readAsDataURL(mediaFileInput[0]);
+            } else { uploadDirectToGitHubFile(null, false); }
         }
 
-        // ==================== DATABASE COMPILER UTILITY FOR GITHUB SYNC ==================== */
         function exportDatabaseToCode() {
-            const currentPosts = localStorage.getItem('sug_posts') || "[]";
-            const outputBox = document.getElementById('admin-db-output');
-            const compiledCodeString = `if (!localStorage.getItem('sug_posts')) {\n    localStorage.setItem('sug_posts', JSON.stringify(${currentPosts}));\n}`;
-            outputBox.value = compiledCodeString;
-            outputBox.select();
-            alert("Database string generated and selected! Copy the text in the box and paste it over Part 13 in your GitHub editor.");
-    }
+            document.getElementById('admin-db-output').value = `if (!localStorage.getItem('sug_posts')) {\n    localStorage.setItem('sug_posts', JSON.stringify(${localStorage.getItem('sug_posts') || "[]"}));\n}`;
+            document.getElementById('admin-db-output').select();
+        }
                 function renderLiveNewsFeedStream() {
             const feedContainerBoxElement = document.getElementById('dynamic-feed-target');
-            
-            // SECURITY LOCK ENGINE: Check if student session or admin clearance is active
             if (!sessionUser && !sessionAdminActive) {
-                feedContainerBoxElement.innerHTML = `
-                    <div style="background-color: var(--white); border-radius: 12px; padding: 3rem 1.5rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 2px dashed var(--accent); margin-top: 1rem;">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
-                        <h3 style="color: var(--primary); font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 700;">Secure Portal Stream Protected</h3>
-                        <p style="color: var(--text-dark); max-width: 450px; margin: 0 auto 1.5rem; font-size: 0.95rem;">Official updates, media directives, and discussion logs are restricted exclusively to verified union members.</p>
-                        <div style="display: flex; gap: 10px; justify-content: center;">
-                            <button onclick="switchView('login')" style="background-color: var(--primary); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">Student Login</button>
-                            <button onclick="switchView('register')" style="background-color: var(--accent); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">Register Here</button>
-                        </div>
-                    </div>`;
+                feedContainerBoxElement.innerHTML = `<div style="background:var(--white);border-radius:12px;padding:3rem 1.5rem;text-align:center;border:2px dashed var(--accent);margin-top:1rem;"><div style="font-size:3rem;margin-bottom:1rem;">🔒</div><h3 style="color:var(--primary);font-size:1.3rem;margin-bottom:0.5rem;font-weight:700;">Secure Stream Protected</h3><p style="color:var(--text-dark);max-width:450px;margin:0 auto 1.5rem;font-size:0.95rem;">Official updates are restricted exclusively to verified union members.</p><div style="display:flex;gap:10px;justify-content:center;"><button onclick="switchView('login')" style="background:var(--primary);color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:bold;cursor:pointer;font-size:0.85rem;">Student Login</button><button onclick="switchView('register')" style="background:var(--accent);color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:bold;cursor:pointer;font-size:0.85rem;">Register</button></div></div>`;
                 return;
             }
-
             const cachedPostStreamTable = JSON.parse(localStorage.getItem('sug_posts')) || [];
-
-            if (cachedPostStreamTable.length === 0) {
-                feedContainerBoxElement.innerHTML = `<p style="text-align:center; color:var(--text-light); padding:2rem;">No entries found inside the community dashboard index stream.</p>`;
-                return;
-            }
-
+            if (cachedPostStreamTable.length === 0) { feedContainerBoxElement.innerHTML = `<p style="text-align:center;padding:2rem;">No entries found.</p>`; return; }
             let computedHtmlBufferString = "";
-
             cachedPostStreamTable.forEach(post => {
                 let commentItemsHtmlBuffer = "";
-                post.comments.forEach(comment => {
-                    let deleteCommentBtnMarkup = "";
-                    if (sessionAdminActive) {
-                        deleteCommentBtnMarkup = `<button class="btn-delete" onclick="deleteCommentNode(${post.id}, ${comment.id})">Purge</button>`;
-                    }
-                    commentItemsHtmlBuffer += `
-                        <li class="comment-item">
-                            <span>${comment.author}:</span> ${comment.text}
-                            ${deleteCommentBtnMarkup}
-                        </li>`;
-                });
-
-                let adminPostPurgeBtnMarkup = "";
-                if (sessionAdminActive) {
-                    adminPostPurgeBtnMarkup = `<button class="btn-delete" style="font-size:0.9rem;" onclick="deletePostNode(${post.id})">Delete Post</button>`;
+                if (post.comments) {
+                    post.comments.forEach(c => {
+                        commentItemsHtmlBuffer += `<li class="comment-item"><span>${c.author}:</span> ${c.text}${sessionAdminActive ? `<button class="btn-delete" onclick="deleteCommentNode(${post.id}, ${c.id})">Purge</button>` : ''}</li>`;
+                    });
                 }
-
-                let mediaElementOutput = "";
-                if (post.image) {
-                    mediaElementOutput = `<img class="post-media" src="${post.image}" onerror="this.style.display='none'">`;
-                } else if (post.video) {
-                    mediaElementOutput = `<video class="post-media" src="${post.video}" controls style="background-color:#1e293b; max-height:450px;" onerror="this.style.display='none'"></video>`;
-                }
-
-                computedHtmlBufferString += `
-                    <div class="post-card">
-                        <div class="post-header">
-                            <span class="post-author" style="color:var(--accent);">${post.author}</span>
-                            <div style="display:flex; gap:10px; align-items:center;">
-                                <span class="post-time">${new Date(post.id).toLocaleDateString()}</span>
-                                ${adminPostPurgeBtnMarkup}
-                            </div>
-                        </div>
-                        <p style="font-size:1.05rem; margin-bottom:1rem;">${post.text}</p>
-                        ${mediaElementOutput}
-                        
-                        <div class="post-actions">
-                            <button class="action-link" onclick="handleLikeToggle(${post.id})">♥ Like (${post.likes})</button>
-                            <span class="action-link">💬 Discussion Log (${post.comments.length})</span>
-                        </div>
-
-                        <div class="comment-section">
-                            <div class="comment-input-group">
-                                <input type="text" id="com-input-${post.id}" class="form-control" placeholder="Write an anonymous feedback comment..." style="padding:0.5rem 0.75rem; font-size:0.9rem;">
-                                <button onclick="handleCommentSubmission(${post.id})" style="background:var(--primary); color:white; border:none; padding:0 1rem; border-radius:8px; font-weight:bold; cursor:pointer; font-size:0.85rem;">Send</button>
-                            </div>
-                            <ul class="comment-box">${commentItemsHtmlBuffer}</ul>
-                        </div>
-                    </div>`;
+                let mediaElementOutput = post.image ? `<img class="post-media" src="${post.image}" onerror="this.style.display='none'">` : (post.video ? `<video class="post-media" src="${post.video}" controls style="background-color:#1e293b;max-height:450px;" onerror="this.style.display='none'"></video>` : "");
+                computedHtmlBufferString += `<div class="post-card"><div class="post-header"><span class="post-author" style="color:var(--accent);">${post.author}</span><div style="display:flex;gap:10px;align-items:center;"><span class="post-time">${new Date(post.id).toLocaleDateString()}</span>${sessionAdminActive ? `<button class="btn-delete" style="font-size:0.9rem;" onclick="deletePostNode(${post.id})">Delete Post</button>` : ''}</div></div><p style="font-size:1.05rem;margin-bottom:1rem;">${post.text}</p>${mediaElementOutput}<div class="post-actions"><button class="action-link" onclick="handleLikeToggle(${post.id})">♥ Like (${post.likes || 0})</button><span class="action-link">💬 Discussion (${post.comments ? post.comments.length : 0})</span></div><div class="comment-section"><div class="comment-input-group"><input type="text" id="com-input-${post.id}" class="form-control" placeholder="Write anonymous feedback..." style="padding:0.5rem 0.75rem;font-size:0.9rem;"><button onclick="handleCommentSubmission(${post.id})" style="background:var(--primary);color:white;border:none;padding:0 1rem;border-radius:8px;font-weight:bold;cursor:pointer;font-size:0.85rem;">Send</button></div><ul class="comment-box">${commentItemsHtmlBuffer}</ul></div></div>`;
             });
-
             feedContainerBoxElement.innerHTML = computedHtmlBufferString;
         }
                 // ==================== INTERACTIVE USER FEED OPERATIONS ==================== */
         function handleLikeToggle(postId) {
-            if (!sessionUser) {
-                alert("Access Denied: Only registered, logged-in students can interact with this content.");
-                return;
-            }
-
-            let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
+            if (!sessionUser) return; let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
             posts = posts.map(post => {
                 if (post.id === postId) {
-                    if (!post.likedBy) post.likedBy = [];
-                    const userIndex = post.likedBy.indexOf(sessionUser.matric);
-                    if (userIndex === -1) {
-                        post.likedBy.push(sessionUser.matric);
-                        post.likes += 1;
-                    } else {
-                        post.likedBy.splice(userIndex, 1);
-                        post.likes -= 1;
-                    }
-                }
-                return post;
+                    if (!post.likedBy) post.likedBy = []; const userIndex = post.likedBy.indexOf(sessionUser.matric);
+                    if (userIndex === -1) { post.likedBy.push(sessionUser.matric); post.likes = (post.likes || 0) + 1; } else { post.likedBy.splice(userIndex, 1); post.likes = (post.likes || 0) - 1; }
+                } return post;
             });
-
-            localStorage.setItem('sug_posts', JSON.stringify(posts));
-            renderLiveNewsFeedStream();
+            localStorage.setItem('sug_posts', JSON.stringify(posts)); renderLiveNewsFeedStream();
         }
 
         function handleCommentSubmission(postId) {
-            if (!sessionUser) {
-                alert("Access Denied: Only authenticated, logged-in student members can comment.");
-                return;
-            }
-
-            const inputField = document.getElementById(`com-input-${postId}`);
-            const commentText = inputField.value.trim();
-            if (!commentText) return;
-
+            if (!sessionUser) return; const inputField = document.getElementById(`com-input-${postId}`); const commentText = inputField.value.trim(); if (!commentText) return;
             let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
             posts = posts.map(post => {
-                if (post.id === postId) {
-                    post.comments.push({
-                        id: Date.now(),
-                        text: commentText,
-                        author: "Anonymous Student"
-                    });
-                }
-                return post;
+                if (post.id === postId) { if(!post.comments) post.comments = []; post.comments.push({ id: Date.now(), text: commentText, author: "Anonymous Student" }); } return post;
             });
-
-            localStorage.setItem('sug_posts', JSON.stringify(posts));
-            inputField.value = '';
-            renderLiveNewsFeedStream();
+            localStorage.setItem('sug_posts', JSON.stringify(posts)); inputField.value = ''; renderLiveNewsFeedStream();
         }
 
         // ==================== MASTER ADMIN DATA PURGING OPERATIONS ==================== */
         function deletePostNode(postId) {
-            if (!sessionAdminActive) return;
-            if (confirm("Are you sure you want to completely purge this post from the campus database?")) {
-                let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
-                posts = posts.filter(post => post.id !== postId);
-                localStorage.setItem('sug_posts', JSON.stringify(posts));
-                renderLiveNewsFeedStream();
-            }
+            if (!sessionAdminActive || !confirm("Purge post from campus directory?")) return;
+            localStorage.setItem('sug_posts', JSON.stringify((JSON.parse(localStorage.getItem('sug_posts')) || []).filter(post => post.id !== postId)));
+            renderLiveNewsFeedStream();
         }
 
+        // Precise comment removal handler 
         function deleteCommentNode(postId, commentId) {
-            if (!sessionAdminActive) return;
-            if (confirm("Are you sure you want to completely wipe this comment from the discussion logs?")) {
-                let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
-                posts = posts.map(post => {
-                    if (post.id === postId) {
-                        post.comments = post.comments.filter(c => c.id !== commentId);
-                    }
-                    return post;
-                });
-                localStorage.setItem('sug_posts', JSON.stringify(posts));
-                renderLiveNewsFeedStream();
-            }
+            if (!sessionAdminActive || !confirm("Wipe this comment from discussion logs?")) return;
+            let posts = JSON.parse(localStorage.getItem('sug_posts')) || [];
+            posts = posts.map(post => { if (post.id === postId) post.comments = post.comments.filter(c => c.id !== commentId); return post; });
+            localStorage.setItem('sug_posts', JSON.stringify(posts)); renderLiveNewsFeedStream();
         }
 
         // ==================== EXECUTIVE COUNCIL MODAL CONTROL ENGINE ==================== */
         function openExecModal(name, role, customImgUrl) {
-            document.getElementById('modal-name').textContent = name;
-            document.getElementById('modal-role').textContent = role;
-            
+            document.getElementById('modal-name').textContent = name; document.getElementById('modal-role').textContent = role;
             const modalImgElement = document.getElementById('modal-img');
             
-            if (name.includes("Godspower") || role.includes("Speaker")) {
-                modalImgElement.src = "speaker.jpg";
-                modalImgElement.style.display = 'block';
-            } else if (customImgUrl) {
-                modalImgElement.src = customImgUrl;
-                modalImgElement.style.display = 'block';
-            } else {
-                modalImgElement.src = "";
-                modalImgElement.style.display = 'none';
+            // Bulletproof conditional layers separating the Speaker and Deputy Speaker card models
+            if (role.includes("Deputy Speaker")) { 
+                modalImgElement.src = "IMG-20260415-WA0270(1).jpg"; modalImgElement.style.display = 'block'; 
+            } else if (name.includes("Godspower") || role.includes("Speaker")) { 
+                modalImgElement.src = "speaker.jpg"; modalImgElement.style.display = 'block'; 
+            } else if (customImgUrl) { 
+                modalImgElement.src = customImgUrl; modalImgElement.style.display = 'block'; 
+            } else { 
+                modalImgElement.src = ""; modalImgElement.style.display = 'none'; 
             }
             document.getElementById('exec-modal').style.display = 'flex';
         }
 
-        function closeExecModal(e) {
-            if (e.target.id === 'exec-modal') {
-                document.getElementById('exec-modal').style.display = 'none';
-            }
-        }
+        function closeExecModal(e) { if (e.target.id === 'exec-modal') document.getElementById('exec-modal').style.display = 'none'; }
     </script>
 </body>
 </html>
