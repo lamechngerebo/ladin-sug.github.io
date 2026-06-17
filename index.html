@@ -115,7 +115,7 @@
             </nav>
         </div>
     </header>
-        <!-- Page 1: Home View Layout Area -->
+       <!-- Page 1: Home View Layout Area -->
     <main id="view-home" class="page-view active-view">
         <div class="hero-banner">
             <span class="banner-tag">RIVERS STATE COLLEGE OF HEALTH SCIENCE AND MANAGEMENT TECHNOLOGY</span>
@@ -142,7 +142,7 @@
             <!-- 1. SUG President -->
             <div class="exec-card" onclick="openExecModal('Sen.Comr.Justina Gentle Welli', 'SUG President', 'president.jpg')">
                 <div class="exec-avatar">
-                    <img src="president.jpg" alt="President" onerror="this.style.display='none'; this.parentElement.innerText='P';">
+                    <img src="president.jpg" alt="President" onerror="this.src='president.jpeg'; this.onerror=function(){ this.src='president.JPG'; this.onerror=function(){ this.style.display='none'; this.parentElement.innerText='P'; } }">
                 </div>
                 <h4>Sen.Comr.Justina Gentle Welli</h4>
                 <p>SUG President</p>
@@ -160,7 +160,7 @@
             <!-- 3. SUG Speaker -->
             <div class="exec-card" onclick="openExecModal('Rt.Hon.Godspower Awajimowa Ebirien', 'SUG Speaker', 'speaker.jpg')">
                 <div class="exec-avatar">
-                    <img src="speaker.jpg" alt="Speaker" onerror="this.style.display='none'; this.parentElement.innerText='SP';">
+                    <img src="speaker.jpg" alt="Speaker" onerror="this.src='speaker.jpeg'; this.onerror=function(){ this.src='speaker.JPG'; this.onerror=function(){ this.style.display='none'; this.parentElement.innerText='SP'; } }">
                 </div>
                 <h4>Rt.Hon.Godspower Awajimowa Ebirien</h4>
                 <p>SUG Speaker</p>
@@ -178,7 +178,7 @@
             <!-- 6. SUG Secretary -->
             <div class="exec-card" onclick="openExecModal('Comr.Favour Nbete', 'SUG Secretary', 'secretary.jpg')">
                 <div class="exec-avatar">
-                    <img src="secretary.jpg" alt="Secretary" onerror="this.style.display='none'; this.parentElement.innerText='SEC';">
+                    <img src="secretary.jpg" alt="Secretary" onerror="this.src='secretary.jpeg'; this.onerror=function(){ this.src='secretary.JPG'; this.onerror=function(){ this.style.display='none'; this.parentElement.innerText='SEC'; } }">
                 </div>
                 <h4>Comr.Favour Nbete</h4>
                 <p>SUG Secretary</p>
@@ -209,8 +209,8 @@
                 </div>
                 <h4>Comr.Bob Orji</h4>
                 <p>SUG P.R.O</p>
-            </div>
-                        <!-- 10. SUG Financial Secretary -->
+    </div>
+                                    <!-- 10. SUG Financial Secretary -->
             <div class="exec-card" onclick="openExecModal('Comr.Chinemerem Silver', 'SUG Financial Secretary', 'WA_1781601350244.jpeg')">
                 <div class="exec-avatar">
                     <img src="WA_1781601350244.jpeg" alt="Financial Secretary" onerror="this.style.display='none'; this.parentElement.innerText='FS';">
@@ -287,7 +287,7 @@
             <span class="admin-tag">2025/2026 Led Administration</span>
         </div>
                     </div>
-        <!-- Page 3: Student Registration View Layout -->
+                        <!-- Page 3: Student Registration View Layout -->
     <section id="view-register" class="page-view">
         <div class="form-wrapper">
             <div class="section-header">
@@ -348,8 +348,8 @@
             </div>
             <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 1rem;">Note: Only you have administrative permission to alter or remove this profile photo asset.</p>
         </div>
-    </section>
-        <!-- Page 5: Student Login View Layout -->
+                                                                                                         </section>
+                                                                                                             <!-- Page 5: Student Login View Layout -->
     <section id="view-login" class="page-view">
         <div class="form-wrapper">
             <div class="section-header">
@@ -367,7 +367,7 @@
                     <span class="password-toggle" onclick="togglePass('login-pass')">SHOW</span>
                 </div>
                 <button type="submit" class="btn-submit">Sign In to Dashboard</button>
-                <a href="#" class="forgot-link" onclick="event.preventDefault(); alert('Please contact the ICT Helpdesk or your Departmental SUG Representative to reset your password.');">Forgot Password?</a>
+                <a href="#" class="forgot-link" onclick="event.preventDefault(); const userMatric = prompt('Enter your registered Matric Number to recover your password:'); if(userMatric){ const records = JSON.parse(localStorage.getItem('sug_users')) || []; const match = records.find(u => u.matric.toUpperCase() === userMatric.toUpperCase()); if(match){ alert('Your account password is: ' + match.pass); } else { alert('Matric record not found inside the active union database directory.'); } }">Forgot Password?</a>
             </form>
         </div>
     </section>
@@ -400,15 +400,19 @@
                 <button onclick="logoutAdmin()" style="background-color: var(--text-dark); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600;">Exit Workspace</button>
             </div>
             
-            <div style="background-color: #fef2f2; border-left: 4px solid var(--danger); padding: 1rem; border-radius: 6px; margin-bottom: 2rem;">
-                <h4 style="color: #991b1b; margin-bottom: 0.25rem;">Global Access Active</h4>
-                <p style="font-size: 0.85rem; color: #7f1d1d;">You now possess master-level administrative deletion privileges. You can purge uploaded media nodes and remove any student commentary logs across the campus portal instantly.</p>
+            <div style="background-color: #fffbeb; border-left: 4px solid var(--accent); padding: 1rem; border-radius: 6px; margin-bottom: 2rem;">
+                <h4 style="color: #92400e; margin-bottom: 0.25rem;">🌐 Sync Feed & Comments Across All Student Devices</h4>
+                <p style="font-size: 0.85rem; color: #b45309; line-height:1.4;">To make new posts and student comments visible to everyone, tap the export button below, open your <b>index.html</b> file on GitHub, and paste the code directly into the <b>Part 13</b> memory storage bracket!</p>
+                <button onclick="exportDatabaseToCode()" style="background-color: var(--accent); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: bold; font-size: 0.8rem; margin-top: 0.75rem; cursor: pointer;">💾 Generate GitHub Sync Code</button>
             </div>
             
-            <p style="text-align: center; color: var(--text-light); font-weight: bold; padding: 2rem 0; border: 2px dashed #e2e8f0; border-radius: 8px; background: var(--bg-light);">Use the "Campus Feed" top navigation menu channel to manage, audit, and delete live user posts and comments.</p>
+            <div class="form-group">
+                <label style="font-weight:bold; color:var(--primary);">Your Consolidated Global Database String:</label>
+                <textarea id="admin-db-output" class="form-control" rows="5" readonly placeholder="Click the button above to generate sync text strings..." style="background:#f8fafc; font-family:monospace; font-size:0.8rem; resize:none;"></textarea>
+            </div>
         </div>
-    </section>
-        <!-- Page 7: Campus Interactive Media Feed & Community Board -->
+                        </section>
+                            <!-- Page 7: Campus Interactive Media Feed & Community Board -->
     <section id="view-feed" class="page-view">
         <div class="feed-container">
             
@@ -423,14 +427,11 @@
                         <textarea id="post-text" class="form-control" rows="3" placeholder="Write the update caption narrative here..." required style="resize: none;"></textarea>
                     </div>
                     
-                    <!-- Flexible Media Node Input Splitting Layout Frame -->
-                    <div class="form-group">
-                        <label style="font-size: 0.8rem; color: var(--text-light); font-weight: 600;">Optional: Add Image File Link URL</label>
-                        <input type="text" id="post-image-url" class="form-control" placeholder="https://example.com (Leave blank if none)">
-                    </div>
-                    <div class="form-group">
-                        <label style="font-size: 0.8rem; color: var(--text-light); font-weight: 600;">Optional: Add Video File Link URL (.mp4 / stream)</label>
-                        <input type="text" id="post-video-url" class="form-control" placeholder="https://example.com (Leave blank if none)">
+                    <!-- New Native Phone Media Gallery Attachment Inputs -->
+                    <div class="form-group" style="background:#f8fafc; padding:1rem; border-radius:8px; border:1px solid #e2e8f0; margin-bottom:1rem;">
+                        <label style="font-size: 0.85rem; color: var(--primary); font-weight: 700; display:block; margin-bottom:0.5rem;">Optional: Attach Photo / Video from Gallery</label>
+                        <input type="file" id="post-file-upload" class="form-control" accept="image/*,video/*" style="padding:0.4rem; background:white;">
+                        <p style="font-size:0.7rem; color:var(--text-light); margin-top:0.3rem;">Supports native phone camera snapshots, gallery images, or MP4 video records.</p>
                     </div>
                     
                     <button type="submit" class="btn-submit" style="background-color: var(--accent); margin-top: 0.5rem;">Broadcast Content Asset</button>
@@ -464,7 +465,7 @@
                 {
                     id: 1718114400000,
                     author: "★ SUG Executive Secretariat Notice",
-                    text: "The 2025/2026 Led Administration Cabinet has officially finalized infrastructure talks with university management panels today. Major upgrades coming soon!",
+                    text: "The 2025/2026 Led Administration Cabinet has officially finalized infrastructure expansion talks with university management panels today. Major updates coming up!",
                     image: "https://githubusercontent.com",
                     video: null,
                     likes: 12,
@@ -590,7 +591,6 @@
             currentUsers.push(newStudentAccount);
             localStorage.setItem('sug_users', JSON.stringify(currentUsers));
             
-            // Set persistent refresh memory configurations instantly
             sessionUser = newStudentAccount;
             localStorage.setItem('sug_active_session', JSON.stringify(newStudentAccount));
 
@@ -606,33 +606,37 @@
 
         // ==================== ACCREDITED USER AVATAR UPDATE CONTROLLER ==================== */
         function handleProfilePicUpload(e) {
-            if (!sessionUser) {
-                alert("Security Error: Please sign in or register to manipulate profile configuration.");
-                return;
-            }
-
+            if (!sessionUser) return;
             const targetFile = e.target.files;
             if (!targetFile || targetFile.length === 0) return;
 
             const mediaReader = new FileReader();
             mediaReader.onload = function(eventResult) {
-                const base64EncodedImageString = eventResult.target.result;
-                
-                let currentUsers = JSON.parse(localStorage.getItem('sug_users')) || [];
-                currentUsers = currentUsers.map(user => {
-                    if (user.matric === sessionUser.matric) {
-                        user.avatar = base64EncodedImageString;
-                        sessionUser.avatar = base64EncodedImageString;
-                    }
-                    return user;
-                });
-
-                localStorage.setItem('sug_users', JSON.stringify(currentUsers));
-                localStorage.setItem('sug_active_session', JSON.stringify(sessionUser));
-                document.getElementById('profile-display-img').src = base64EncodedImageString;
-                alert("Your personal profile photo has been successfully updated.");
+                const structuralImageElement = new Image();
+                structuralImageElement.src = eventResult.target.result;
+                structuralImageElement.onload = function() {
+                    const layoutCanvas = document.createElement('canvas');
+                    layoutCanvas.width = 150;
+                    layoutCanvas.height = 150;
+                    const contextRender = layoutCanvas.getContext('2d');
+                    contextRender.drawImage(structuralImageElement, 0, 0, 150, 150);
+                    
+                    const compressedBase64String = layoutCanvas.toDataURL('image/jpeg', 0.6);
+                    
+                    let currentUsers = JSON.parse(localStorage.getItem('sug_users')) || [];
+                    currentUsers = currentUsers.map(user => {
+                        if (user.matric === sessionUser.matric) {
+                            user.avatar = compressedBase64String;
+                            sessionUser.avatar = compressedBase64String;
+                        }
+                        return user;
+                    });
+                    localStorage.setItem('sug_users', JSON.stringify(currentUsers));
+                    localStorage.setItem('sug_active_session', JSON.stringify(sessionUser));
+                    document.getElementById('profile-display-img').src = compressedBase64String;
+                    alert("Your profile picture has been successfully compressed and saved.");
+                };
             };
-            
             mediaReader.readAsDataURL(targetFile);
         }
                 // ==================== USER LOGIN ACCOUNT VERIFICATION ==================== */
@@ -711,32 +715,67 @@
             if (!sessionAdminActive) return;
 
             const textContent = document.getElementById('post-text').value.trim();
-            const imageUrl = document.getElementById('post-image-url').value.trim();
-            const videoUrl = document.getElementById('post-video-url').value.trim();
-
+            const mediaFileInput = document.getElementById('post-file-upload').files[0];
             const postStreamTable = JSON.parse(localStorage.getItem('sug_posts')) || [];
-            
-            const newBroadcastPost = {
-                id: Date.now(),
-                author: "★ SUG Executive Secretariat Notice",
-                text: textContent,
-                image: imageUrl ? imageUrl : null,
-                video: videoUrl ? videoUrl : null,
-                likes: 0,
-                likedBy: [],
-                comments: []
-            };
 
-            postStreamTable.unshift(newBroadcastPost);
-            localStorage.setItem('sug_posts', JSON.stringify(postStreamTable));
+            function finalizePostSave(mediaBase64String, isVideo = false) {
+                const newBroadcastPost = {
+                    id: Date.now(),
+                    author: "★ SUG Executive Secretariat Notice",
+                    text: textContent,
+                    image: !isVideo ? mediaBase64String : null,
+                    video: isVideo ? mediaBase64String : null,
+                    likes: 0,
+                    likedBy: [],
+                    comments: []
+                };
 
-            document.getElementById('post-text').value = '';
-            document.getElementById('post-image-url').value = '';
-            document.getElementById('post-video-url').value = '';
-            
-            alert("Content update broadcast completed successfully.");
-            renderLiveNewsFeedStream();
+                postStreamTable.unshift(newBroadcastPost);
+                localStorage.setItem('sug_posts', JSON.stringify(postStreamTable));
+
+                document.getElementById('post-text').value = '';
+                document.getElementById('post-file-upload').value = '';
+                
+                alert("Post created locally! Click 'Generate GitHub Sync Code' in your Admin menu to distribute it to all student devices.");
+                renderLiveNewsFeedStream();
+            }
+
+            if (mediaFileInput) {
+                const fileReader = new FileReader();
+                fileReader.onload = function(eventResult) {
+                    const base64Result = eventResult.target.result;
+                    if (mediaFileInput.type.startsWith('video/')) {
+                        finalizePostSave(base64Result, true);
+                    } else {
+                        const img = new Image();
+                        img.src = base64Result;
+                        img.onload = function() {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            const maxW = 600;
+                            const scale = maxW / img.width;
+                            canvas.width = maxW;
+                            canvas.height = img.height * scale;
+                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                            finalizePostSave(canvas.toDataURL('image/jpeg', 0.65), false);
+                        };
+                    }
+                };
+                fileReader.readAsDataURL(mediaFileInput);
+            } else {
+                finalizePostSave(null, false);
+            }
         }
+
+        // ==================== DATABASE COMPILER UTILITY FOR GITHUB SYNC ==================== */
+        function exportDatabaseToCode() {
+            const currentPosts = localStorage.getItem('sug_posts') || "[]";
+            const outputBox = document.getElementById('admin-db-output');
+            const compiledCodeString = `if (!localStorage.getItem('sug_posts')) {\n    localStorage.setItem('sug_posts', JSON.stringify(${currentPosts}));\n}`;
+            outputBox.value = compiledCodeString;
+            outputBox.select();
+            alert("Database string generated and selected! Copy the text in the box and paste it over Part 13 in your GitHub editor.");
+    }
                 function renderLiveNewsFeedStream() {
             const feedContainerBoxElement = document.getElementById('dynamic-feed-target');
             
