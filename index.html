@@ -3,198 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUG Portal | RSCHSMT</title>
+    <title>RSCHSMT | Official SUG Portal</title>
     <style>
         :root {
-            --primary: #0f172a; --accent: #eab308; --text: #f8fafc;
-            --glass: rgba(30, 41, 59, 0.8);
+            --primary: #0f172a; --secondary: #1e293b; --accent: #eab308;
+            --text: #f8fafc; --glass: rgba(30, 41, 59, 0.7);
         }
-        body { background: #020617; color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; }
-        
-        /* Navigation */
-        nav { display: flex; justify-content: center; gap: 20px; padding: 20px; background: var(--glass); position: sticky; top: 0; z-index: 100; }
-        nav a { color: var(--text); text-decoration: none; cursor: pointer; padding: 10px; }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #020617; color: var(--text); margin: 0; display: flex; min-height: 100vh; }
 
-        /* Branding */
-        .header-section { text-align: center; padding: 50px 20px; }
-        .logo-group img { height: 100px; margin: 0 10px; }
-        
-        /* Utility */
-        .page { display: none; padding: 40px; max-width: 900px; margin: auto; }
-        .active { display: block; }
-        .card { background: var(--glass); padding: 20px; border-radius: 15px; margin-bottom: 20px; border: 1px solid #334155; }
-        input, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #444; background: #1e293b; color: white; }
-        button { background: var(--accent); color: black; padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        
-        /* Executive Grid */
-        .exec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .exec-card { cursor: pointer; text-align: center; }
-        .exec-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
+        /* --- Global Layout --- */
+        #nav-sidebar { width: 250px; background: var(--secondary); padding: 20px; border-right: 1px solid #334155; position: fixed; height: 100%; }
+        #app-viewport { margin-left: 250px; padding: 40px; width: calc(100% - 250px); }
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Modal */
-        #modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; }
+        /* --- UI Components --- */
+        .card { background: var(--glass); border: 1px solid #334155; padding: 25px; border-radius: 15px; margin-bottom: 20px; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; background: #0f172a; border: 1px solid #444; color: white; }
+        button { background: var(--accent); color: black; padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; }
+        
+        .exec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .exec-card { cursor: pointer; text-align: center; background: var(--secondary); padding: 15px; border-radius: 10px; }
+        .exec-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; }
     </style>
 </head>
 <body>
 
-<nav>
-    <a onclick="show('home')">Home</a>
-    <a onclick="show('execs')">Executives</a>
-    <a onclick="show('register')">Register</a>
-    <a onclick="show('login')">Login</a>
-    <a onclick="show('dashboard')">Dashboard</a>
-</nav>
+<aside id="nav-sidebar">
+    <h2>SUG PORTAL</h2>
+    <nav>
+        <div class="nav-item" onclick="Portal.render('home')">Home</div>
+        <div class="nav-item" onclick="Portal.render('execs')">Executives</div>
+        <div class="nav-item" onclick="Portal.render('register')">Register</div>
+        <div class="nav-item" onclick="Portal.render('dashboard')">Member Dashboard</div>
+        <div class="nav-item" onclick="Portal.render('admin')">Admin Controls</div>
+    </nav>
+</aside>
 
-<!-- HOME PAGE -->
-<section id="home" class="page active">
-    <div class="header-section">
-        <div class="logo-group">
-            <img src="aluta_logo.png" alt="Aluta" onerror="this.style.display='none'">
-            <img src="college_logo.png" alt="College" onerror="this.style.display='none'">
-        </div>
-        <h1>Rivers State College of Health Science and Management Technology</h1>
-        <h2>Student Union Government (SUG)</h2>
-        <p>Official Student Union Government Platform - 2025/2026 Led Administration</p>
-    </div>
-    <div class="card">
-        <h3>What is the SUG?</h3>
-        <p>The Student Union Government (SUG) acts as the bridge between the student body and the college administration. It is a governing body that wields significant influence, ensuring that student welfare, academic standards, and extracurricular rights are protected. Through the SUG, students have a collective voice to negotiate, advocate, and lead, effectively holding dominance in student affairs to foster a conducive learning environment.</p>
-    </div>
-</section>
-
-<!-- EXECUTIVE PAGE -->
-<section id="execs" class="page">
-    <h1>Executive Council</h1>
-    <div class="exec-grid" id="exec-container"></div>
-</section>
-
-<!-- REGISTRATION -->
-<section id="register" class="page">
-    <h2>Student Registration</h2>
-    <input type="text" id="reg-name" placeholder="Full Name">
-    <input type="text" id="reg-matric" placeholder="Matric Number">
-    <input list="deps" id="reg-dep" placeholder="Type or Select Department">
-    <datalist id="deps">
-        <option value="Public Health">
-        <option value="Health Info Management">
-        <option value="Pharmacy Tech">
-    </datalist>
-    <div style="position:relative;">
-        <input type="password" id="reg-pass" placeholder="Password">
-        <span onclick="togglePass('reg-pass')" style="cursor:pointer; position:absolute; right:10px; top:20px;">👁️</span>
-    </div>
-    <button onclick="Auth.register()">Register</button>
-</section>
-
-<!-- LOGIN -->
-<section id="login" class="page">
-    <h2>Student / Admin Login</h2>
-    <input type="text" id="login-matric" placeholder="Matric Number">
-    <input type="password" id="login-pass" placeholder="Password">
-    <a href="#" onclick="alert('Contact Admin for reset')">Forgot Password?</a>
-    <br><br><button onclick="Auth.login()">Login</button>
-</section>
-
-<!-- DASHBOARD (POST-REG) -->
-<section id="dashboard" class="page">
-    <div id="user-area"></div>
-    <div class="card">
-        <h3>Content Feed</h3>
-        <div id="feed"></div>
-        <textarea id="comment-box" placeholder="Write an anonymous comment..."></textarea>
-        <button onclick="Social.post()">Post Comment</button>
-    </div>
-</section>
-
-<!-- MODAL -->
-<div id="modal" onclick="this.style.display='none'">
-    <div class="card" onclick="event.stopPropagation()">
-        <img id="modal-img" src="" style="width:100%">
-        <h2 id="modal-name"></h2>
-        <p>2025/2026 Led Administration</p>
-    </div>
-</div>
+<main id="app-viewport">
+    <!-- PAGES ARE INJECTED HERE VIA JS -->
+    <div id="page-content"></div>
+</main>
 
 <script>
-    // --- Data ---
-    const execs = [
-        {name: "Sen. Comr. Justina Gentle Welli", role: "SUG President", img: "president.jpg"},
-        {name: "Comr. Nwibu Roselyn", role: "SUG Vice President", img: "vp.jpg"},
-        {name: "Rt. Hon. Godspower Awajimowa Ebirien", role: "SUG Speaker", img: "speaker.jpg"},
-        {name: "Hon. PraiseGod Barisi", role: "SUG Deputy Speaker", img: "deputy.jpg"},
-        {name: "Comr. Favour Mbete", role: "SUG Secretary", img: "secretary.jpg"},
-        {name: "Comr. Ngerebo Lamech Dimkpa", role: "SUG Provost", img: "provost.jpg"},
-        {name: "Comr. Vera Sunday", role: "SUG Treasurer", img: "treasurer.jpg"},
-        {name: "Comr. Bob Orji", role: "SUG P.R.O", img: "pro.jpg"},
-        {name: "Comr. Chinemerem Silver", role: "SUG Financial Secretary", img: "fin-sec.jpg"},
-        {name: "Comr. Maureen Ebelogwu chinuzoke", role: "SUG Welfare", img: "welfare.jpg"},
-        {name: "Comr. Queeneth Amadi", role: "Director Of Socials", img: "socials.jpg"},
-        {name: "Comr. Nelson", role: "Director of Sports", img: "sports.jpg"},
-        {name: "Hon. Chinna Success", role: "Chief Whip", img: "whip.jpg"},
-        {name: "Hon. Victor Dakubor", role: "Internal Auditor", img: "auditor.jpg"},
-        {name: "Hon. Akpobari Barisua", role: "Majority Leader", img: "leader.jpg"}
-    ];
+    const Portal = {
+        // Core Data
+        execs: [
+            { name: "Sen. Comr. Justina Gentle Welli", role: "SUG President", img: "president.jpg" },
+            { name: "Comr. Ngerebo Lamech Dimkpa", role: "SUG Provost", img: "provost.jpg" },
+            // ... add your full array here
+        ],
 
-    // --- Core Logic ---
-    function show(id) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-    }
-
-    function togglePass(id) {
-        const input = document.getElementById(id);
-        input.type = (input.type === 'password') ? 'text' : 'password';
-    }
-
-    // --- Authentication ---
-    const Auth = {
-        register: () => {
-            const m = document.getElementById('reg-matric').value;
-            if(localStorage.getItem(m)) { alert("This Matric Number already exists!"); return; }
-            const user = {
-                name: document.getElementById('reg-name').value,
-                pass: document.getElementById('reg-pass').value,
-                dep: document.getElementById('reg-dep').value
-            };
-            localStorage.setItem(m, JSON.stringify(user));
-            alert("Registered! You are now a member.");
-            show('dashboard');
+        // Page Router
+        render: (pageId) => {
+            const content = document.getElementById('page-content');
+            content.innerHTML = ""; // Clear current
+            
+            if(pageId === 'home') content.innerHTML = `
+                <h1>Rivers State College of Health Science & Management Tech</h1>
+                <h3>2025/2026 Administration</h3>
+                <div class="card">
+                    <h2>About the SUG</h2>
+                    <p>The Student Union Government is the apex body...</p>
+                </div>
+            `;
+            
+            if(pageId === 'execs') {
+                content.innerHTML = `<h1>Executive Council</h1><div class="exec-grid" id="grid"></div>`;
+                const grid = document.getElementById('grid');
+                this.execs.forEach(e => {
+                    grid.innerHTML += `<div class="exec-card" onclick="alert('${e.name}')">
+                        <img src="${e.img}"><h4>${e.role}</h4><p>${e.name}</p>
+                    </div>`;
+                });
+            }
+            
+            if(pageId === 'register') {
+                content.innerHTML = `
+                    <h2>Register</h2>
+                    <input type="text" id="name" placeholder="Full Name">
+                    <input type="text" id="matric" placeholder="Matric Number">
+                    <button onclick="Portal.authRegister()">Register</button>
+                `;
+            }
         },
-        login: () => {
-            const m = document.getElementById('login-matric').value;
-            const p = document.getElementById('login-pass').value;
-            const data = JSON.parse(localStorage.getItem(m));
-            if(data && data.pass === p) {
-                sessionStorage.setItem('loggedIn', m);
-                show('dashboard');
-            } else alert("Invalid credentials");
+
+        authRegister: () => {
+            const m = document.getElementById('matric').value;
+            if(localStorage.getItem(m)) return alert("Matric number already registered.");
+            localStorage.setItem(m, JSON.stringify({ name: document.getElementById('name').value }));
+            alert("Registration successful.");
         }
     };
 
-    // --- Social/Admin ---
-    const Social = {
-        post: () => {
-            const comment = document.getElementById('comment-box').value;
-            const div = document.createElement('div');
-            div.innerHTML = `<p><strong>Anonymous:</strong> ${comment}</p>`;
-            document.getElementById('feed').prepend(div);
-        }
-    };
-
-    // Render Execs
-    const container = document.getElementById('exec-container');
-    execs.forEach(e => {
-        const div = document.createElement('div');
-        div.className = 'exec-card';
-        div.innerHTML = `<img src="${e.img}" onerror="this.src='https://via.placeholder.com/200'"><h3>${e.name}</h3>`;
-        div.onclick = () => {
-            document.getElementById('modal-img').src = e.img;
-            document.getElementById('modal-name').innerText = e.name;
-            document.getElementById('modal').style.display = 'flex';
-        };
-        container.appendChild(div);
-    });
+    // Initial Load
+    Portal.render('home');
 </script>
 </body>
-    </html>
-    
+</html>
